@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Card : MonoBehaviour
+public class Deck : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public List<Card> cardList;
+
     void Start()
     {
         
@@ -14,5 +15,10 @@ public class Card : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void LoadDeck()
+    {
+
     }
 }
