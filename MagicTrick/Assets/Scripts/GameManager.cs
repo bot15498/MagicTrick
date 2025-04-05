@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
     public int maxAct = 3;
     public int maxHandSize = 8;
     public GameState state;
-    public Deck deck;
     public Party currParty;
 
     [SerializeField]
