@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     {
         state = GameState.Idle;
         scoreManager = GetComponent<ScoreManager>();
+        ((IncreaseStatAction)slot1.GetComponentInChildren<TestCardHolder>().Card.Actions[0]).ChangeAmount += 5;
     }
 
     void Update()
