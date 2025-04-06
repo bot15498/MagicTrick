@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardName: 
   Description: 
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: b2a3ce6193c023744a213e8de82ed2ee, type: 3}
   Type: 0
   Actions:
   - {fileID: 9132469991858129247}

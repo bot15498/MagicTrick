@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
   m_Name: Increase Stats
   m_EditorClassIdentifier: 
-  StatToChange: 5
+  StatToChange: 0
   ChangeAmount: 5
 --- !u!114 &11400000
 MonoBehaviour:
@@ -28,7 +28,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardName: 
   Description: 
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: a47fdf2543f62204cb752a19ccb67f4f, type: 3}
   Type: 0
   Actions:
   - {fileID: -1771332861655997875}

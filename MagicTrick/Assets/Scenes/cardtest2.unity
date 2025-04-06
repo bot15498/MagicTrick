@@ -473,11 +473,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527647347}
   m_CullTransparentMesh: 1
---- !u!224 &664827224 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5601240606851714807, guid: cf3af88375540a744b99eb4e740b3bf1, type: 3}
-  m_PrefabInstance: {fileID: 7540985911686914303}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &665804096
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,7 +724,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -26.163662, z: -118.74307, w: -98.617035}
+  m_margin: {x: 0, y: 0.32948694, z: -0.54231274, w: 1.2418518}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -759,8 +754,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 465, y: 429}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 511.39, y: 404}
+  m_SizeDelta: {x: 407.87, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &731889724
 GameObject:
@@ -1045,7 +1040,7 @@ GameObject:
   - component: {fileID: 775873030}
   - component: {fileID: 775873029}
   - component: {fileID: 775873028}
-  - component: {fileID: 775873027}
+  - component: {fileID: 775873031}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1053,24 +1048,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &775873027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 775873026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7599b6a1e46cf448225117e41a3d4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayableCardList: []
-  Cards:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &775873028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1114,12 +1091,13 @@ MonoBehaviour:
   maxRounds: 3
   maxAct: 3
   maxHandSize: 7
-  state: 0
+  state: 1
   currParty: {fileID: 11400000, guid: f0e1b9145843d5349b882e6332d47bd8, type: 2}
   slot1: {fileID: 1502328621}
   slot2: {fileID: 2114666196}
   slot3: {fileID: 385290562}
   scoreText: {fileID: 698623056}
+  cardHolder: {fileID: 731889729}
 --- !u!4 &775873030
 Transform:
   m_ObjectHideFlags: 0
@@ -1135,6 +1113,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &775873031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775873026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f66fc80e913ac43b0afc88d47baeea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentDeck: {fileID: 795570397668151484, guid: 586b4ed62146400409ccfe2807343fd3, type: 3}
+  DeckCards: []
+  Discards: []
 --- !u!1 &780791687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,7 +1165,7 @@ RectTransform:
   - {fileID: 665804097}
   - {fileID: 767530415}
   - {fileID: 672091616}
-  - {fileID: 664827224}
+  - {fileID: 7540985911686914304}
   m_Father: {fileID: 458570171}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2171,6 +2164,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf3af88375540a744b99eb4e740b3bf1, type: 3}
+--- !u!224 &7540985911686914304 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2513562591768994046, guid: cf3af88375540a744b99eb4e740b3bf1, type: 3}
+  m_PrefabInstance: {fileID: 7540985911686914303}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

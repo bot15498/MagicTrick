@@ -12,6 +12,7 @@ public enum GameState
     Mulligan,
     ActSetup,
     ActPlayout,
+    ActEnd,
     RoundEnd,
     Shopping,
     PartyEnd,
@@ -45,12 +46,25 @@ public class GameManager : MonoBehaviour
     private GameObject slot3;
     [SerializeField]
     private TMP_Text scoreText;
+    [SerializeField]
+    private HorizontalCardHolder cardHolder;
     private ScoreManager scoreManager;
+    private DeckManager deckManager;
+    private List<GameObject> slots;
+
+    void Awake()
+    {
+        slots = new List<GameObject>
+        {
+            slot1, slot2, slot3
+        };
+    }
 
     void Start()
     {
-        state = GameState.Idle;
+        //state = GameState.Idle;
         scoreManager = GetComponent<ScoreManager>();
+        deckManager = GetComponent<DeckManager>();
     }
 
     void Update()
@@ -60,6 +74,8 @@ public class GameManager : MonoBehaviour
             case GameState.Idle:
                 break;
             case GameState.PartyStart:
+                // Reset and shuffle deck
+                deckManager.InitializeDeck();
                 state = GameState.RoundStart;
                 break;
             case GameState.RoundStart:
@@ -68,7 +84,15 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.ActStart:
                 // Draw cards
-                state = GameState.Mulligan;
+                if (cardHolder.cards.Count < maxHandSize)
+                {
+                    PlayableCard draw = deckManager.DrawCard();
+                    cardHolder.AddCardToHand(draw);
+                }
+                else
+                {
+                    state = GameState.Mulligan;
+                }
                 break;
             case GameState.ActSetup:
                 // Pick cards to play. Wait for confirmation
@@ -88,19 +112,29 @@ public class GameManager : MonoBehaviour
                 // Update text
                 scoreText.text = $"Current score: {scoreManager.Score}";
                 // Go to next 
-                currAct++;
-                if (currAct > maxAct)
+                state = GameState.ActEnd;
+                break;
+            case GameState.ActEnd:
+                // Send to discards
+                bool allgood = DiscardBoard();
+                if (allgood)
                 {
-                    state = GameState.RoundEnd;
-                }
-                else
-                {
-                    state = GameState.ActStart;
+                    // Determine what to do next
+                    currAct++;
+                    if (currAct > maxAct)
+                    {
+                        currAct = 1;
+                        state = GameState.RoundEnd;
+                    }
+                    else
+                    {
+                        state = GameState.ActStart;
+                    }
                 }
                 break;
             case GameState.RoundEnd:
                 // Check if you die or not
-                if(scoreManager.Score < currParty.Rounds[currRound].ScoreRequired)
+                if (scoreManager.Score < currParty.Rounds[currRound].ScoreRequired)
                 {
                     // Die
                     state = GameState.GameOver;
@@ -110,6 +144,7 @@ public class GameManager : MonoBehaviour
                     currRound++;
                     if (currRound > maxRounds)
                     {
+                        currRound = 1;
                         state = GameState.PartyEnd;
                     }
                     else
@@ -127,6 +162,13 @@ public class GameManager : MonoBehaviour
             case GameState.GameOver:
                 break;
         }
+
+        // debug stuff
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            PlayableCard draw = deckManager.DrawCard();
+            cardHolder.AddCardToHand(draw);
+        }
     }
 
     public void LoadParty(Party party)
@@ -136,14 +178,10 @@ public class GameManager : MonoBehaviour
 
     private void PlayAllCards()
     {
-        List<GameObject> slots = new List<GameObject>
-        {
-            slot1, slot2, slot3
-        };
-        foreach(var slot in slots)
+        foreach (var slot in slots)
         {
             Card currCardObj = slot.GetComponentInChildren<Card>();
-            if(currCardObj != null)
+            if (currCardObj != null)
             {
                 currCardObj.CardData.PlayCard(this);
             }
@@ -156,10 +194,6 @@ public class GameManager : MonoBehaviour
         scoreManager.ClearToAddVariables();
 
         // Run preview card in all slots if there is something there
-        List<GameObject> slots = new List<GameObject>
-        {
-            slot1, slot2, slot3
-        };
         foreach (var slot in slots)
         {
             Card currCardObj = slot.GetComponentInChildren<Card>();
@@ -168,5 +202,29 @@ public class GameManager : MonoBehaviour
                 currCardObj.CardData.PreviewCard(this);
             }
         }
+    }
+
+    private bool DiscardBoard()
+    {
+        foreach(var slot in slots)
+        {
+            Card currCardObj = slot.GetComponentInChildren<Card>();
+            if (currCardObj != null)
+            {
+                // Add the card to discards
+                deckManager.SendToDiscard(currCardObj.CardData);
+
+                // Delete the game object
+                Destroy(currCardObj.transform.parent.gameObject);
+                if(cardHolder.cards.Contains(currCardObj))
+                {
+                    cardHolder.cards.Remove(currCardObj);
+                }
+                // Exit early
+                return false;
+            }
+        }
+        // If you get here, all slots are empty
+        return true;
     }
 }

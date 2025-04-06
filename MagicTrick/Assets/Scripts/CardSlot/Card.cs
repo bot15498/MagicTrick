@@ -248,4 +248,12 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             hand.cards.Add(this);
         }
     }
+
+    public void UpdateVisual()
+    {
+        if(CardData != null && cardVisual != null)
+        {
+            cardVisual.UpdateVisual(CardData);
+        }
+    }
 }

@@ -33,36 +33,22 @@ public class HorizontalCardHolder : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < cardsToSpawn; i++)
-        {
-            Instantiate(slotPrefab, transform);
-        }
 
         rect = GetComponent<RectTransform>();
-        cards = GetComponentsInChildren<Card>(true).Where(card => card.transform.parent != null && card.transform.parent.parent == this.transform).ToList();
+        cards = new List<Card>();
+        //cards = GetComponentsInChildren<Card>(true).Where(card => card.transform.parent != null && card.transform.parent.parent == this.transform).ToList();
 
+        //StartCoroutine(Frame());
 
-        foreach (Card card in cards)
-        {
-            card.PointerEnterEvent.AddListener(CardPointerEnter);
-            card.PointerExitEvent.AddListener(CardPointerExit);
-            card.BeginDragEvent.AddListener(BeginDrag);
-            card.EndDragEvent.AddListener(EndDrag);
-            card.name = cardCount.ToString();
-            cardCount++;
-        }
-
-        StartCoroutine(Frame());
-
-        IEnumerator Frame()
-        {
-            yield return new WaitForSecondsRealtime(.1f);
-            for (int i = 0; i < cards.Count; i++)
-            {
-                if (cards[i].cardVisual != null)
-                    cards[i].cardVisual.UpdateIndex(transform.childCount);
-            }
-        }
+        //IEnumerator Frame()
+        //{
+        //    yield return new WaitForSecondsRealtime(.1f);
+        //    for (int i = 0; i < cards.Count; i++)
+        //    {
+        //        if (cards[i].cardVisual != null)
+        //            cards[i].cardVisual.UpdateIndex(transform.childCount);
+        //    }
+        //}
     }
 
     private void BeginDrag(Card card)
@@ -117,26 +103,26 @@ public class HorizontalCardHolder : MonoBehaviour
             cards.Remove(hoveredCard);
         }*/
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Instantiate(slotPrefab, transform);
-            cards = GetComponentsInChildren<Card>(true)
-    .Where(card => card.transform.parent != null &&
-                   card.transform.parent.parent == this.transform)
-    .ToList();
+    //    if (Input.GetKeyDown(KeyCode.F))
+    //    {
+    //        Instantiate(slotPrefab, transform);
+    //        cards = GetComponentsInChildren<Card>(true)
+    //.Where(card => card.transform.parent != null &&
+    //               card.transform.parent.parent == this.transform)
+    //.ToList();
 
 
-            foreach (Card card in cards)
-            {
-                card.PointerEnterEvent.AddListener(CardPointerEnter);
-                card.PointerExitEvent.AddListener(CardPointerExit);
-                card.BeginDragEvent.AddListener(BeginDrag);
-                card.EndDragEvent.AddListener(EndDrag);
-                card.name = cardCount.ToString();
-                cardCount++;
-            }
+    //        foreach (Card card in cards)
+    //        {
+    //            card.PointerEnterEvent.AddListener(CardPointerEnter);
+    //            card.PointerExitEvent.AddListener(CardPointerExit);
+    //            card.BeginDragEvent.AddListener(BeginDrag);
+    //            card.EndDragEvent.AddListener(EndDrag);
+    //            card.name = cardCount.ToString();
+    //            cardCount++;
+    //        }
 
-        }
+    //    }
 
 
 
@@ -197,6 +183,32 @@ public class HorizontalCardHolder : MonoBehaviour
         {
             card.cardVisual.UpdateIndex(transform.childCount);
         }
+    }
+
+    public void AddCardToHand(PlayableCard cardData)
+    {
+        if (cardData == null)
+        {
+            Debug.Log("Trying to draw more cards than you have!!");
+            // Probably force a game loss ( but this should never happen) 
+            return;
+        }
+        GameObject slotObj = Instantiate(slotPrefab, transform);
+        Card card = slotObj.GetComponentInChildren<Card>(true);
+
+        // Add card data
+        card.CardData = cardData;
+        card.UpdateVisual();
+
+        // Add callbacks
+        card.PointerEnterEvent.AddListener(CardPointerEnter);
+        card.PointerExitEvent.AddListener(CardPointerExit);
+        card.BeginDragEvent.AddListener(BeginDrag);
+        card.EndDragEvent.AddListener(EndDrag);
+        card.name = cardCount.ToString();
+
+        cardCount++;
+        cards.Add(card);
     }
 
 }

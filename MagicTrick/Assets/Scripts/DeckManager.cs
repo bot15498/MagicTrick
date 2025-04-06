@@ -47,13 +47,31 @@ public class DeckManager : MonoBehaviour
 
     public void ShuffleCurrentDeck()
     {
-        DeckCards.OrderBy(x => Random.value).ToList();
+        DeckCards = DeckCards.OrderBy(x => Random.value).ToList();
     }
 
     public PlayableCard DrawCard()
     {
+        if(DeckCards.Count == 0)
+        {
+            // Deck refresh
+            RefreshDeck();
+        }
+
         var toreturn = DeckCards.FirstOrDefault();
-        DeckCards.RemoveAt(0);
-        return toreturn;
+        if (toreturn == null)
+        {
+            return null;
+        }
+        else
+        {
+            DeckCards.RemoveAt(0);
+            return toreturn;
+        }
+    }
+
+    public void SendToDiscard(PlayableCard card)
+    {
+        Discards.Add(card);
     }
 }

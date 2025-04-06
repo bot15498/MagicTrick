@@ -77,6 +77,7 @@ public class CardVisual : MonoBehaviour
         cardTransform = target.transform;
         canvas = GetComponent<Canvas>();
         shadowCanvas = visualShadow.GetComponent<Canvas>();
+        UpdateVisual(target.CardData);
 
         //Event Listening
         parentCard.PointerEnterEvent.AddListener(PointerEnter);
@@ -216,4 +217,8 @@ public class CardVisual : MonoBehaviour
         shadowCanvas.overrideSorting = false;
     }
 
+    public void UpdateVisual(PlayableCard carddata)
+    {
+        cardImage.sprite = carddata.Image;
+    }
 }
