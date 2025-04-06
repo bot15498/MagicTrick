@@ -32,13 +32,22 @@ public class PlayableCard : ScriptableObject
     // The list of things this card will do (in order).
     public List<ActAction> Actions = new List<ActAction>();
 
-    public void PlayCard()
+    public void PlayCard(GameManager gameManager)
     {
         // Note: these happen in the order they are added
         // Just make sure you put the multipliy actions last
         foreach (ActAction act in Actions)
         {
-            //act.DoAction();
+            act.DoAction(gameManager);
+        }
+    }
+
+    public void PreviewCard(GameManager gameManager)
+    {
+        // Preview what the card will add in score.
+        foreach (ActAction act in Actions)
+        {
+            act.PreviewAction(gameManager);
         }
     }
 

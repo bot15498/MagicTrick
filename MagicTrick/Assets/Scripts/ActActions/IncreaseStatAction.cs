@@ -26,4 +26,24 @@ public class IncreaseStatAction : ActAction
                 break;
         }
     }
+
+    public override void PreviewAction(GameManager gameManager)
+    {
+        var scoreManager = gameManager.GetComponent<ScoreManager>();
+        switch (StatToChange)
+        {
+            case Stats.Captivation:
+                scoreManager.captivationToAdd += ChangeAmount;
+                break;
+            case Stats.SleightOfHand:
+                scoreManager.sleightOfHandToAdd += ChangeAmount;
+                break;
+            case Stats.Payout:
+                scoreManager.additionalPayoutToAdd += ChangeAmount;
+                break;
+            case Stats.Liability:
+                scoreManager.liabilityToAdd += ChangeAmount;
+                break;
+        }
+    }
 }

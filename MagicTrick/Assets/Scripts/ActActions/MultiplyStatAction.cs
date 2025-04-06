@@ -16,13 +16,33 @@ public class MultiplyStatAction : ActAction
                 scoreManager.captivation = Mathf.FloorToInt(scoreManager.captivation * MultiplyAmount);
                 break;
             case Stats.SleightOfHand:
-                scoreManager.sleightOfHand = Mathf.FloorToInt(scoreManager.captivation * MultiplyAmount);
+                scoreManager.sleightOfHand = Mathf.FloorToInt(scoreManager.sleightOfHand * MultiplyAmount);
                 break;
             case Stats.Payout:
-                scoreManager.additionalPayout = Mathf.FloorToInt(scoreManager.captivation * MultiplyAmount);
+                scoreManager.additionalPayout = Mathf.FloorToInt(scoreManager.additionalPayout * MultiplyAmount);
                 break;
             case Stats.Liability:
-                scoreManager.liability = Mathf.FloorToInt(scoreManager.captivation * MultiplyAmount);
+                scoreManager.liability = Mathf.FloorToInt(scoreManager.liability * MultiplyAmount);
+                break;
+        }
+    }
+
+    public override void PreviewAction(GameManager gameManager)
+    {
+        var scoreManager = gameManager.GetComponent<ScoreManager>();
+        switch (StatToChange)
+        {
+            case Stats.Captivation:
+                scoreManager.captivationToAdd = Mathf.FloorToInt(scoreManager.captivationToAdd * MultiplyAmount);
+                break;
+            case Stats.SleightOfHand:
+                scoreManager.sleightOfHandToAdd = Mathf.FloorToInt(scoreManager.sleightOfHandToAdd * MultiplyAmount);
+                break;
+            case Stats.Payout:
+                scoreManager.additionalPayoutToAdd = Mathf.FloorToInt(scoreManager.additionalPayoutToAdd * MultiplyAmount);
+                break;
+            case Stats.Liability:
+                scoreManager.liabilityToAdd = Mathf.FloorToInt(scoreManager.liabilityToAdd * MultiplyAmount);
                 break;
         }
     }

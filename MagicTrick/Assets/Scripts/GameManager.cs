@@ -70,13 +70,21 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.ActSetup:
                 // Pick cards to play. Wait for confirmation
+                // Update score to say what it might be 
+                // TODO: DELETE THIS
+                PreviewAllCards();
+                scoreText.text = $"Current score: {scoreManager.Score} + {scoreManager.TemporaryScore - scoreManager.Score}";
                 // TODO: DELTE THIS
-                if(Input.GetKeyUp(KeyCode.O))
+                if (Input.GetKeyUp(KeyCode.O))
                 {
                     state = GameState.ActPlayout;
                 }
                 break;
             case GameState.ActPlayout:
+                // Play each card
+                PlayAllCards();
+                // Update text
+                scoreText.text = $"Current score: {scoreManager.Score}";
                 // Go to next 
                 currAct++;
                 if (currAct > maxAct)
@@ -122,5 +130,43 @@ public class GameManager : MonoBehaviour
     public void LoadParty(Party party)
     {
         currParty = party;
+    }
+
+    private void PlayAllCards()
+    {
+        List<TestCardHolder> cardslots = new List<TestCardHolder>
+        {
+            slot1.GetComponentInChildren<TestCardHolder>(), 
+            slot2.GetComponentInChildren<TestCardHolder>(), 
+            slot3.GetComponentInChildren<TestCardHolder>()
+        };
+        foreach(var cardslot in cardslots)
+        {
+            if(cardslot.Card != null)
+            {
+                cardslot.Card.PlayCard(this);
+            }
+        }
+    }
+
+    private void PreviewAllCards()
+    {
+        // Zero out the temp variables in score manager first 
+        scoreManager.ClearToAddVariables();
+
+        // Run preview card in all slots if there is something there
+        List<TestCardHolder> cardslots = new List<TestCardHolder>
+        {
+            slot1.GetComponentInChildren<TestCardHolder>(),
+            slot2.GetComponentInChildren<TestCardHolder>(),
+            slot3.GetComponentInChildren<TestCardHolder>()
+        };
+        foreach (var cardslot in cardslots)
+        {
+            if (cardslot.Card != null)
+            {
+                cardslot.Card.PreviewCard(this);
+            }
+        }
     }
 }
