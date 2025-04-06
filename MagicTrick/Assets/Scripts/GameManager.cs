@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     public GameState state;
     public Party currParty;
 
+    // The followign are references to the trick slot.
+    // Heiarchy goes Trick Slot -> Cardslot prefab -> Then card
     [SerializeField]
     private GameObject slot1;
     [SerializeField]
@@ -49,7 +51,6 @@ public class GameManager : MonoBehaviour
     {
         state = GameState.Idle;
         scoreManager = GetComponent<ScoreManager>();
-        ((IncreaseStatAction)slot1.GetComponentInChildren<TestCardHolder>().Card.Actions[0]).ChangeAmount += 5;
     }
 
     void Update()
@@ -135,17 +136,16 @@ public class GameManager : MonoBehaviour
 
     private void PlayAllCards()
     {
-        List<TestCardHolder> cardslots = new List<TestCardHolder>
+        List<GameObject> slots = new List<GameObject>
         {
-            slot1.GetComponentInChildren<TestCardHolder>(), 
-            slot2.GetComponentInChildren<TestCardHolder>(), 
-            slot3.GetComponentInChildren<TestCardHolder>()
+            slot1, slot2, slot3
         };
-        foreach(var cardslot in cardslots)
+        foreach(var slot in slots)
         {
-            if(cardslot.Card != null)
+            Card currCardObj = slot.GetComponentInChildren<Card>();
+            if(currCardObj != null)
             {
-                cardslot.Card.PlayCard(this);
+                currCardObj.CardData.PlayCard(this);
             }
         }
     }
@@ -156,17 +156,16 @@ public class GameManager : MonoBehaviour
         scoreManager.ClearToAddVariables();
 
         // Run preview card in all slots if there is something there
-        List<TestCardHolder> cardslots = new List<TestCardHolder>
+        List<GameObject> slots = new List<GameObject>
         {
-            slot1.GetComponentInChildren<TestCardHolder>(),
-            slot2.GetComponentInChildren<TestCardHolder>(),
-            slot3.GetComponentInChildren<TestCardHolder>()
+            slot1, slot2, slot3
         };
-        foreach (var cardslot in cardslots)
+        foreach (var slot in slots)
         {
-            if (cardslot.Card != null)
+            Card currCardObj = slot.GetComponentInChildren<Card>();
+            if (currCardObj != null)
             {
-                cardslot.Card.PreviewCard(this);
+                currCardObj.CardData.PreviewCard(this);
             }
         }
     }

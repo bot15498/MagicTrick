@@ -6,19 +6,6 @@ public class Deck : MonoBehaviour
 {
     // This is the list of playable cards in this deck. 
     public List<PlayableCard> PlayableCardList;
-    public List<Card> Cards;
-
-    void Start()
-    {
-        // Instantiate a list of card objects based on the card list
-        foreach (var playableCard in PlayableCardList)
-        {
-            //GameObject obj = Instantiate
-        }
-    }
-
-    void Update()
-    {
-        
-    }
+    // This is the list of card objects created from the list
+    //public List<Card> Cards;
 }
