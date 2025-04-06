@@ -47,10 +47,10 @@ MonoBehaviour:
   PlayableCardList:
   - {fileID: 11400000, guid: 0b995586faa515a418da942587a374a4, type: 2}
   - {fileID: 11400000, guid: 0b995586faa515a418da942587a374a4, type: 2}
+  - {fileID: 11400000, guid: 0b995586faa515a418da942587a374a4, type: 2}
   - {fileID: 11400000, guid: 386868a8e849f374ab27316def0e1514, type: 2}
   - {fileID: 11400000, guid: 386868a8e849f374ab27316def0e1514, type: 2}
   - {fileID: 11400000, guid: 386868a8e849f374ab27316def0e1514, type: 2}
-  - {fileID: 11400000, guid: d3fdbab985ae66e4d9328b265ea9f576, type: 2}
   - {fileID: 11400000, guid: d3fdbab985ae66e4d9328b265ea9f576, type: 2}
   - {fileID: 11400000, guid: d3fdbab985ae66e4d9328b265ea9f576, type: 2}
   - {fileID: 11400000, guid: d3fdbab985ae66e4d9328b265ea9f576, type: 2}

@@ -571,7 +571,7 @@ GameObject:
   - component: {fileID: 176428524}
   - component: {fileID: 176428523}
   m_Layer: 5
-  m_Name: PropZone (2)
+  m_Name: PropZone 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1835,8 +1835,8 @@ RectTransform:
   - {fileID: 505733091}
   - {fileID: 599850622}
   - {fileID: 1412814389}
-  - {fileID: 1639362161}
   - {fileID: 1406534400}
+  - {fileID: 1639362161}
   - {fileID: 176428522}
   - {fileID: 1929267573}
   - {fileID: 2104248787}
@@ -3813,7 +3813,7 @@ GameObject:
   - component: {fileID: 1406534402}
   - component: {fileID: 1406534401}
   m_Layer: 5
-  m_Name: PropZone (1)
+  m_Name: PropZone 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4675,7 +4675,7 @@ GameObject:
   - component: {fileID: 1639362163}
   - component: {fileID: 1639362162}
   m_Layer: 5
-  m_Name: PropZone
+  m_Name: PropZone 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
