@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 
 public class MultiplyStatAction : ActAction
@@ -46,4 +49,12 @@ public class MultiplyStatAction : ActAction
                 break;
         }
     }
+#if UNITY_EDITOR
+    [ContextMenu("Delete This")]
+    private void DeleteThis()
+    {
+        Undo.DestroyObjectImmediate(this);
+        AssetDatabase.SaveAssets();
+    }
+#endif
 }

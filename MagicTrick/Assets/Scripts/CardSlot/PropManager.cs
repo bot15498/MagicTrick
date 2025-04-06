@@ -28,6 +28,7 @@ public class PropManager : MonoBehaviour
             newPropObj.transform.localPosition = Vector3.zero;
 
             Prop prop = newPropObj.GetComponentInChildren<Prop>();
+            prop.UpdateVisual();
             if (prop != null)
             {
                 // Prevent stacking by ensuring the prop is not assigned elsewhere

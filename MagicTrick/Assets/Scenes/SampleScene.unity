@@ -6012,6 +6012,9 @@ MonoBehaviour:
   slot1: {fileID: 1949454458}
   slot2: {fileID: 505733090}
   slot3: {fileID: 599850621}
+  propSlot1: {fileID: 1406534399}
+  propSlot2: {fileID: 1639362160}
+  propSlot3: {fileID: 176428521}
   scoreText: {fileID: 2104248785}
   cardHolder: {fileID: 239905987}
 --- !u!4 &2000991873

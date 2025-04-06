@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1125470783266642933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
+  m_Name: Increase Stats
+  m_EditorClassIdentifier: 
+  StatToChange: 1
+  ChangeAmount: 5
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efa998ea87a49943b089a64c81492ff, type: 3}
+  m_Name: Card 3
+  m_EditorClassIdentifier: 
+  Actions:
+  - {fileID: -1125470783266642933}
+  CardName: 
+  Description: 
+  Image: {fileID: 21300000, guid: 4dcd9b489306411459fa9cd6216ea2c7, type: 3}
+  Type: 0

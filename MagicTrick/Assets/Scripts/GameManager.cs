@@ -45,18 +45,29 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject slot3;
     [SerializeField]
+    private GameObject propSlot1;
+    [SerializeField]
+    private GameObject propSlot2;
+    [SerializeField]
+    private GameObject propSlot3;
+    [SerializeField]
     private TMP_Text scoreText;
     [SerializeField]
     private HorizontalCardHolder cardHolder;
     private ScoreManager scoreManager;
     private DeckManager deckManager;
     private List<GameObject> slots;
+    private List<GameObject> propSlots;
 
     void Awake()
     {
         slots = new List<GameObject>
         {
             slot1, slot2, slot3
+        };
+        propSlots = new List<GameObject>
+        {
+            propSlot1, propSlot2, propSlot3
         };
     }
 
@@ -157,6 +168,8 @@ public class GameManager : MonoBehaviour
                 // Wait until mulligan has finished.
                 state = GameState.ActSetup;
                 break;
+            case GameState.Shopping:
+                break;
             case GameState.PartyEnd:
                 break;
             case GameState.GameOver:
@@ -178,12 +191,20 @@ public class GameManager : MonoBehaviour
 
     private void PlayAllCards()
     {
-        foreach (var slot in slots)
+        for (int i = 0; i < slots.Count; i++)
         {
-            Card currCardObj = slot.GetComponentInChildren<Card>();
+            Card currCardObj = slots[i].GetComponentInChildren<Card>();
             if (currCardObj != null)
             {
                 currCardObj.CardData.PlayCard(this);
+            }
+            foreach(var propSlot in propSlots)
+            {
+                Prop currPropObj = propSlot.GetComponentInChildren<Prop>();
+                if(currPropObj != null)
+                {
+                    currPropObj.PropData.ApplyProp(this, i);
+                }
             }
         }
     }
@@ -194,19 +215,27 @@ public class GameManager : MonoBehaviour
         scoreManager.ClearToAddVariables();
 
         // Run preview card in all slots if there is something there
-        foreach (var slot in slots)
+        for (int i = 0; i < slots.Count; i++)
         {
-            Card currCardObj = slot.GetComponentInChildren<Card>();
+            Card currCardObj = slots[i].GetComponentInChildren<Card>();
             if (currCardObj != null)
             {
                 currCardObj.CardData.PreviewCard(this);
+            }
+            foreach (var propSlot in propSlots)
+            {
+                Prop currPropObj = propSlot.GetComponentInChildren<Prop>();
+                if (currPropObj != null)
+                {
+                    currPropObj.PropData.PreviewProp(this, i);
+                }
             }
         }
     }
 
     private bool DiscardBoard()
     {
-        foreach(var slot in slots)
+        foreach (var slot in slots)
         {
             Card currCardObj = slot.GetComponentInChildren<Card>();
             if (currCardObj != null)
@@ -216,7 +245,7 @@ public class GameManager : MonoBehaviour
 
                 // Delete the game object
                 Destroy(currCardObj.transform.parent.gameObject);
-                if(cardHolder.cards.Contains(currCardObj))
+                if (cardHolder.cards.Contains(currCardObj))
                 {
                     cardHolder.cards.Remove(currCardObj);
                 }

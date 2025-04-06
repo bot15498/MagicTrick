@@ -175,4 +175,9 @@ public class PropVisual : MonoBehaviour
             transform.DOScale(scaleOnSelect, scaleTransition).SetEase(scaleEase);
 
     }
+
+    public void UpdateVisual(PlayableProp PropData)
+    {
+        propImage.sprite = PropData.Image;
+    }
 }

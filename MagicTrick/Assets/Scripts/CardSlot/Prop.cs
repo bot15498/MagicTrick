@@ -27,7 +27,7 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public bool wasDragged;
 
     [Header("Prop Data")]
-    public ScriptableObject propData;
+    public PlayableProp PropData;
 
     [Header("Events")]
     public UnityEvent<Prop> PointerEnterEvent = new UnityEvent<Prop>();
@@ -221,5 +221,13 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         if (propVisual != null)
             Destroy(propVisual.gameObject);
+    }
+
+    public void UpdateVisual()
+    {
+        if (PropData != null && propVisual != null)
+        {
+            propVisual.UpdateVisual(PropData);
+        }
     }
 }

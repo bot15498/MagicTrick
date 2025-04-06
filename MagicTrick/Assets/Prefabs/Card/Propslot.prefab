@@ -198,7 +198,7 @@ MonoBehaviour:
   isHovering: 0
   isDragging: 0
   wasDragged: 0
-  propData: {fileID: 0}
+  PropData: {fileID: 11400000, guid: f1eb36017fd75f74a9f876ecbc34d201, type: 2}
   PointerEnterEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -220,5 +220,3 @@ MonoBehaviour:
   SelectEvent:
     m_PersistentCalls:
       m_Calls: []
-  previousSlotGroup: {fileID: 0}
-  currentDropZone: {fileID: 0}
