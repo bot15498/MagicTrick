@@ -17,24 +17,33 @@ public class PlayableProp : PlayableItem
     [Header("Actions applied to Fixed slots")]
     public List<SlotAction> FixedSlotActions = new List<SlotAction>();
 
-    public void ApplyProp(GameManager gameManager, int slot)
+    public void ApplyProp(GameManager gameManager, int currCardSlot, int currPropSlot)
     {
         // Apply the current slot actions
-        foreach (ActAction act in Actions)
+        // Make sure we are only applying when card slot and prop slot match
+        if (Actions != null && currCardSlot == currPropSlot)
         {
-            act.DoAction(gameManager);
+            foreach (ActAction act in Actions)
+            {
+                act.DoAction(gameManager);
+            }
         }
         // Apply the fixed slot actions
-        foreach (ActAction act in FixedSlotActions[slot].Actions)
+        // Location of prop slot does not matter here.
+        if (FixedSlotActions != null && currCardSlot < FixedSlotActions.Count)
         {
-            act.DoAction(gameManager);
+            foreach (ActAction act in FixedSlotActions[currCardSlot].Actions)
+            {
+                act.DoAction(gameManager);
+            }
         }
     }
 
-    public void PreviewProp(GameManager gameManager, int slot)
+    public void PreviewProp(GameManager gameManager, int currCardSlot, int currPropSlot)
     {
         // Apply the current slot actions
-        if (Actions != null)
+        // Make sure we are only applying when card slot and prop slot match
+        if (Actions != null && currCardSlot == currPropSlot)
         {
             foreach (ActAction act in Actions)
             {
@@ -42,9 +51,10 @@ public class PlayableProp : PlayableItem
             }
         }
         // Apply the fixed slot actions
-        if (FixedSlotActions != null && slot < FixedSlotActions.Count)
+        // Location of prop slot does not matter here.
+        if (FixedSlotActions != null && currCardSlot < FixedSlotActions.Count)
         {
-            foreach (ActAction act in FixedSlotActions[slot].Actions)
+            foreach (ActAction act in FixedSlotActions[currCardSlot].Actions)
             {
                 act.PreviewAction(gameManager);
             }

@@ -191,19 +191,19 @@ public class GameManager : MonoBehaviour
 
     private void PlayAllCards()
     {
-        for (int i = 0; i < slots.Count; i++)
+        for (int currCardSlot = 0; currCardSlot < slots.Count; currCardSlot++)
         {
-            Card currCardObj = slots[i].GetComponentInChildren<Card>();
+            Card currCardObj = slots[currCardSlot].GetComponentInChildren<Card>();
             if (currCardObj != null)
             {
                 currCardObj.CardData.PlayCard(this);
             }
-            foreach(var propSlot in propSlots)
+            for (int currPropSlot = 0; currPropSlot < propSlots.Count; currPropSlot++)
             {
-                Prop currPropObj = propSlot.GetComponentInChildren<Prop>();
-                if(currPropObj != null)
+                Prop currPropObj = propSlots[currPropSlot].GetComponentInChildren<Prop>();
+                if (currPropObj != null)
                 {
-                    currPropObj.PropData.ApplyProp(this, i);
+                    currPropObj.PropData.ApplyProp(this, currCardSlot, currPropSlot);
                 }
             }
         }
@@ -215,19 +215,19 @@ public class GameManager : MonoBehaviour
         scoreManager.ClearToAddVariables();
 
         // Run preview card in all slots if there is something there
-        for (int i = 0; i < slots.Count; i++)
+        for (int currCardSlot = 0; currCardSlot < slots.Count; currCardSlot++)
         {
-            Card currCardObj = slots[i].GetComponentInChildren<Card>();
+            Card currCardObj = slots[currCardSlot].GetComponentInChildren<Card>();
             if (currCardObj != null)
             {
                 currCardObj.CardData.PreviewCard(this);
             }
-            foreach (var propSlot in propSlots)
+            for(int currPropSlot = 0; currPropSlot<propSlots.Count; currPropSlot++)
             {
-                Prop currPropObj = propSlot.GetComponentInChildren<Prop>();
+                Prop currPropObj = propSlots[currPropSlot].GetComponentInChildren<Prop>();
                 if (currPropObj != null)
                 {
-                    currPropObj.PropData.PreviewProp(this, i);
+                    currPropObj.PropData.PreviewProp(this, currCardSlot, currPropSlot);
                 }
             }
         }
