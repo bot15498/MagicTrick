@@ -124,6 +124,8 @@ public class HorizontalCardHolder : MonoBehaviour
     .Where(card => card.transform.parent != null &&
                    card.transform.parent.parent == this.transform)
     .ToList();
+
+
             foreach (Card card in cards)
             {
                 card.PointerEnterEvent.AddListener(CardPointerEnter);
