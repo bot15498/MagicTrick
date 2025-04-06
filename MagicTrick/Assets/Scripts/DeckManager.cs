@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,12 @@ public class DeckManager : MonoBehaviour
     // Manage what is currently in the deck and discards
     public List<PlayableCard> DeckCards;
     public List<PlayableCard> Discards;
+    private System.Random rand;
+
+    void Awake()
+    {
+        rand = new System.Random();
+    }
 
     void Start()
     {
@@ -47,7 +54,7 @@ public class DeckManager : MonoBehaviour
 
     public void ShuffleCurrentDeck()
     {
-        DeckCards = DeckCards.OrderBy(x => Random.value).ToList();
+        DeckCards = DeckCards.OrderBy(x => rand.NextDouble()).ToList();
     }
 
     public PlayableCard DrawCard()
