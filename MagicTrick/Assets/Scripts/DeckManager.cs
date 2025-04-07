@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class DeckManager : MonoBehaviour
@@ -12,6 +13,9 @@ public class DeckManager : MonoBehaviour
     // Manage what is currently in the deck and discards
     public List<PlayableCard> DeckCards;
     public List<PlayableCard> Discards;
+
+    [SerializeField]
+    private TMP_Text DeckText;
     private System.Random rand;
 
     void Awake()
@@ -28,7 +32,7 @@ public class DeckManager : MonoBehaviour
 
     void Update()
     {
-        
+        DeckText.text = $"{DeckCards.Count}";
     }
 
     public void InitializeDeck()

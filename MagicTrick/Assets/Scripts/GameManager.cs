@@ -9,7 +9,6 @@ public enum GameState
     PartyStart,
     RoundStart,
     ActStart,
-    Mulligan,
     ActSetup,
     ActPlayout,
     ActEnd,
@@ -102,7 +101,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    state = GameState.Mulligan;
+                    state = GameState.ActSetup;
                 }
                 break;
             case GameState.ActSetup:
@@ -163,10 +162,6 @@ public class GameManager : MonoBehaviour
                         state = GameState.RoundStart;
                     }
                 }
-                break;
-            case GameState.Mulligan:
-                // Wait until mulligan has finished.
-                state = GameState.ActSetup;
                 break;
             case GameState.Shopping:
                 break;
