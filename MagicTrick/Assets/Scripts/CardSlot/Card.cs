@@ -211,6 +211,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     public void SetSelected(bool isSelected)
     {
+        selected = isSelected;
         SelectEvent.Invoke(this, isSelected);
 
         if (isSelected)
