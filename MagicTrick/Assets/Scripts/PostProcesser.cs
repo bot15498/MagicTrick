@@ -44,7 +44,6 @@ public class PostProcesser : MonoBehaviour
     [Range(0, 1)] public float cloudCoverage = 0.5f;
     [Range(0, 360)] public float cloudDirection = 30f;
     public float cloudZoom = 10f;
-    public Camera fancycam;
 
 
     public enum ShaderState
@@ -56,19 +55,19 @@ public class PostProcesser : MonoBehaviour
 
     void OnEnable()
 {
-    fancycam.depthTextureMode = DepthTextureMode.DepthNormals | DepthTextureMode.Depth;
+    Camera.main.depthTextureMode = DepthTextureMode.DepthNormals | DepthTextureMode.Depth;
     if (grassState != ShaderState.Debug)
-        fancycam.cullingMask = ~(1 << (int)Mathf.Log(grassLayer.value, 2));
+        Camera.main.cullingMask = ~(1 << (int)Mathf.Log(grassLayer.value, 2));
 
     if (grassState == ShaderState.On && _grassCameraObject == null)
     {
         // Create the GrassCamera GameObject
         _grassCameraObject = new GameObject("GrassCamera");
-        _grassCameraObject.transform.SetParent(fancycam.transform);
+        _grassCameraObject.transform.SetParent(Camera.main.transform);
         
         // Add Camera component
         var grassCamera = _grassCameraObject.AddComponent<Camera>();
-        grassCamera.cullingMask = fancycam.cullingMask;
+        grassCamera.cullingMask = Camera.main.cullingMask;
         grassCamera.clearFlags = CameraClearFlags.Nothing;
 
         // Start with everything included
@@ -113,15 +112,15 @@ public class PostProcesser : MonoBehaviour
 
     void UpdateZoom()
     {
-        if (fancycam == null)
+        if (Camera.main == null)
             return;
 
-        fancycam.orthographicSize = 1 / zoom;
+        Camera.main.orthographicSize = 1 / zoom;
         var farPlane = 20 / zoom;
         var pos = Camera.main.transform.localPosition;
         pos.z = -farPlane / 2;
-        fancycam.transform.SetLocalPositionAndRotation(pos, Quaternion.identity);
-        fancycam.farClipPlane = farPlane;
+        Camera.main.transform.SetLocalPositionAndRotation(pos, Quaternion.identity);
+        Camera.main.farClipPlane = farPlane;
     }
 
     void OnValidate()
@@ -238,7 +237,7 @@ public class PostProcesser : MonoBehaviour
             // grassCameraObject.transform.SetParent(Camera.main.transform);
 
             // var grassCamera = _grassCameraObject.GetComponent<Camera>();
-            grassCamera.CopyFrom(fancycam);
+            grassCamera.CopyFrom(Camera.main);
             grassCamera.targetTexture = grassTex;
             
             grassCamera.clearFlags = CameraClearFlags.Nothing;

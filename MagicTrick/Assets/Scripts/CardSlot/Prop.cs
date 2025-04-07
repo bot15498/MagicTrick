@@ -43,6 +43,7 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     private float pointerDownTime;
     private float pointerUpTime;
+    private TooltipTrigger tooltipTrigger;
 
     void Start()
     {
@@ -58,6 +59,7 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
         previousSlotGroup = GetComponentInParent<IPropZone>();
         currentDropZone = previousSlotGroup;
+        tooltipTrigger = GetComponent<TooltipTrigger>();
     }
 
     void Update()
@@ -185,6 +187,7 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         PointerEnterEvent.Invoke(this);
         isHovering = true;
+        tooltipTrigger.setTooltip(PropData.Description);
     }
 
     public void OnPointerExit(PointerEventData eventData)

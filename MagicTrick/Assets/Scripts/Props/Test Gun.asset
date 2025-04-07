@@ -43,7 +43,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Actions: []
   PropName: Gun
-  Description: 
+  Description: 'So then i started blasting '
   Image: {fileID: 21300000, guid: ef8470d6fd5be20489a1614048470837, type: 3}
   PreviousSlotActions: []
   NextSlotActions: []

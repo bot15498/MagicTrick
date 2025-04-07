@@ -47,6 +47,13 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [HideInInspector] public CardDropZone previousSlotGroup;
     [HideInInspector] public CardDropZone currentDropZone;
 
+
+    private TooltipTrigger tooltipTrigger;
+
+    public void Awake()
+    {
+        
+    }
     void Start()
     {
         canvas = GetComponentInParent<Canvas>();
@@ -58,6 +65,10 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         visualHandler = FindObjectOfType<VisualCardsHandler>();
         cardVisual = Instantiate(cardVisualPrefab, visualHandler ? visualHandler.transform : canvas.transform).GetComponent<CardVisual>();
         cardVisual.Initialize(this);
+        tooltipTrigger = GetComponent<TooltipTrigger>();
+        
+        
+
     }
 
     void Update()
@@ -108,7 +119,6 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         imageComponent.raycastTarget = true;
 
         StartCoroutine(FrameWait());
-
         IEnumerator FrameWait()
         {
             yield return new WaitForEndOfFrame();
@@ -131,28 +141,28 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             var dropZone = result.gameObject.GetComponent<CardDropZone>();
             if (dropZone != null)
             {
-                // Cleanly remove from old zone if needed
+                droppedInZone = true;
+
+                // Clear previous drop zone if necessary
                 if (currentDropZone != null && currentDropZone != dropZone)
                 {
                     currentDropZone.ClearSlot(this);
                 }
 
-                // Replace any card in this drop zone
+                // If replacing another card, return it to hand
                 if (dropZone.CurrentCard != null && dropZone.CurrentCard != this)
                 {
                     dropZone.CurrentCard.ReturnToHand();
                 }
 
-                // Assign to new zone
                 dropZone.AssignCard(this);
                 currentDropZone = dropZone;
 
-                droppedInZone = true;
                 break;
             }
         }
 
-        // If not dropped on any slot, return to hand
+        // Tooltip system toggle handling
         if (!droppedInZone)
         {
             if (currentDropZone != null)
@@ -162,12 +172,28 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             }
 
             ReturnToHand();
+
+            // Reset tooltip direction if returned to hand
+            TooltipTrigger tt = GetComponent<TooltipTrigger>();
+            if (tt != null)
+                tt.rightTooltip = false;
+        }
+        else
+        {
+            // Enable rightTooltip if dropped in trick slot
+            TooltipTrigger tt = GetComponent<TooltipTrigger>();
+            if (tt != null)
+            {
+                bool inTrickZone = currentDropZone != null && currentDropZone.CompareTag("TrickSlot");
+                tt.rightTooltip = inTrickZone;
+            }
         }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
         PointerEnterEvent.Invoke(this);
         isHovering = true;
+        tooltipTrigger.setTooltip(CardData.Description);
     }
 
     public void OnPointerExit(PointerEventData eventData)
