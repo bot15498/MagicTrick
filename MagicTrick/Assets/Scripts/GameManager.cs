@@ -117,11 +117,6 @@ public class GameManager : MonoBehaviour
                 // TODO: DELETE THIS
                 PreviewAllCards();
                 scoreText.text = $"Current score: {scoreManager.Score} + {scoreManager.TemporaryScore - scoreManager.Score}";
-                // TODO: DELTE THIS
-                if (Input.GetKeyUp(KeyCode.O))
-                {
-                    state = GameState.ActPlayout;
-                }
                 break;
             case GameState.ActPlayout:
                 // Play each card
@@ -337,5 +332,10 @@ public class GameManager : MonoBehaviour
             card.SetSelected(false);
             card.canBeSelected = canBeSelected;
         }
+    }
+
+    public void GoToPlayCards()
+    {
+        state = GameState.ActPlayout;
     }
 }
