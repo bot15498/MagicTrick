@@ -22,6 +22,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public float selectionOffset = 50;
     private float pointerDownTime;
     private float pointerUpTime;
+    public bool canBeSelected = true;
 
     [Header("Visual")]
     [SerializeField] private GameObject cardVisualPrefab;
@@ -200,16 +201,23 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (wasDragged)
             return;
 
-        selected = !selected;
-        SelectEvent.Invoke(this, selected);
+        if (!canBeSelected)
+            return;
 
-        if (selected)
+        selected = !selected;
+        SetSelected(selected);
+    }
+
+
+    public void SetSelected(bool isSelected)
+    {
+        SelectEvent.Invoke(this, isSelected);
+
+        if (isSelected)
             transform.localPosition += (cardVisual.transform.up * selectionOffset);
         else
             transform.localPosition = Vector3.zero;
     }
-
-
 
 
     public int SiblingAmount()
@@ -251,7 +259,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     public void UpdateVisual()
     {
-        if(CardData != null && cardVisual != null)
+        if (CardData != null && cardVisual != null)
         {
             cardVisual.UpdateVisual(CardData);
         }

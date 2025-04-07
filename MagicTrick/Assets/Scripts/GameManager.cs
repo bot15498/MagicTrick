@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameState
 {
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
     public int maxHandSize = 8;
     public GameState state;
     public Party currParty;
+    public bool canMulligan = true;
 
     // The followign are references to the trick slot.
     // Heiarchy goes Trick Slot -> Cardslot prefab -> Then card
@@ -53,6 +56,8 @@ public class GameManager : MonoBehaviour
     private TMP_Text scoreText;
     [SerializeField]
     private HorizontalCardHolder cardHolder;
+    [SerializeField]
+    private Button mulliganButton;
     private ScoreManager scoreManager;
     private DeckManager deckManager;
     private List<GameObject> slots;
@@ -94,6 +99,8 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.ActStart:
                 // Draw cards
+                canMulligan = true;
+                ResetCardSelection(canMulligan);
                 if (cardHolder.cards.Count < maxHandSize)
                 {
                     PlayableCard draw = deckManager.DrawCard();
@@ -171,6 +178,11 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+        if(mulliganButton.enabled != canMulligan)
+        {
+            mulliganButton.enabled = canMulligan;
+        }
+
         // debug stuff
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -217,7 +229,7 @@ public class GameManager : MonoBehaviour
             {
                 currCardObj.CardData.PreviewCard(this);
             }
-            for(int currPropSlot = 0; currPropSlot<propSlots.Count; currPropSlot++)
+            for (int currPropSlot = 0; currPropSlot < propSlots.Count; currPropSlot++)
             {
                 Prop currPropObj = propSlots[currPropSlot].GetComponentInChildren<Prop>();
                 if (currPropObj != null)
@@ -250,5 +262,80 @@ public class GameManager : MonoBehaviour
         }
         // If you get here, all slots are empty
         return true;
+    }
+
+    public void Mulligan()
+    {
+        if(!canMulligan)
+        {
+            // nope
+            return;
+        }
+        List<GameObject> cardObjs = new List<GameObject>();
+        // Get all selected cards in hand
+        foreach (var card in cardHolder.cards)
+        {
+            if (card.selected)
+            {
+                cardObjs.Add(card.transform.parent.gameObject);
+            }
+        }
+        // Get all selected cards played in slots
+        foreach (var slot in slots)
+        {
+            Card currCardObj = slot.GetComponentInChildren<Card>();
+            if (currCardObj != null && currCardObj.selected)
+            {
+                cardObjs.Add(currCardObj.transform.parent.gameObject);
+            }
+        }
+
+        // Check if you selected anything. If not, don't do anything.
+        if(cardObjs.Count == 0)
+        {
+            return;
+        }
+
+        // Go one by one and delete / draw a card
+        for (int i = 0; i < cardObjs.Count; i++)
+        {
+            GameObject cardToKill = cardObjs.FirstOrDefault();
+            if (cardToKill != null)
+            {
+                Card cardCardTokill = cardToKill.GetComponentInChildren<Card>();
+                cardObjs.RemoveAt(0);
+                deckManager.SendToDiscard(cardCardTokill.CardData);
+                Destroy(cardToKill);
+                if (cardHolder.cards.Contains(cardCardTokill))
+                {
+                    cardHolder.cards.Remove(cardCardTokill);
+                }
+
+                PlayableCard draw = deckManager.DrawCard();
+                cardHolder.AddCardToHand(draw);
+            }
+        }
+
+        // Prevent further mulligan
+        canMulligan = false;
+        ResetCardSelection(false);
+    }
+
+    public void ResetCardSelection(bool canBeSelected)
+    {
+        foreach (var slot in slots)
+        {
+            Card currCardObj = slot.GetComponentInChildren<Card>();
+            if (currCardObj != null)
+            {
+                currCardObj.SetSelected(false);
+                currCardObj.canBeSelected = canBeSelected;
+            }
+        }
+        foreach (var card in cardHolder.cards)
+        {
+            card.SetSelected(false);
+            card.canBeSelected = canBeSelected;
+        }
     }
 }

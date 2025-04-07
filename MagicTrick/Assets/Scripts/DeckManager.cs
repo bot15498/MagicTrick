@@ -63,12 +63,6 @@ public class DeckManager : MonoBehaviour
 
     public PlayableCard DrawCard()
     {
-        if(DeckCards.Count == 0)
-        {
-            // Deck refresh
-            RefreshDeck();
-        }
-
         var toreturn = DeckCards.FirstOrDefault();
         if (toreturn == null)
         {
@@ -77,6 +71,11 @@ public class DeckManager : MonoBehaviour
         else
         {
             DeckCards.RemoveAt(0);
+            if (DeckCards.Count == 0)
+            {
+                // Deck refresh
+                RefreshDeck();
+            }
             return toreturn;
         }
     }
