@@ -3,15 +3,15 @@ using UnityEngine.EventSystems;
 
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public string tooltipText = "Tooltip here!";
+    public string tooltipText = "IF YOU SEE THIS YOU MESSED UP";
     public Vector3 tooltipOffset = new Vector3(0, 50, 0);
     public Vector3 RighttooltipOffset;
-    public bool rightTooltip = false; // This will be set by the Card script
+    public bool rightTooltip = false; 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Vector3 offset = rightTooltip ? RighttooltipOffset : tooltipOffset;
-        TooltipSystem.Instance.ShowTooltip(tooltipText, transform.position, offset);
+       
+       
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -21,7 +21,8 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void setTooltip(string tooltiptoadd)
     {
-        TooltipSystem.Instance.setdescriptionText(tooltiptoadd);
-        Debug.Log(tooltiptoadd);
+        Vector3 offset = rightTooltip ? RighttooltipOffset : tooltipOffset;
+        TooltipSystem.Instance.ShowTooltip(tooltiptoadd,transform.position, offset);
+
     }
 }

@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instantiateVisual: 1
-  moveSpeedLimit: 50
+  moveSpeedLimit: 75
   selected: 0
   selectionOffset: 50
   canBeSelected: 1

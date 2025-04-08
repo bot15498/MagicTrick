@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -16,6 +15,7 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     [Header("Movement")]
     [SerializeField] private float moveSpeedLimit = 50;
+    [SerializeField] private Camera targetCamera;
 
     [Header("Visual")]
     [SerializeField] private GameObject propVisualPrefab;
@@ -47,6 +47,16 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     void Start()
     {
+        if (targetCamera == null)
+        {
+            GameObject camObj = GameObject.FindGameObjectWithTag("GameCamera");
+            if (camObj != null)
+                targetCamera = camObj.GetComponent<Camera>();
+
+            if (targetCamera == null)
+                Debug.LogWarning("Prop: No camera with tag 'GameCamera' found.");
+        }
+
         canvas = GetComponentInParent<Canvas>();
         imageComponent = GetComponent<Image>();
 
@@ -68,7 +78,7 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
         if (isDragging)
         {
-            Vector2 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - offset;
+            Vector2 targetPosition = targetCamera.ScreenToWorldPoint(Input.mousePosition) - offset;
             Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
             Vector2 velocity = direction * Mathf.Min(moveSpeedLimit, Vector2.Distance(transform.position, targetPosition) / Time.deltaTime);
             transform.Translate(velocity * Time.deltaTime);
@@ -77,7 +87,7 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     void ClampPosition()
     {
-        Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        Vector2 screenBounds = targetCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, targetCamera.transform.position.z));
         transform.position = new Vector3(
             Mathf.Clamp(transform.position.x, -screenBounds.x, screenBounds.x),
             Mathf.Clamp(transform.position.y, -screenBounds.y, screenBounds.y),

@@ -9,7 +9,7 @@ public class LeafInstancer : MonoBehaviour
     [SerializeField] Mesh _leafMesh;
     [SerializeField] Material _material;
 
-    MeshSurfaceSampler _meshSurfaceSampler;
+    public MeshSurfaceSampler _meshSurfaceSampler;
     RenderParams _renderParams;
 
     GraphicsBuffer commandBuffer;

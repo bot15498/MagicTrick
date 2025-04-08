@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -47,13 +46,12 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [HideInInspector] public CardDropZone previousSlotGroup;
     [HideInInspector] public CardDropZone currentDropZone;
 
+    [SerializeField] private Camera targetCamera;
 
     private TooltipTrigger tooltipTrigger;
 
-    public void Awake()
-    {
-        
-    }
+    public void Awake() { }
+
     void Start()
     {
         canvas = GetComponentInParent<Canvas>();
@@ -66,9 +64,16 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         cardVisual = Instantiate(cardVisualPrefab, visualHandler ? visualHandler.transform : canvas.transform).GetComponent<CardVisual>();
         cardVisual.Initialize(this);
         tooltipTrigger = GetComponent<TooltipTrigger>();
-        
-        
 
+        if (targetCamera == null)
+        {
+            GameObject camObj = GameObject.FindWithTag("GameCamera");
+            if (camObj != null)
+                targetCamera = camObj.GetComponent<Camera>();
+
+            if (targetCamera == null)
+                Debug.LogWarning("Card: No camera with tag 'GameCamera' found.");
+        }
     }
 
     void Update()
@@ -77,7 +82,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
         if (isDragging)
         {
-            Vector2 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - offset;
+            Vector2 targetPosition = targetCamera.ScreenToWorldPoint(Input.mousePosition) - offset;
             Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
             Vector2 velocity = direction * Mathf.Min(moveSpeedLimit, Vector2.Distance(transform.position, targetPosition) / Time.deltaTime);
             transform.Translate(velocity * Time.deltaTime);
@@ -86,7 +91,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     void ClampPosition()
     {
-        Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        Vector2 screenBounds = targetCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, targetCamera.transform.position.z));
         Vector3 clampedPosition = transform.position;
         clampedPosition.x = Mathf.Clamp(clampedPosition.x, -screenBounds.x, screenBounds.x);
         clampedPosition.y = Mathf.Clamp(clampedPosition.y, -screenBounds.y, screenBounds.y);
@@ -99,17 +104,11 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         isDragging = true;
         canvas.GetComponent<GraphicRaycaster>().enabled = false;
         imageComponent.raycastTarget = false;
-
         wasDragged = true;
-
-        // Track which slot group the card came from
         previousSlotGroup = transform.parent.GetComponentInParent<CardDropZone>();
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-
-    }
+    public void OnDrag(PointerEventData eventData) { }
 
     public void OnEndDrag(PointerEventData eventData)
     {
@@ -143,26 +142,18 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             {
                 droppedInZone = true;
 
-                // Clear previous drop zone if necessary
                 if (currentDropZone != null && currentDropZone != dropZone)
-                {
                     currentDropZone.ClearSlot(this);
-                }
 
-                // If replacing another card, return it to hand
                 if (dropZone.CurrentCard != null && dropZone.CurrentCard != this)
-                {
                     dropZone.CurrentCard.ReturnToHand();
-                }
 
                 dropZone.AssignCard(this);
                 currentDropZone = dropZone;
-
                 break;
             }
         }
 
-        // Tooltip system toggle handling
         if (!droppedInZone)
         {
             if (currentDropZone != null)
@@ -172,23 +163,17 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             }
 
             ReturnToHand();
-
-            // Reset tooltip direction if returned to hand
             TooltipTrigger tt = GetComponent<TooltipTrigger>();
-            if (tt != null)
-                tt.rightTooltip = false;
+            if (tt != null) tt.rightTooltip = false;
         }
         else
         {
-            // Enable rightTooltip if dropped in trick slot
             TooltipTrigger tt = GetComponent<TooltipTrigger>();
             if (tt != null)
-            {
-                bool inTrickZone = currentDropZone != null && currentDropZone.CompareTag("TrickSlot");
-                tt.rightTooltip = inTrickZone;
-            }
+                tt.rightTooltip = currentDropZone != null && currentDropZone.CompareTag("TrickSlot");
         }
     }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         PointerEnterEvent.Invoke(this);
@@ -202,38 +187,26 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         isHovering = false;
     }
 
-
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (eventData.button != PointerEventData.InputButton.Left)
-            return;
-
+        if (eventData.button != PointerEventData.InputButton.Left) return;
         PointerDownEvent.Invoke(this);
         pointerDownTime = Time.time;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (eventData.button != PointerEventData.InputButton.Left)
-            return;
+        if (eventData.button != PointerEventData.InputButton.Left) return;
 
         pointerUpTime = Time.time;
-
         PointerUpEvent.Invoke(this, pointerUpTime - pointerDownTime > .2f);
 
-        if (pointerUpTime - pointerDownTime > .2f)
-            return;
-
-        if (wasDragged)
-            return;
-
-        if (!canBeSelected)
+        if (pointerUpTime - pointerDownTime > .2f || wasDragged || !canBeSelected)
             return;
 
         selected = !selected;
         SetSelected(selected);
     }
-
 
     public void SetSelected(bool isSelected)
     {
@@ -245,7 +218,6 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         else
             transform.localPosition = Vector3.zero;
     }
-
 
     public int SiblingAmount()
     {
@@ -274,21 +246,18 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (hand == null) return;
 
         Transform slot = transform.parent;
-
         slot.SetParent(hand.transform, false);
         slot.localPosition = Vector3.zero;
 
         if (!hand.cards.Contains(this))
-        {
             hand.cards.Add(this);
-        }
+
+        tooltipTrigger.rightTooltip = false;
     }
 
     public void UpdateVisual()
     {
         if (CardData != null && cardVisual != null)
-        {
             cardVisual.UpdateVisual(CardData);
-        }
     }
 }
