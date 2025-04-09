@@ -1,5 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -19,10 +25,10 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         TooltipSystem.Instance.HideTooltip();
     }
 
-    public void setTooltip(string tooltiptoadd)
+    public void setTooltip(string Title,string tooltiptoadd)
     {
         Vector3 offset = rightTooltip ? RighttooltipOffset : tooltipOffset;
-        TooltipSystem.Instance.ShowTooltip(tooltiptoadd,transform.position, offset);
+        TooltipSystem.Instance.ShowTooltip(Title,tooltiptoadd,transform.position, offset);
 
     }
 }

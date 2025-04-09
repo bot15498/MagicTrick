@@ -197,7 +197,7 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         PointerEnterEvent.Invoke(this);
         isHovering = true;
-        tooltipTrigger.setTooltip(PropData.Description);
+        tooltipTrigger.setTooltip(PropData.PropName,PropData.Description);
     }
 
     public void OnPointerExit(PointerEventData eventData)

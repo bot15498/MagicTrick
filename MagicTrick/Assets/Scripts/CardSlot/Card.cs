@@ -178,7 +178,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         PointerEnterEvent.Invoke(this);
         isHovering = true;
-        tooltipTrigger.setTooltip(CardData.Description);
+        tooltipTrigger.setTooltip(CardData.CardName ,CardData.Description);
     }
 
     public void OnPointerExit(PointerEventData eventData)

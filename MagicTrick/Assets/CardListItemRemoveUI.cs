@@ -5,14 +5,17 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class CardListItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class CardListItemRemoveUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public string descriptionString;
     public string titleString;
     public Image cardIconImage;
     private TooltipTrigger tprigger;
 
-    [HideInInspector] public UnityEvent<CardListItemUI> PointerEnterEvent;
+    private DeckManager deckManager;
+
+    [HideInInspector] public UnityEvent<CardListItemRemoveUI> PointerEnterEvent;
+    public UnityEvent OnDeckChanged; // <- Add this event for click actions
 
     [Header("Scale Parameters")]
     [SerializeField] private bool scaleAnimations = true;
@@ -21,8 +24,11 @@ public class CardListItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private float scaleTransition = 0.15f;
     [SerializeField] private Ease scaleEase = Ease.OutBack;
 
+    private PlayableCard savedCard;
+
     private void Start()
     {
+        deckManager = FindObjectOfType<DeckManager>();
         tprigger = GetComponent<TooltipTrigger>();
     }
 
@@ -31,12 +37,11 @@ public class CardListItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         descriptionString = card.Description;
         cardIconImage.sprite = card.Image;
         titleString = card.CardName;
+        savedCard = card;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        
-
         PointerEnterEvent?.Invoke(this);
 
         if (tprigger != null)
@@ -50,9 +55,21 @@ public class CardListItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Pointer exited: " + gameObject.name);
-
         if (scaleAnimations)
             transform.DOScale(1f, scaleTransition).SetEase(scaleEase);
+
+
+        
+    }
+    
+    
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        //MINUS MONEY DISABLE CARD REMOVAL 
+        //ADD REMOVAL EFFECT HERE
+        
+        deckManager.RemoveCard(savedCard);
+        TooltipSystem.Instance.HideTooltip();
+
     }
 }

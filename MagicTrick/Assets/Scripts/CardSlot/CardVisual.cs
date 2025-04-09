@@ -82,6 +82,8 @@ public class CardVisual : MonoBehaviour
             if (targetCamera == null)
                 Debug.LogWarning("CardVisual: No camera with tag 'GameCamera' found.");
         }
+        StartCoroutine(Delay());
+        
     }
 
     public void Initialize(Card target, int index = 0)
@@ -229,4 +231,15 @@ public class CardVisual : MonoBehaviour
     {
         cardImage.sprite = carddata.Image;
     }
+
+
+    IEnumerator Delay()
+    {
+
+        yield return new WaitForSeconds(0.7f);
+        transform.DOScale(1, scaleTransition).SetEase(scaleEase);
+    }
+
+
+
 }

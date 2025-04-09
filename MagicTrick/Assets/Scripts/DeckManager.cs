@@ -59,6 +59,20 @@ public class DeckManager : MonoBehaviour
         OnDeckChanged?.Invoke();
     }
 
+
+    public void RemoveCard(PlayableCard card)
+    {
+        if (DeckCards.Remove(card))
+        {
+            Debug.Log($"Successfully removed card: {card.CardName}");
+        }
+        else
+        {
+            Debug.LogWarning($"Card not found in deck: {card.CardName}");
+        }
+
+        OnDeckChanged?.Invoke();
+    }
     public void ShuffleCurrentDeck()
     {
         DeckCards = DeckCards.OrderBy(x => rand.NextDouble()).ToList();

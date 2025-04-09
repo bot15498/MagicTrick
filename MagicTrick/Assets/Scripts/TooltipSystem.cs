@@ -5,9 +5,10 @@ using TMPro;
 public class TooltipSystem : MonoBehaviour
 {
     public static TooltipSystem Instance;
-
+    public TextMeshProUGUI tooltipHeaderText;
     public RectTransform tooltipPanel;
     public TextMeshProUGUI tooltipText;
+
     public Canvas canvas;
     public Vector2 screenPadding = new Vector2(10f, 10f);
 
@@ -36,12 +37,21 @@ public class TooltipSystem : MonoBehaviour
         tooltipText.text = descriptiontext;
     }
 
-    public void ShowTooltip(string text, Vector3 worldPosition, Vector3 offset)
+    public void ShowTooltip(string header, string body, Vector3 worldPosition, Vector3 offset)
     {
         isShowing = true;
-        setdescriptionText(text);
+
+        // Set texts
+        tooltipHeaderText.text = header;
+        tooltipText.text = body;
+
+        // Activate first to make layout valid
         tooltipPanel.gameObject.SetActive(true);
+
+        // Force layout to calculate updated size
         LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipPanel);
+
+        // Position (with clamping)
         UpdateTooltipPosition(worldPosition, offset);
     }
 

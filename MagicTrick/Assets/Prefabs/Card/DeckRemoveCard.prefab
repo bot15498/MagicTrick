@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 57327282749754515}
   - component: {fileID: 8056966985737252182}
   - component: {fileID: 5793815781578064375}
+  - component: {fileID: 558790832781644897}
   m_Layer: 5
-  m_Name: DeckCardPrefab
+  m_Name: DeckRemoveCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,3 +138,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &558790832781644897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5321741932246629880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be693e8848d41dd48bf3237977b2e275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  descriptionString: 
+  titleString: 
+  cardIconImage: {fileID: 5793815781578064375}
+  PointerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeckChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  scaleAnimations: 1
+  scaleOnHover: 1.15
+  scaleOnSelect: 1.25
+  scaleTransition: 0.15
+  scaleEase: 27
