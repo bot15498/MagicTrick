@@ -17,48 +17,45 @@ public class PlayableProp : PlayableItem
     [Header("Actions applied to Fixed slots")]
     public List<SlotAction> FixedSlotActions = new List<SlotAction>();
 
-    public void ApplyProp(GameManager gameManager, int currCardSlot, int currPropSlot)
+    public ActionContainer ApplyProp(ActionContainer container, GameManager gameManager, int currCardSlot, int currPropSlot)
     {
-        // Apply the current slot actions
-        // Make sure we are only applying when card slot and prop slot match
-        if (Actions != null && currCardSlot == currPropSlot)
+        // Apply the actions for this current prop
+        if (currCardSlot == currPropSlot)
         {
             foreach (ActAction act in Actions)
             {
-                act.DoAction(gameManager);
+                container = act.AddAction(container, gameManager);
             }
         }
-        // Apply the fixed slot actions
-        // Location of prop slot does not matter here.
-        if (FixedSlotActions != null && currCardSlot < FixedSlotActions.Count)
+        // Apply actions to the previous slot's trick if it exists
+        if (currCardSlot == currPropSlot - 1)
         {
-            foreach (ActAction act in FixedSlotActions[currCardSlot].Actions)
+            foreach (ActAction act in PreviousSlotActions)
             {
-                act.DoAction(gameManager);
+                container = act.AddAction(container, gameManager);
             }
         }
-    }
+        // Apply actions to the next slot's trick if it exists
+        if (currCardSlot == currPropSlot + 1)
+        {
+            foreach (ActAction act in NextSlotActions)
+            {
+                container = act.AddAction(container, gameManager);
+            }
+        }
+        // Apply actions fixed slots
+        for (int i = 0; i < FixedSlotActions.Count; i++)
+        {
+            if(currCardSlot == i)
+            {
+                foreach(ActAction act in FixedSlotActions[i].Actions)
+                {
+                    container = act.AddAction(container, gameManager);
+                }
+            }
+        }
 
-    public void PreviewProp(GameManager gameManager, int currCardSlot, int currPropSlot)
-    {
-        // Apply the current slot actions
-        // Make sure we are only applying when card slot and prop slot match
-        if (Actions != null && currCardSlot == currPropSlot)
-        {
-            foreach (ActAction act in Actions)
-            {
-                act.PreviewAction(gameManager);
-            }
-        }
-        // Apply the fixed slot actions
-        // Location of prop slot does not matter here.
-        if (FixedSlotActions != null && currCardSlot < FixedSlotActions.Count)
-        {
-            foreach (ActAction act in FixedSlotActions[currCardSlot].Actions)
-            {
-                act.PreviewAction(gameManager);
-            }
-        }
+        return container;
     }
 
 #if UNITY_EDITOR

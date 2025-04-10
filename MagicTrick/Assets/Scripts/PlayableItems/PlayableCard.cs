@@ -30,22 +30,14 @@ public class PlayableCard : PlayableItem
     public Sprite Image;
     public CardType Type;
 
-    public void PlayCard(GameManager gameManager)
-    {
-        // Note: these happen in the order they are added
-        // Just make sure you put the multipliy actions last
-        foreach (ActAction act in Actions)
-        {
-            act.DoAction(gameManager);
-        }
-    }
-
-    public void PreviewCard(GameManager gameManager)
+    public ActionContainer ApplyCard(ActionContainer container, GameManager gameManager)
     {
         // Preview what the card will add in score.
         foreach (ActAction act in Actions)
         {
-            act.PreviewAction(gameManager);
+            container = act.AddAction(container, gameManager);
         }
+
+        return container;
     }
 }

@@ -40,5 +40,19 @@ public abstract class PlayableItem : ScriptableObject
         EditorUtility.SetDirty(this);
         EditorUtility.SetDirty(newaction);
     }
+    [ContextMenu("Add Multiply Current Effect Action")]
+    private void AddNewMultiplyCurrentEffect()
+    {
+        MultiplyCurrentEffectAction newaction = CreateInstance<MultiplyCurrentEffectAction>();
+        newaction.name = "Multiply Current Effect";
+        newaction.MultiplyAmount = 1;
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
 #endif
 }

@@ -16,10 +16,12 @@ public class ScoreManager : MonoBehaviour
     public int liability = 0;
     public float payoutBonusFromScoreWeight = 0.5f;
 
-    public int captivationToAdd = 0;
-    public int sleightOfHandToAdd = 0;
-    public int additionalPayoutToAdd = 0;
-    public int liabilityToAdd = 0;
+    public int previewCaptivation = 0;
+    public int previewSleightOfHand = 0;
+    public int previewAdditionalPayout = 0;
+    public int previewLiability = 0;
+    public float previewPayoutBonusFromScoreWeight = 0.5f;
+
     public int Score
     {
         get
@@ -27,11 +29,12 @@ public class ScoreManager : MonoBehaviour
             return captivation * (1 + sleightOfHand);
         }
     }
-    public int TemporaryScore
+
+    public int PreviewScore
     {
         get
         {
-            return (captivation + captivationToAdd) * (1 + sleightOfHand + sleightOfHandToAdd);
+            return previewCaptivation * (1 + previewSleightOfHand);
         }
     }
 
@@ -45,16 +48,34 @@ public class ScoreManager : MonoBehaviour
 
     }
 
+    public void ApplyToPreviewScore(ActionContainer container)
+    {
+        previewCaptivation = container.ApplyCaptivationActions(captivation);
+        previewSleightOfHand = container.ApplySleightOfHandActions(sleightOfHand);
+        previewAdditionalPayout = container.ApplyPayoutActions(additionalPayout);
+        previewLiability = container.ApplyLiabilityActions(liability);
+    }
+
+    public void ApplyToScore(ActionContainer container)
+    {
+        // Apply the contents of the container to the temp variables
+        captivation = container.ApplyCaptivationActions(captivation);
+        sleightOfHand = container.ApplySleightOfHandActions(sleightOfHand);
+        additionalPayout = container.ApplyPayoutActions(additionalPayout);
+        liability = container.ApplyLiabilityActions(liability);
+    }
+
     public int CalculatePayout(int requiredScore)
     {
         return basePayout + additionalPayout + Mathf.FloorToInt((Score - requiredScore) / (requiredScore * payoutBonusFromScoreWeight));
     }
 
-    public void ClearToAddVariables()
+    public void ResetStats()
     {
-        captivationToAdd = 0;
-        sleightOfHandToAdd = 0;
-        additionalPayoutToAdd = 0;
-        liabilityToAdd = 0;
+        captivation = baseCaptivation;
+        sleightOfHand = baseSleightOfHand;
+        additionalPayout = basePayout;
+        liability = baseLiability;
+        payoutBonusFromScoreWeight = basePayoutBonusFromScoreWeight;
     }
 }

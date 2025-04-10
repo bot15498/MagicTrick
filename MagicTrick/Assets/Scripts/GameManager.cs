@@ -89,12 +89,12 @@ public class GameManager : MonoBehaviour
             case GameState.Idle:
                 break;
             case GameState.PartyStart:
-                // Reset and shuffle deck
-                deckManager.InitializeDeck();
                 state = GameState.RoundStart;
                 break;
             case GameState.RoundStart:
                 // Pre round effects
+                // Reset and shuffle deck
+                deckManager.InitializeDeck();
                 state = GameState.ActStart;
                 break;
             case GameState.ActStart:
@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
                 // Update score to say what it might be 
                 // TODO: DELETE THIS
                 PreviewAllCards();
-                scoreText.text = $"Current score: {scoreManager.Score} + {scoreManager.TemporaryScore - scoreManager.Score}";
+                scoreText.text = $"Current score: {scoreManager.Score} + {scoreManager.PreviewScore - scoreManager.Score}";
                 break;
             case GameState.ActPlayout:
                 // Play each card
@@ -161,11 +161,12 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        state = GameState.RoundStart;
+                        state = GameState.Shopping;
                     }
                 }
                 break;
             case GameState.Shopping:
+                state = GameState.RoundStart;
                 break;
             case GameState.PartyEnd:
                 break;
@@ -193,46 +194,64 @@ public class GameManager : MonoBehaviour
 
     private void PlayAllCards()
     {
+        // Get the action container for each card, combine them, then calculate
+        // what the new score would be. Return the new score.
+        List<ActionContainer> slotchanges = new List<ActionContainer>();
         for (int currCardSlot = 0; currCardSlot < slots.Count; currCardSlot++)
         {
+            ActionContainer previewContainer = new ActionContainer();
             Card currCardObj = slots[currCardSlot].GetComponentInChildren<Card>();
             if (currCardObj != null)
             {
-                currCardObj.CardData.PlayCard(this);
+                previewContainer = currCardObj.CardData.ApplyCard(previewContainer, this);
             }
             for (int currPropSlot = 0; currPropSlot < propSlots.Count; currPropSlot++)
             {
                 Prop currPropObj = propSlots[currPropSlot].GetComponentInChildren<Prop>();
                 if (currPropObj != null)
                 {
-                    currPropObj.PropData.ApplyProp(this, currCardSlot, currPropSlot);
+                    currPropObj.PropData.ApplyProp(previewContainer, this, currCardSlot, currPropSlot);
                 }
             }
         }
+        // Apply to actual variables
+        ActionContainer toReturnContainer = new ActionContainer();
+        foreach (ActionContainer slotContainer in slotchanges)
+        {
+            toReturnContainer += slotContainer;
+        }
+        scoreManager.ApplyToScore(toReturnContainer);
     }
 
     private void PreviewAllCards()
     {
-        // Zero out the temp variables in score manager first 
-        scoreManager.ClearToAddVariables();
-
-        // Run preview card in all slots if there is something there
+        // Get the action container for each card, combine them, then calculate
+        List<ActionContainer> slotchanges = new List<ActionContainer>();
         for (int currCardSlot = 0; currCardSlot < slots.Count; currCardSlot++)
         {
+            ActionContainer previewContainer = new ActionContainer();
             Card currCardObj = slots[currCardSlot].GetComponentInChildren<Card>();
             if (currCardObj != null)
             {
-                currCardObj.CardData.PreviewCard(this);
+                previewContainer = currCardObj.CardData.ApplyCard(previewContainer, this);
             }
             for (int currPropSlot = 0; currPropSlot < propSlots.Count; currPropSlot++)
             {
                 Prop currPropObj = propSlots[currPropSlot].GetComponentInChildren<Prop>();
                 if (currPropObj != null)
                 {
-                    currPropObj.PropData.PreviewProp(this, currCardSlot, currPropSlot);
+                    previewContainer = currPropObj.PropData.ApplyProp(previewContainer, this, currCardSlot, currPropSlot);
                 }
             }
+            slotchanges.Add(previewContainer);
         }
+        // Apply to preview variables
+        ActionContainer toReturnContainer = new ActionContainer();
+        foreach (ActionContainer slotContainer in slotchanges)
+        {
+            toReturnContainer += slotContainer;
+        }
+        scoreManager.ApplyToPreviewScore(toReturnContainer);
     }
 
     private bool DiscardBoard()

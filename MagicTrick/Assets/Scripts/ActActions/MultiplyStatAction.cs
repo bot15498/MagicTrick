@@ -10,51 +10,24 @@ public class MultiplyStatAction : ActAction
     public Stats StatToChange = Stats.Captivation;
     public float MultiplyAmount = 1f;
 
-    public override void DoAction(GameManager gameManager)
+    public override ActionContainer AddAction(ActionContainer container, GameManager manager)
     {
-        var scoreManager = gameManager.GetComponent<ScoreManager>();
+        // return a function thad adds to input
         switch (StatToChange)
         {
             case Stats.Captivation:
-                scoreManager.captivation = Mathf.FloorToInt(scoreManager.captivation * MultiplyAmount);
+                container.CaptivationActions += x => Mathf.FloorToInt(x * MultiplyAmount);
                 break;
             case Stats.SleightOfHand:
-                scoreManager.sleightOfHand = Mathf.FloorToInt(scoreManager.sleightOfHand * MultiplyAmount);
+                container.SleightOfHandActions += x => Mathf.FloorToInt(x * MultiplyAmount);
                 break;
             case Stats.Payout:
-                scoreManager.additionalPayout = Mathf.FloorToInt(scoreManager.additionalPayout * MultiplyAmount);
+                container.PayoutActions += x => Mathf.FloorToInt(x * MultiplyAmount);
                 break;
             case Stats.Liability:
-                scoreManager.liability = Mathf.FloorToInt(scoreManager.liability * MultiplyAmount);
+                container.LiabilityActions += x => Mathf.FloorToInt(x * MultiplyAmount);
                 break;
         }
+        return container;
     }
-
-    public override void PreviewAction(GameManager gameManager)
-    {
-        var scoreManager = gameManager.GetComponent<ScoreManager>();
-        switch (StatToChange)
-        {
-            case Stats.Captivation:
-                scoreManager.captivationToAdd = Mathf.FloorToInt(scoreManager.captivationToAdd * MultiplyAmount);
-                break;
-            case Stats.SleightOfHand:
-                scoreManager.sleightOfHandToAdd = Mathf.FloorToInt(scoreManager.sleightOfHandToAdd * MultiplyAmount);
-                break;
-            case Stats.Payout:
-                scoreManager.additionalPayoutToAdd = Mathf.FloorToInt(scoreManager.additionalPayoutToAdd * MultiplyAmount);
-                break;
-            case Stats.Liability:
-                scoreManager.liabilityToAdd = Mathf.FloorToInt(scoreManager.liabilityToAdd * MultiplyAmount);
-                break;
-        }
-    }
-#if UNITY_EDITOR
-    [ContextMenu("Delete This")]
-    private void DeleteThis()
-    {
-        Undo.DestroyObjectImmediate(this);
-        AssetDatabase.SaveAssets();
-    }
-#endif
 }

@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-878052672939057256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
-  m_Name: Increase Stats
-  m_EditorClassIdentifier: 
-  StatToChange: 0
-  ChangeAmount: 5
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,8 +13,22 @@ MonoBehaviour:
   m_Name: Card 1
   m_EditorClassIdentifier: 
   Actions:
-  - {fileID: -878052672939057256}
-  CardName: 
-  Description: 
+  - {fileID: 572030708196689367}
+  CardName: man
+  Description: the man
   Image: {fileID: 21300000, guid: a47fdf2543f62204cb752a19ccb67f4f, type: 3}
   Type: 0
+--- !u!114 &572030708196689367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
+  m_Name: Increase Stats
+  m_EditorClassIdentifier: 
+  StatToChange: 0
+  ChangeAmount: 5

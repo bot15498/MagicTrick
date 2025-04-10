@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening.Core.Easing;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -10,52 +12,24 @@ public class IncreaseStatAction : ActAction
     public Stats StatToChange = Stats.Captivation;
     public int ChangeAmount = 0;
 
-    public override void DoAction(GameManager gameManager)
+    public override ActionContainer AddAction(ActionContainer container, GameManager manager)
     {
-        var scoreManager = gameManager.GetComponent<ScoreManager>();
-        switch(StatToChange)
-        {
-            case Stats.Captivation:
-                scoreManager.captivation += ChangeAmount;
-                break;
-            case Stats.SleightOfHand:
-                scoreManager.sleightOfHand += ChangeAmount;
-                break;
-            case Stats.Payout:
-                scoreManager.additionalPayout += ChangeAmount;
-                break;
-            case Stats.Liability:
-                scoreManager.liability += ChangeAmount;
-                break;
-        }
-    }
-
-    public override void PreviewAction(GameManager gameManager)
-    {
-        var scoreManager = gameManager.GetComponent<ScoreManager>();
+        // return a function thad adds to input
         switch (StatToChange)
         {
             case Stats.Captivation:
-                scoreManager.captivationToAdd += ChangeAmount;
+                container.CaptivationActions += x => x + ChangeAmount;
                 break;
             case Stats.SleightOfHand:
-                scoreManager.sleightOfHandToAdd += ChangeAmount;
+                container.SleightOfHandActions += x => x + ChangeAmount;
                 break;
             case Stats.Payout:
-                scoreManager.additionalPayoutToAdd += ChangeAmount;
+                container.PayoutActions += x => x + ChangeAmount;
                 break;
             case Stats.Liability:
-                scoreManager.liabilityToAdd += ChangeAmount;
+                container.LiabilityActions += x => x + ChangeAmount;
                 break;
         }
+        return container;
     }
-
-#if UNITY_EDITOR
-    [ContextMenu("Delete This")]
-    private void DeleteThis()
-    {
-        Undo.DestroyObjectImmediate(this);
-        AssetDatabase.SaveAssets();
-    }
-#endif
 }

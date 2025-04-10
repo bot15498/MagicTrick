@@ -45,13 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayableCardList:
-  - {fileID: 11400000, guid: 0b995586faa515a418da942587a374a4, type: 2}
-  - {fileID: 11400000, guid: 0b995586faa515a418da942587a374a4, type: 2}
-  - {fileID: 11400000, guid: 0b995586faa515a418da942587a374a4, type: 2}
-  - {fileID: 11400000, guid: 22cce1aa9e63a9f46ad3b1a41036c97d, type: 2}
-  - {fileID: 11400000, guid: 22cce1aa9e63a9f46ad3b1a41036c97d, type: 2}
-  - {fileID: 11400000, guid: 22cce1aa9e63a9f46ad3b1a41036c97d, type: 2}
-  - {fileID: 11400000, guid: 7c8b8d05070698a45a728fb290d75778, type: 2}
-  - {fileID: 11400000, guid: 7c8b8d05070698a45a728fb290d75778, type: 2}
-  - {fileID: 11400000, guid: 7c8b8d05070698a45a728fb290d75778, type: 2}
-  - {fileID: 11400000, guid: 7c8b8d05070698a45a728fb290d75778, type: 2}
+  - {fileID: 11400000, guid: 2e3d3d83c80b31249bfa017c85308d22, type: 2}
+  - {fileID: 11400000, guid: 2e3d3d83c80b31249bfa017c85308d22, type: 2}
+  - {fileID: 11400000, guid: 2e3d3d83c80b31249bfa017c85308d22, type: 2}
+  - {fileID: 11400000, guid: 2e3d3d83c80b31249bfa017c85308d22, type: 2}
+  - {fileID: 11400000, guid: a54ec7d814faefd4ea4b92418efe1184, type: 2}
+  - {fileID: 11400000, guid: a54ec7d814faefd4ea4b92418efe1184, type: 2}
+  - {fileID: 11400000, guid: a54ec7d814faefd4ea4b92418efe1184, type: 2}
+  - {fileID: 11400000, guid: d725ca71874b318499f24c885a5df369, type: 2}
+  - {fileID: 11400000, guid: d725ca71874b318499f24c885a5df369, type: 2}
+  - {fileID: 11400000, guid: d725ca71874b318499f24c885a5df369, type: 2}
