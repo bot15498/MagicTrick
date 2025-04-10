@@ -362,8 +362,8 @@ MonoBehaviour:
   manualTiltAmount: 15
   tiltSpeed: 40
   scaleAnimations: 1
-  scaleOnHover: 1.4
-  scaleOnSelect: 1.5
+  scaleOnHover: 1.5
+  scaleOnSelect: 1.1
   scaleTransition: 0.15
   scaleEase: 27
   selectPunchAmount: 20

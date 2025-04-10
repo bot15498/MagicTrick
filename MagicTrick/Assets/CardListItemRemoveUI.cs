@@ -24,6 +24,7 @@ public class CardListItemRemoveUI : MonoBehaviour, IPointerEnterHandler, IPointe
     [SerializeField] private float scaleTransition = 0.15f;
     [SerializeField] private Ease scaleEase = Ease.OutBack;
 
+
     private PlayableCard savedCard;
 
     private void Start()
@@ -58,8 +59,6 @@ public class CardListItemRemoveUI : MonoBehaviour, IPointerEnterHandler, IPointe
         if (scaleAnimations)
             transform.DOScale(1f, scaleTransition).SetEase(scaleEase);
 
-
-        
     }
     
     
