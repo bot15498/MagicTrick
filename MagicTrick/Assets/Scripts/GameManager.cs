@@ -196,34 +196,18 @@ public class GameManager : MonoBehaviour
     {
         // Get the action container for each card, combine them, then calculate
         // what the new score would be. Return the new score.
-        List<ActionContainer> slotchanges = new List<ActionContainer>();
-        for (int currCardSlot = 0; currCardSlot < slots.Count; currCardSlot++)
-        {
-            ActionContainer previewContainer = new ActionContainer();
-            Card currCardObj = slots[currCardSlot].GetComponentInChildren<Card>();
-            if (currCardObj != null)
-            {
-                previewContainer = currCardObj.CardData.ApplyCard(previewContainer, this);
-            }
-            for (int currPropSlot = 0; currPropSlot < propSlots.Count; currPropSlot++)
-            {
-                Prop currPropObj = propSlots[currPropSlot].GetComponentInChildren<Prop>();
-                if (currPropObj != null)
-                {
-                    currPropObj.PropData.ApplyProp(previewContainer, this, currCardSlot, currPropSlot);
-                }
-            }
-        }
-        // Apply to actual variables
-        ActionContainer toReturnContainer = new ActionContainer();
-        foreach (ActionContainer slotContainer in slotchanges)
-        {
-            toReturnContainer += slotContainer;
-        }
+        ActionContainer toReturnContainer = CreateCombinedContainer();
         scoreManager.ApplyToScore(toReturnContainer);
     }
 
     private void PreviewAllCards()
+    {
+        // Apply to preview variables
+        ActionContainer toReturnContainer = CreateCombinedContainer();
+        scoreManager.ApplyToPreviewScore(toReturnContainer);
+    }
+
+    private ActionContainer CreateCombinedContainer()
     {
         // Get the action container for each card, combine them, then calculate
         List<ActionContainer> slotchanges = new List<ActionContainer>();
@@ -251,7 +235,7 @@ public class GameManager : MonoBehaviour
         {
             toReturnContainer += slotContainer;
         }
-        scoreManager.ApplyToPreviewScore(toReturnContainer);
+        return toReturnContainer;
     }
 
     private bool DiscardBoard()
