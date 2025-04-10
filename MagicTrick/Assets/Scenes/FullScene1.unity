@@ -1242,7 +1242,7 @@ GameObject:
   - component: {fileID: 700594260}
   - component: {fileID: 700594259}
   - component: {fileID: 700594258}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1347,7 +1347,7 @@ GameObject:
   - component: {fileID: 704205145}
   - component: {fileID: 704205144}
   - component: {fileID: 704205143}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2469,7 +2469,7 @@ GameObject:
   - component: {fileID: 1467861549}
   - component: {fileID: 1467861548}
   - component: {fileID: 1467861547}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3726,6 +3726,7 @@ MonoBehaviour:
   cloudCoverage: 0.1
   cloudDirection: 0
   cloudZoom: 85
+  thisCam: {fileID: 0}
 --- !u!20 &4614135807421334825
 Camera:
   m_ObjectHideFlags: 0

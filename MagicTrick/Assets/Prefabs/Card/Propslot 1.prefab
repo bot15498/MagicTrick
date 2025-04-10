@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instantiateVisual: 1
-  moveSpeedLimit: 50
+  moveSpeedLimit: 75
   propVisualPrefab: {fileID: 4877114960914594400, guid: ae90b75f86da0f44f96d6dcec906844e, type: 3}
   propVisual: {fileID: 0}
   isHovering: 0
@@ -235,5 +235,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipText: Tooltip here!
   tooltipOffset: {x: 0, y: 50, z: 0}
-  RighttooltipOffset: {x: 300, y: 0, z: 0}
+  RighttooltipOffset: {x: 90, y: -40, z: 0}
   rightTooltip: 1

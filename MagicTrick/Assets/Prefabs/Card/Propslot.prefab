@@ -235,5 +235,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipText: Tooltip here!
   tooltipOffset: {x: 0, y: 50, z: 0}
-  RighttooltipOffset: {x: 260, y: 0, z: 0}
+  RighttooltipOffset: {x: 90, y: -40, z: 0}
   rightTooltip: 1

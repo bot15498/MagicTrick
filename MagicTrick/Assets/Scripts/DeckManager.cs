@@ -18,6 +18,8 @@ public class DeckManager : MonoBehaviour
     private TMP_Text DeckText;
     private System.Random rand;
 
+    public event Action OnDeckChanged;
+
     void Awake()
     {
         rand = new System.Random();
@@ -43,7 +45,7 @@ public class DeckManager : MonoBehaviour
 
         // Copy the card list from the deck
         DeckCards.AddRange(CurrentDeck.PlayableCardList);
-
+        OnDeckChanged?.Invoke();
         // Shuffle
         ShuffleCurrentDeck();
     }
@@ -54,8 +56,23 @@ public class DeckManager : MonoBehaviour
         DeckCards.AddRange(Discards);
         Discards.Clear();
         ShuffleCurrentDeck();
+        OnDeckChanged?.Invoke();
     }
 
+
+    public void RemoveCard(PlayableCard card)
+    {
+        if (DeckCards.Remove(card))
+        {
+            Debug.Log($"Successfully removed card: {card.CardName}");
+        }
+        else
+        {
+            Debug.LogWarning($"Card not found in deck: {card.CardName}");
+        }
+
+        OnDeckChanged?.Invoke();
+    }
     public void ShuffleCurrentDeck()
     {
         DeckCards = DeckCards.OrderBy(x => rand.NextDouble()).ToList();
@@ -76,6 +93,7 @@ public class DeckManager : MonoBehaviour
                 // Deck refresh
                 RefreshDeck();
             }
+            OnDeckChanged?.Invoke();
             return toreturn;
         }
     }
@@ -83,5 +101,6 @@ public class DeckManager : MonoBehaviour
     public void SendToDiscard(PlayableCard card)
     {
         Discards.Add(card);
+        OnDeckChanged?.Invoke();
     }
 }

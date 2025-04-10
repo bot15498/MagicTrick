@@ -61,6 +61,8 @@ public class CardVisual : MonoBehaviour
     [Header("Curve")]
     [SerializeField] private CurveParameters curve;
 
+    private Camera targetCamera;
+
     private float curveYOffset;
     private float curveRotationOffset;
     private Coroutine pressCoroutine;
@@ -68,18 +70,30 @@ public class CardVisual : MonoBehaviour
     private void Start()
     {
         shadowDistance = visualShadow.localPosition;
+
+        if (targetCamera == null)
+        {
+            GameObject camObj = GameObject.FindGameObjectWithTag("GameCamera");
+            if (camObj != null)
+            {
+                targetCamera = camObj.GetComponent<Camera>();
+            }
+
+            if (targetCamera == null)
+                Debug.LogWarning("CardVisual: No camera with tag 'GameCamera' found.");
+        }
+        StartCoroutine(Delay());
+        
     }
 
     public void Initialize(Card target, int index = 0)
     {
-        //Declarations
         parentCard = target;
         cardTransform = target.transform;
         canvas = GetComponent<Canvas>();
         shadowCanvas = visualShadow.GetComponent<Canvas>();
         UpdateVisual(target.CardData);
 
-        //Event Listening
         parentCard.PointerEnterEvent.AddListener(PointerEnter);
         parentCard.PointerExitEvent.AddListener(PointerExit);
         parentCard.BeginDragEvent.AddListener(BeginDrag);
@@ -88,7 +102,6 @@ public class CardVisual : MonoBehaviour
         parentCard.PointerUpEvent.AddListener(PointerUp);
         parentCard.SelectEvent.AddListener(Select);
 
-        //Initialization
         initalize = true;
     }
 
@@ -99,13 +112,12 @@ public class CardVisual : MonoBehaviour
 
     void Update()
     {
-        if (!initalize || parentCard == null) return;
+        if (!initalize || parentCard == null || targetCamera == null) return;
 
         HandPositioning();
         SmoothFollow();
         FollowRotation();
         CardTilt();
-
     }
 
     private void HandPositioning()
@@ -136,7 +148,7 @@ public class CardVisual : MonoBehaviour
         float sine = Mathf.Sin(Time.time + savedIndex) * (parentCard.isHovering ? .2f : 1);
         float cosine = Mathf.Cos(Time.time + savedIndex) * (parentCard.isHovering ? .2f : 1);
 
-        Vector3 offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 offset = transform.position - targetCamera.ScreenToWorldPoint(Input.mousePosition);
         float tiltX = parentCard.isHovering ? ((offset.y * -1) * manualTiltAmount) : 0;
         float tiltY = parentCard.isHovering ? ((offset.x) * manualTiltAmount) : 0;
         float tiltZ = parentCard.isDragging ? tiltParent.eulerAngles.z : (curveRotationOffset * (curve.rotationInfluence * parentCard.SiblingAmount()));
@@ -157,13 +169,11 @@ public class CardVisual : MonoBehaviour
 
         if (scaleAnimations)
             transform.DOScale(scaleOnHover, scaleTransition).SetEase(scaleEase);
-
     }
 
     public void Swap(float dir = 1)
     {
-        if (!swapAnimations)
-            return;
+        if (!swapAnimations) return;
 
         DOTween.Kill(2, true);
         shakeParent.DOPunchRotation((Vector3.forward * swapRotationAngle) * dir, swapTransition, swapVibrato, 1).SetId(3);
@@ -221,4 +231,15 @@ public class CardVisual : MonoBehaviour
     {
         cardImage.sprite = carddata.Image;
     }
+
+
+    IEnumerator Delay()
+    {
+
+        yield return new WaitForSeconds(0.7f);
+        transform.DOScale(1, scaleTransition).SetEase(scaleEase);
+    }
+
+
+
 }
