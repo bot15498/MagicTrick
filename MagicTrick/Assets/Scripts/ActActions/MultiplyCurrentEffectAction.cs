@@ -11,52 +11,52 @@ public class MultiplyCurrentEffectAction : ActAction
     {
         // To multiply an existing card's effects, we are going to loop
         // over all the stat changes and apply them again.
-        Func<int, int> temp = container.CaptivationActions;
-        foreach (var @delegate in container.CaptivationActions.GetInvocationList())
+        Func<long, long> temp1 = container.CaptivationActions;
+        container.CaptivationActions = x => x;
+        foreach (var @delegate in temp1.GetInvocationList())
         {
-            var currAction = (Func<int, int>)@delegate;
-            for(int i=0;i<MultiplyAmount-1; i++)
+            var currAction = (Func<long, long>)@delegate;
+            for(int i=0;i<MultiplyAmount; i++)
             {
-                temp += currAction;
+                container.CaptivationActions += currAction;
             }
         }
-        container.CaptivationActions = temp;
 
         // Sleight of hand
-        temp = container.SleightOfHandActions;
-        foreach (var @delegate in container.SleightOfHandActions.GetInvocationList())
+        Func<long, long> temp2 = container.SleightOfHandActions;
+        container.SleightOfHandActions = x => x;
+        foreach (var @delegate in temp2.GetInvocationList())
         {
-            var currAction = (Func<int, int>)@delegate;
+            var currAction = (Func<long, long>)@delegate;
             for (int i = 0; i < MultiplyAmount-1; i++)
             {
-                temp += currAction;
+                container.SleightOfHandActions += currAction;
             }
         }
-        container.SleightOfHandActions = temp;
 
         // Payout
-        temp = container.PayoutActions;
-        foreach (var @delegate in container.PayoutActions.GetInvocationList())
+        Func<long, long> temp3 = container.PayoutActions;
+        container.PayoutActions = x => x;
+        foreach (var @delegate in temp3.GetInvocationList())
         {
-            var currAction = (Func<int, int>)@delegate;
+            var currAction = (Func<long, long>)@delegate;
             for (int i = 0; i < MultiplyAmount-1; i++)
             {
-                temp += currAction;
+                container.PayoutActions += currAction;
             }
         }
-        container.PayoutActions = temp;
 
         // Liability
-        temp = container.LiabilityActions;
-        foreach (var @delegate in container.LiabilityActions.GetInvocationList())
+        Func<long, long> temp4 = container.LiabilityActions;
+        container.LiabilityActions = x => x;
+        foreach (var @delegate in temp4.GetInvocationList())
         {
-            var currAction = (Func<int, int>)@delegate;
+            var currAction = (Func<long, long>)@delegate;
             for (int i = 0; i < MultiplyAmount-1; i++)
             {
-                temp += currAction;
+                container.LiabilityActions += currAction;
             }
         }
-        container.LiabilityActions = temp;
         return container;
     }
 }

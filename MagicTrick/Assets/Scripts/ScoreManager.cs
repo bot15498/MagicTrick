@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int baseCaptivation = 0;
-    public int baseSleightOfHand = 0;
-    public int basePayout = 5;
-    public int baseLiability = 0;
+    public long baseCaptivation = 0;
+    public long baseSleightOfHand = 0;
+    public long basePayout = 5;
+    public long baseLiability = 0;
     public float basePayoutBonusFromScoreWeight = 0.5f;
 
-    public int captivation = 0;
-    public int sleightOfHand = 0;
-    public int additionalPayout = 0;
-    public int liability = 0;
+    public long captivation = 0;
+    public long sleightOfHand = 0;
+    public long additionalPayout = 0;
+    public long liability = 0;
     public float payoutBonusFromScoreWeight = 0.5f;
 
-    public int previewCaptivation = 0;
-    public int previewSleightOfHand = 0;
-    public int previewAdditionalPayout = 0;
-    public int previewLiability = 0;
+    public long previewCaptivation = 0;
+    public long previewSleightOfHand = 0;
+    public long previewAdditionalPayout = 0;
+    public long previewLiability = 0;
     public float previewPayoutBonusFromScoreWeight = 0.5f;
 
-    public int Score
+    public long Score
     {
         get
         {
@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public int PreviewScore
+    public long PreviewScore
     {
         get
         {
@@ -65,7 +65,7 @@ public class ScoreManager : MonoBehaviour
         liability = container.ApplyLiabilityActions(liability);
     }
 
-    public int CalculatePayout(int requiredScore)
+    public long CalculatePayout(int requiredScore)
     {
         return basePayout + additionalPayout + Mathf.FloorToInt((Score - requiredScore) / (requiredScore * payoutBonusFromScoreWeight));
     }

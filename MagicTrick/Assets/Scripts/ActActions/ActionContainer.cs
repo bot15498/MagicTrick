@@ -6,50 +6,50 @@ using UnityEngine;
 public class ActionContainer
 {
     // This is a holder for all the actions you are going to do to the stats this timestep
-    public Func<int, int> CaptivationActions { get; set; } = x => x;
-    public Func<int, int> SleightOfHandActions { get; set; } = x => x;
-    public Func<int, int> PayoutActions { get; set; } = x => x;
-    public Func<int, int> LiabilityActions { get; set; } = x => x;
+    public Func<long, long> CaptivationActions { get; set; } = x => x;
+    public Func<long, long> SleightOfHandActions { get; set; } = x => x;
+    public Func<long, long> PayoutActions { get; set; } = x => x;
+    public Func<long, long> LiabilityActions { get; set; } = x => x;
 
-    public int ApplyCaptivationActions(int startingVal)
+    public long ApplyCaptivationActions(long startingVal)
     {
-        int toreturn = startingVal;
+        long toreturn = startingVal;
         foreach (var @delegate in CaptivationActions.GetInvocationList())
         {
-            var currAction = (Func<int, int>)@delegate;
+            var currAction = (Func<long, long>)@delegate;
             toreturn = currAction(toreturn);
         }
         return toreturn;
     }
 
-    public int ApplySleightOfHandActions(int startingVal)
+    public long ApplySleightOfHandActions(long startingVal)
     {
-        int toreturn = startingVal;
+        long toreturn = startingVal;
         foreach (var @delegate in SleightOfHandActions.GetInvocationList())
         {
-            var currAction = (Func<int, int>)@delegate;
+            var currAction = (Func<long, long>)@delegate;
             toreturn = currAction(toreturn);
         }
         return toreturn;
     }
 
-    public int ApplyPayoutActions(int startingVal)
+    public long ApplyPayoutActions(long startingVal)
     {
-        int toreturn = startingVal;
+        long toreturn = startingVal;
         foreach (var @delegate in PayoutActions.GetInvocationList())
         {
-            var currAction = (Func<int, int>)@delegate;
+            var currAction = (Func<long, long>)@delegate;
             toreturn = currAction(toreturn);
         }
         return toreturn;
     }
 
-    public int ApplyLiabilityActions(int startingVal)
+    public long ApplyLiabilityActions(long startingVal)
     {
-        int toreturn = startingVal;
+        long toreturn = startingVal;
         foreach (var @delegate in LiabilityActions.GetInvocationList())
         {
-            var currAction = (Func<int, int>)@delegate;
+            var currAction = (Func<long, long>)@delegate;
             toreturn = currAction(toreturn);
         }
         return toreturn;
@@ -64,19 +64,19 @@ public class ActionContainer
         {
             foreach (var @delegate in actcon.CaptivationActions.GetInvocationList())
             {
-                toreturn.CaptivationActions += (Func<int, int>)@delegate;
+                toreturn.CaptivationActions += (Func<long, long>)@delegate;
             }
             foreach (var @delegate in actcon.SleightOfHandActions.GetInvocationList())
             {
-                toreturn.SleightOfHandActions += (Func<int, int>)@delegate;
+                toreturn.SleightOfHandActions += (Func<long, long>)@delegate;
             }
             foreach (var @delegate in actcon.PayoutActions.GetInvocationList())
             {
-                toreturn.PayoutActions += (Func<int, int>)@delegate;
+                toreturn.PayoutActions += (Func<long, long>)@delegate;
             }
             foreach (var @delegate in actcon.LiabilityActions.GetInvocationList())
             {
-                toreturn.LiabilityActions += (Func<int, int>)@delegate;
+                toreturn.LiabilityActions += (Func<long, long>)@delegate;
             }
         }
         return toreturn;

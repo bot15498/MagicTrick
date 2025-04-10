@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 #if UNITY_EDITOR
@@ -8,7 +9,7 @@ using UnityEngine;
 public class MultiplyStatAction : ActAction
 {
     public Stats StatToChange = Stats.Captivation;
-    public float MultiplyAmount = 1f;
+    public double MultiplyAmount = 1.0;
 
     public override ActionContainer AddAction(ActionContainer container, GameManager manager)
     {
@@ -16,16 +17,16 @@ public class MultiplyStatAction : ActAction
         switch (StatToChange)
         {
             case Stats.Captivation:
-                container.CaptivationActions += x => Mathf.FloorToInt(x * MultiplyAmount);
+                container.CaptivationActions += x => (long)(x * MultiplyAmount);
                 break;
             case Stats.SleightOfHand:
-                container.SleightOfHandActions += x => Mathf.FloorToInt(x * MultiplyAmount);
+                container.SleightOfHandActions += x => (long)(x * MultiplyAmount);
                 break;
             case Stats.Payout:
-                container.PayoutActions += x => Mathf.FloorToInt(x * MultiplyAmount);
+                container.PayoutActions += x => (long)(x * MultiplyAmount);
                 break;
             case Stats.Liability:
-                container.LiabilityActions += x => Mathf.FloorToInt(x * MultiplyAmount);
+                container.LiabilityActions += x => (long)(x * MultiplyAmount);
                 break;
         }
         return container;

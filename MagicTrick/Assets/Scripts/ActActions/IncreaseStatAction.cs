@@ -10,7 +10,7 @@ using UnityEngine;
 public class IncreaseStatAction : ActAction
 {
     public Stats StatToChange = Stats.Captivation;
-    public int ChangeAmount = 0;
+    public long ChangeAmount = 0;
 
     public override ActionContainer AddAction(ActionContainer container, GameManager manager)
     {
