@@ -10,7 +10,7 @@ using UnityEngine;
 public class IncreaseStatAction : ActAction
 {
     public Stats StatToChange = Stats.Captivation;
-    public long ChangeAmount = 0;
+    public double ChangeAmount = 0;
 
     public override ActionContainer AddAction(ActionContainer container, int slot, GameManager manager)
     {
@@ -18,16 +18,16 @@ public class IncreaseStatAction : ActAction
         switch (StatToChange)
         {
             case Stats.Captivation:
-                container.CaptivationActions += x => x + ChangeAmount;
+                container.CaptivationActions += x => x + (long)ChangeAmount;
                 break;
             case Stats.SleightOfHand:
                 container.SleightOfHandActions += x => x + ChangeAmount;
                 break;
             case Stats.Payout:
-                container.PayoutActions += x => x + ChangeAmount;
+                container.PayoutActions += x => x + (long)ChangeAmount;
                 break;
             case Stats.Liability:
-                container.LiabilityActions += x => x + ChangeAmount;
+                container.LiabilityActions += x => x + (long)ChangeAmount;
                 break;
         }
         return container;

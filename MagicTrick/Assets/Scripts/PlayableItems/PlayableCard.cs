@@ -11,7 +11,7 @@ public enum CardType
     Showmanship,
     Deception,
     Criminal,
-    Entrepreneurship
+    Financial
 }
 
 public enum Stats

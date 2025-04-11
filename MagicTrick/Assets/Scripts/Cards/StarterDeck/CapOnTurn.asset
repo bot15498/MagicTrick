@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2810321122231864491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4036bdac35716dc42b77dbdfca5c4d0e, type: 3}
+  m_Name: Increase Stat On Specific Turn
+  m_EditorClassIdentifier: 
+  StatToChange: 0
+  ChangeAmount: 5
+  TargetAct: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efa998ea87a49943b089a64c81492ff, type: 3}
+  m_Name: CapOnTurn
+  m_EditorClassIdentifier: 
+  Actions:
+  - {fileID: -2810321122231864491}
+  - {fileID: 2639242257652056657}
+  - {fileID: 6805426972342591837}
+  DoesRandomAction: 0
+  CardName: CapOnturn
+  Description: +5 on Act 1, +10 on Act 2, +20 Act 3
+  Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
+  Type: 0
+--- !u!114 &2639242257652056657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4036bdac35716dc42b77dbdfca5c4d0e, type: 3}
+  m_Name: Increase Stat On Specific Turn
+  m_EditorClassIdentifier: 
+  StatToChange: 0
+  ChangeAmount: 10
+  TargetAct: 2
+--- !u!114 &6805426972342591837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4036bdac35716dc42b77dbdfca5c4d0e, type: 3}
+  m_Name: Increase Stat On Specific Turn
+  m_EditorClassIdentifier: 
+  StatToChange: 0
+  ChangeAmount: 20
+  TargetAct: 3
