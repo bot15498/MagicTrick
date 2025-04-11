@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
             case GameState.RoundStart:
                 // Pre round effects
                 // Reset and shuffle deck
-                deckManager.InitializeDeck();
+                deckManager.RefreshDeck();
                 state = GameState.ActStart;
                 break;
             case GameState.ActStart:
@@ -233,7 +233,7 @@ public class GameManager : MonoBehaviour
         {
             combined += actionContainer;
         }
-        scoreManager.ApplyToPreviewScore(combined);
+        scoreManager.ApplyToPreviewScore(combined, this);
     }
 
     private List<ActionContainer> CreateCombinedContainer()

@@ -18,7 +18,7 @@ public class DisableFutureSlotAction : ActAction
                 x.SetSlotEnable(slot, true);
                 return 0;
             };
-            x.historyManager.slotTimelines[slot].AddToTimeline(future, slot);
+            x.historyManager.slotTimelines[slot].AddToTimeline(future, 1);
             return 0;
         };
         return container;

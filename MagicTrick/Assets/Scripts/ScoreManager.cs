@@ -5,19 +5,19 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public long baseCaptivation = 0;
-    public long baseSleightOfHand = 0;
+    public double baseSleightOfHand = 0;
     public long basePayout = 5;
     public long baseLiability = 0;
     public float basePayoutBonusFromScoreWeight = 0.5f;
 
     public long captivation = 0;
-    public long sleightOfHand = 0;
+    public double sleightOfHand = 0;
     public long additionalPayout = 0;
     public long liability = 0;
     public float payoutBonusFromScoreWeight = 0.5f;
 
     public long previewCaptivation = 0;
-    public long previewSleightOfHand = 0;
+    public double previewSleightOfHand = 0;
     public long previewAdditionalPayout = 0;
     public long previewLiability = 0;
     public float previewPayoutBonusFromScoreWeight = 0.5f;
@@ -26,7 +26,7 @@ public class ScoreManager : MonoBehaviour
     {
         get
         {
-            return captivation * (1 + sleightOfHand);
+            return (long)(captivation * (1 + sleightOfHand));
         }
     }
 
@@ -34,7 +34,7 @@ public class ScoreManager : MonoBehaviour
     {
         get
         {
-            return previewCaptivation * (1 + previewSleightOfHand);
+            return (long)(previewCaptivation * (1 + previewSleightOfHand));
         }
     }
 
@@ -48,24 +48,31 @@ public class ScoreManager : MonoBehaviour
 
     }
 
-    public void ApplyToPreviewScore(ActionContainer container)
+    public void ApplyToPreviewScore(ActionContainer container, GameManager gameManager)
     {
+        // Also do the extra actions
+        container.ApplyNonStatActions(gameManager);
+
         previewCaptivation = container.ApplyCaptivationActions(captivation);
         previewSleightOfHand = container.ApplySleightOfHandActions(sleightOfHand);
         previewAdditionalPayout = container.ApplyPayoutActions(additionalPayout);
         previewLiability = container.ApplyLiabilityActions(liability);
+
+        container.ApplyNonStatPostActions(gameManager);
     }
 
     public void ApplyToScore(ActionContainer container, GameManager gameManager)
     {
-        // Apply the contents of the container to the temp variables
+        // Also do the extra actions
+        container.ApplyNonStatActions(gameManager);
+
+        // Apply the contents of the container to the variables
         captivation = container.ApplyCaptivationActions(captivation);
         sleightOfHand = container.ApplySleightOfHandActions(sleightOfHand);
         additionalPayout = container.ApplyPayoutActions(additionalPayout);
         liability = container.ApplyLiabilityActions(liability);
 
-        // Also do the extra actions
-        container.ApplyNonStatActions(gameManager);
+        container.ApplyNonStatPostActions(gameManager);
     }
 
     public long CalculatePayout(int requiredScore)

@@ -10,6 +10,7 @@ public abstract class PlayableItem : ScriptableObject
     // The list of things this card will do (in order).
     [Header("Actions Applied to Current Slot")]
     public List<ActAction> Actions = new List<ActAction>();
+    public bool DoesRandomAction = false;
 
 #if UNITY_EDITOR
     [ContextMenu("Add Increase Stat Action")]
@@ -59,6 +60,50 @@ public abstract class PlayableItem : ScriptableObject
     {
         DisableFutureSlotAction newaction = CreateInstance<DisableFutureSlotAction>();
         newaction.name = "Disable Future Slot";
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("Multiply Next Trick")]
+    private void AddMultiplyNextTrick()
+    {
+        MultiplyOtherAction newaction = CreateInstance<MultiplyOtherAction>();
+        newaction.name = "Multiply Next Trick";
+        newaction.MultiplyAmount = 1;
+        newaction.RelativeTimestep = 1;
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("Increase Stat On Turn")]
+    private void AddIncreaseStatOnTurnAction()
+    {
+        IncreaseStatOnTurnAction newaction = CreateInstance<IncreaseStatOnTurnAction>();
+        newaction.name = "Increase Stat On Specific Turn";
+        newaction.StatToChange = Stats.Captivation;
+        newaction.ChangeAmount = 0;
+        newaction.TargetAct = 1;
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("Uniform Random Action Choice")]
+    private void AddUniformRandomActionChoice()
+    {
+        UniformRandomChanceAction newaction = CreateInstance<UniformRandomChanceAction>();
+        newaction.name = "Choose Uniform Random Action";
 
         Actions.Add(newaction);
 
