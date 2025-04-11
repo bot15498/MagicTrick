@@ -167,8 +167,8 @@ public class CardVisual : MonoBehaviour
         shakeParent.DOPunchPosition(shakeParent.up * selectPunchAmount * dir, scaleTransition, 10, 1);
         shakeParent.DOPunchRotation(Vector3.forward * (hoverPunchAngle / 2), hoverTransition, 20, 1).SetId(2);
 
-        if (scaleAnimations)
-            transform.DOScale(scaleOnHover, scaleTransition).SetEase(scaleEase);
+        /*if (scaleAnimations)
+            transform.DOScale(scaleOnHover, scaleTransition).SetEase(scaleEase);*/
     }
 
     public void Swap(float dir = 1)
