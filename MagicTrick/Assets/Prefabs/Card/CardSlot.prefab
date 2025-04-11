@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipText: Tooltip here!
-  tooltipOffset: {x: -125, y: 125, z: 0}
+  tooltipOffset: {x: -190, y: 160, z: 0}
   RighttooltipOffset: {x: 90, y: -40, z: 0}
   rightTooltip: 0
 --- !u!224 &4137251342562263919 stripped
