@@ -6,7 +6,7 @@ using UnityEngine;
 
 public abstract class ActAction : ScriptableObject
 {
-    public abstract ActionContainer AddAction(ActionContainer container, GameManager manager);
+    public abstract ActionContainer AddAction(ActionContainer container, int slot, GameManager manager);
 
 #if UNITY_EDITOR
     [ContextMenu("Delete This")]

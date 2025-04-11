@@ -10,6 +10,7 @@ public class ActionContainer
     public Func<long, long> SleightOfHandActions { get; set; } = x => x;
     public Func<long, long> PayoutActions { get; set; } = x => x;
     public Func<long, long> LiabilityActions { get; set; } = x => x;
+    public Func<GameManager, int> NonStatActions { get; set; } = x => 0;
 
     public long ApplyCaptivationActions(long startingVal)
     {
@@ -55,6 +56,11 @@ public class ActionContainer
         return toreturn;
     }
 
+    public int ApplyNonStatActions(GameManager gameManager)
+    {
+        return NonStatActions(gameManager);
+    }
+
     public static ActionContainer operator +(ActionContainer a, ActionContainer b)
     {
         // Order doesn't matter for applying stats
@@ -77,6 +83,10 @@ public class ActionContainer
             foreach (var @delegate in actcon.LiabilityActions.GetInvocationList())
             {
                 toreturn.LiabilityActions += (Func<long, long>)@delegate;
+            }
+            foreach(var @delegate in actcon.NonStatActions.GetInvocationList())
+            {
+                toreturn.NonStatActions += (Func<GameManager, int>)@delegate;
             }
         }
         return toreturn;

@@ -7,7 +7,7 @@ public class MultiplyCurrentEffectAction : ActAction
 {
     public int MultiplyAmount = 1;
 
-    public override ActionContainer AddAction(ActionContainer container, GameManager manager)
+    public override ActionContainer AddAction(ActionContainer container, int slot, GameManager manager)
     {
         // To multiply an existing card's effects, we are going to loop
         // over all the stat changes and apply them again.

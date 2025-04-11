@@ -56,13 +56,16 @@ public class ScoreManager : MonoBehaviour
         previewLiability = container.ApplyLiabilityActions(liability);
     }
 
-    public void ApplyToScore(ActionContainer container)
+    public void ApplyToScore(ActionContainer container, GameManager gameManager)
     {
         // Apply the contents of the container to the temp variables
         captivation = container.ApplyCaptivationActions(captivation);
         sleightOfHand = container.ApplySleightOfHandActions(sleightOfHand);
         additionalPayout = container.ApplyPayoutActions(additionalPayout);
         liability = container.ApplyLiabilityActions(liability);
+
+        // Also do the extra actions
+        container.ApplyNonStatActions(gameManager);
     }
 
     public long CalculatePayout(int requiredScore)

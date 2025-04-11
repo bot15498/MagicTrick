@@ -24,7 +24,7 @@ public class PlayableProp : PlayableItem
         {
             foreach (ActAction act in Actions)
             {
-                container = act.AddAction(container, gameManager);
+                container = act.AddAction(container, currCardSlot, gameManager);
             }
         }
         // Apply actions to the previous slot's trick if it exists
@@ -32,7 +32,7 @@ public class PlayableProp : PlayableItem
         {
             foreach (ActAction act in PreviousSlotActions)
             {
-                container = act.AddAction(container, gameManager);
+                container = act.AddAction(container, currCardSlot, gameManager);
             }
         }
         // Apply actions to the next slot's trick if it exists
@@ -40,7 +40,7 @@ public class PlayableProp : PlayableItem
         {
             foreach (ActAction act in NextSlotActions)
             {
-                container = act.AddAction(container, gameManager);
+                container = act.AddAction(container, currCardSlot, gameManager);
             }
         }
         // Apply actions fixed slots
@@ -50,7 +50,7 @@ public class PlayableProp : PlayableItem
             {
                 foreach(ActAction act in FixedSlotActions[i].Actions)
                 {
-                    container = act.AddAction(container, gameManager);
+                    container = act.AddAction(container, currCardSlot, gameManager);
                 }
             }
         }

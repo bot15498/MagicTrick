@@ -11,7 +11,7 @@ public class MultiplyStatAction : ActAction
     public Stats StatToChange = Stats.Captivation;
     public double MultiplyAmount = 1.0;
 
-    public override ActionContainer AddAction(ActionContainer container, GameManager manager)
+    public override ActionContainer AddAction(ActionContainer container, int slot, GameManager manager)
     {
         // return a function thad adds to input
         switch (StatToChange)

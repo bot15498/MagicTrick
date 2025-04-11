@@ -54,5 +54,18 @@ public abstract class PlayableItem : ScriptableObject
         EditorUtility.SetDirty(this);
         EditorUtility.SetDirty(newaction);
     }
+    [ContextMenu("Add Disable Future Slot")]
+    private void AddDisableFutureSlotAction()
+    {
+        DisableFutureSlotAction newaction = CreateInstance<DisableFutureSlotAction>();
+        newaction.name = "Disable Future Slot";
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
 #endif
 }

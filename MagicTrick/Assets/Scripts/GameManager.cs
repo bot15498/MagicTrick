@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
     private Button mulliganButton;
     private ScoreManager scoreManager;
     private DeckManager deckManager;
+    public HistoryManager historyManager;
     private List<GameObject> slots;
     private List<GameObject> propSlots;
 
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
         //state = GameState.Idle;
         scoreManager = GetComponent<ScoreManager>();
         deckManager = GetComponent<DeckManager>();
+        historyManager = GetComponent<HistoryManager>();
     }
 
     void Update()
@@ -174,7 +176,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        if(mulliganButton.enabled != canMulligan)
+        if (mulliganButton.enabled != canMulligan)
         {
             mulliganButton.enabled = canMulligan;
         }
@@ -196,18 +198,45 @@ public class GameManager : MonoBehaviour
     {
         // Get the action container for each card, combine them, then calculate
         // what the new score would be. Return the new score.
-        ActionContainer toReturnContainer = CreateCombinedContainer();
-        scoreManager.ApplyToScore(toReturnContainer);
+        List<ActionContainer> currentSlotContainer = CreateCombinedContainer();
+        // Combine with anything thats currently in the history
+        for (int i = 0; i < historyManager.slotTimelines.Count; i++)
+        {
+            currentSlotContainer[i] = currentSlotContainer[i] + historyManager.slotTimelines[i].History[0];
+        }
+        ActionContainer combined = new ActionContainer();
+        foreach (ActionContainer actionContainer in currentSlotContainer)
+        {
+            combined += actionContainer;
+        }
+        scoreManager.ApplyToScore(combined, this);
+
+        // Now update the timeline
+        for (int i = 0; i < historyManager.slotTimelines.Count; i++)
+        {
+            historyManager.slotTimelines[i].History[0] = currentSlotContainer[i];
+            historyManager.slotTimelines[i].AdvanceTime();
+        }
     }
 
     private void PreviewAllCards()
     {
-        // Apply to preview variables
-        ActionContainer toReturnContainer = CreateCombinedContainer();
-        scoreManager.ApplyToPreviewScore(toReturnContainer);
+        // Get the current action containers
+        List<ActionContainer> currentSlotContainer = CreateCombinedContainer();
+        // Combine with anything thats currently in the history
+        for (int i = 0; i < historyManager.slotTimelines.Count; i++)
+        {
+            currentSlotContainer[i] = currentSlotContainer[i] + historyManager.slotTimelines[i].History[0];
+        }
+        ActionContainer combined = new ActionContainer();
+        foreach (ActionContainer actionContainer in currentSlotContainer)
+        {
+            combined += actionContainer;
+        }
+        scoreManager.ApplyToPreviewScore(combined);
     }
 
-    private ActionContainer CreateCombinedContainer()
+    private List<ActionContainer> CreateCombinedContainer()
     {
         // Get the action container for each card, combine them, then calculate
         List<ActionContainer> slotchanges = new List<ActionContainer>();
@@ -217,7 +246,7 @@ public class GameManager : MonoBehaviour
             Card currCardObj = slots[currCardSlot].GetComponentInChildren<Card>();
             if (currCardObj != null)
             {
-                previewContainer = currCardObj.CardData.ApplyCard(previewContainer, this);
+                previewContainer = currCardObj.CardData.ApplyCard(previewContainer, currCardSlot, this);
             }
             for (int currPropSlot = 0; currPropSlot < propSlots.Count; currPropSlot++)
             {
@@ -229,13 +258,7 @@ public class GameManager : MonoBehaviour
             }
             slotchanges.Add(previewContainer);
         }
-        // Apply to preview variables
-        ActionContainer toReturnContainer = new ActionContainer();
-        foreach (ActionContainer slotContainer in slotchanges)
-        {
-            toReturnContainer += slotContainer;
-        }
-        return toReturnContainer;
+        return slotchanges;
     }
 
     private bool DiscardBoard()
@@ -264,7 +287,7 @@ public class GameManager : MonoBehaviour
 
     public void Mulligan()
     {
-        if(!canMulligan)
+        if (!canMulligan)
         {
             // nope
             return;
@@ -289,7 +312,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Check if you selected anything. If not, don't do anything.
-        if(cardObjs.Count == 0)
+        if (cardObjs.Count == 0)
         {
             return;
         }
@@ -340,5 +363,10 @@ public class GameManager : MonoBehaviour
     public void GoToPlayCards()
     {
         state = GameState.ActPlayout;
+    }
+
+    public void SetSlotEnable(int slot, bool isEnabled)
+    {
+        Debug.Log($"Modify slot {slot}, setting enabled to: {isEnabled}");
     }
 }

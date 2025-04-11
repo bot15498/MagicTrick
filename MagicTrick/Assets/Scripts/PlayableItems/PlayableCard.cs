@@ -11,7 +11,7 @@ public enum CardType
     Showmanship,
     Deception,
     Criminal,
-    Cash
+    Entrepreneurship
 }
 
 public enum Stats
@@ -30,12 +30,12 @@ public class PlayableCard : PlayableItem
     public Sprite Image;
     public CardType Type;
 
-    public ActionContainer ApplyCard(ActionContainer container, GameManager gameManager)
+    public ActionContainer ApplyCard(ActionContainer container, int slot, GameManager gameManager)
     {
         // Preview what the card will add in score.
         foreach (ActAction act in Actions)
         {
-            container = act.AddAction(container, gameManager);
+            container = act.AddAction(container, slot, gameManager);
         }
 
         return container;
