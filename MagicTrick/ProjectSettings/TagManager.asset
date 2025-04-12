@@ -8,6 +8,7 @@ TagManager:
   - TrickSlot
   - PlayerHand
   - GameCamera
+  - AnimationManager
   layers:
   - Default
   - TransparentFX
