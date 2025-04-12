@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -61,7 +62,7 @@ public class ScoreManager : MonoBehaviour
         //container.ApplyNonStatActions(gameManager);
 
         previewCaptivation = container.ApplyCaptivationActions(captivation);
-        previewSleightOfHand = container.ApplySleightOfHandActions(sleightOfHand);
+        previewSleightOfHand = Math.Max(container.ApplySleightOfHandActions(sleightOfHand), 0.0);
         previewAdditionalPayout = container.ApplyPayoutActions(additionalPayout);
         previewLiability = container.ApplyLiabilityActions(liability);
 
@@ -75,7 +76,7 @@ public class ScoreManager : MonoBehaviour
 
         // Apply the contents of the container to the variables
         captivation = container.ApplyCaptivationActions(captivation);
-        sleightOfHand = container.ApplySleightOfHandActions(sleightOfHand);
+        sleightOfHand = Math.Max(container.ApplySleightOfHandActions(sleightOfHand), 0.0);
         additionalPayout = container.ApplyPayoutActions(additionalPayout);
         liability = container.ApplyLiabilityActions(liability);
 
