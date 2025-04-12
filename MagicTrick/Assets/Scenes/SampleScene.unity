@@ -858,7 +858,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 66717616}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2000991875}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: BuyProp
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &66717616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1851,7 +1863,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 133065101}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2000991875}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: BuyProp
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &133065101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4116,7 +4140,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -4527,7 +4551,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 344748585}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2000991875}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: BuyProp
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &344748585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14704,6 +14740,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257406007}
   m_CullTransparentMesh: 1
+--- !u!1 &1260959323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1260959324}
+  - component: {fileID: 1260959325}
+  m_Layer: 5
+  m_Name: VisualHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1260959324
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260959323}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1813789608}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1260959325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260959323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 359e3b777e72b40458fa5a5036d42e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propVisualLevel: 1
 --- !u!1 &1264323588 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bc297edc304019e448aba327ef79a2be, type: 3}
@@ -16054,13 +16139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aadea5c3e0a39a543941b30b4ee07a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  propPrefabs:
-  - {fileID: 259729996853682315, guid: cf3af88375540a744b99eb4e740b3bf1, type: 3}
-  - {fileID: 259729996853682315, guid: 1cf2ac2adab8d0f408be81d493a01c86, type: 3}
-  - {fileID: 259729996853682315, guid: cf3af88375540a744b99eb4e740b3bf1, type: 3}
-  - {fileID: 259729996853682315, guid: 1cf2ac2adab8d0f408be81d493a01c86, type: 3}
-  - {fileID: 259729996853682315, guid: cf3af88375540a744b99eb4e740b3bf1, type: 3}
-  - {fileID: 259729996853682315, guid: 1cf2ac2adab8d0f408be81d493a01c86, type: 3}
+  propPrefabs: []
+  propPrefab: {fileID: 259729996853682315, guid: cf3af88375540a744b99eb4e740b3bf1, type: 3}
   propSlots:
   - {fileID: 1573214449}
   - {fileID: 1598285178}
@@ -16068,7 +16148,6 @@ MonoBehaviour:
   - {fileID: 622468054}
   - {fileID: 688064521}
   - {fileID: 1075267220}
-  props: []
 --- !u!222 &1412814391
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16266,13 +16345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aadea5c3e0a39a543941b30b4ee07a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  propPrefabs:
-  - {fileID: 259729996853682315, guid: cf3af88375540a744b99eb4e740b3bf1, type: 3}
-  - {fileID: 259729996853682315, guid: 1cf2ac2adab8d0f408be81d493a01c86, type: 3}
-  - {fileID: 259729996853682315, guid: cf3af88375540a744b99eb4e740b3bf1, type: 3}
-  - {fileID: 259729996853682315, guid: 1cf2ac2adab8d0f408be81d493a01c86, type: 3}
-  - {fileID: 259729996853682315, guid: cf3af88375540a744b99eb4e740b3bf1, type: 3}
-  - {fileID: 259729996853682315, guid: 1cf2ac2adab8d0f408be81d493a01c86, type: 3}
+  propPrefabs: []
+  propPrefab: {fileID: 259729996853682315, guid: 1cf2ac2adab8d0f408be81d493a01c86, type: 3}
   propSlots:
   - {fileID: 1294826945}
   - {fileID: 895184152}
@@ -16280,7 +16354,6 @@ MonoBehaviour:
   - {fileID: 841369264}
   - {fileID: 1488008775}
   - {fileID: 541390790}
-  props: []
 --- !u!222 &1423439032
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19368,7 +19441,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1743763802}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2000991875}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: RefreshPropShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1743763802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20141,7 +20226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1813789608
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20171,6 +20256,7 @@ RectTransform:
   - {fileID: 1078844397}
   - {fileID: 1423439030}
   - {fileID: 916298003}
+  - {fileID: 1260959324}
   m_Father: {fileID: 556952597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -21204,6 +21290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 359e3b777e72b40458fa5a5036d42e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  propVisualLevel: 0
 --- !u!114 &1929267575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21796,6 +21883,7 @@ GameObject:
   - component: {fileID: 2000991874}
   - component: {fileID: 2000991876}
   - component: {fileID: 2000991875}
+  - component: {fileID: 2000991877}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -21877,12 +21965,10 @@ MonoBehaviour:
   propSlot2: {fileID: 1639362160}
   propSlot3: {fileID: 176428521}
   totalScoreText: {fileID: 1118467303}
-  captivationText: {fileID: 0}
-  captivationAddText: {fileID: 0}
-  captivationSignText: {fileID: 0}
-  sleightOfHandText: {fileID: 0}
-  sleightOfHandAddText: {fileID: 0}
-  sleightOfHandSignText: {fileID: 0}
+  captivationText: {fileID: 1610638896}
+  captivationAddText: {fileID: 553483269}
+  sleightOfHandText: {fileID: 1809733900}
+  sleightOfHandAddText: {fileID: 1239493523}
   additionalPayoutText: {fileID: 742044591}
   additionalPayoutAddText: {fileID: 745683138}
   additionalPayoutSignText: {fileID: 1863531529}
@@ -21893,6 +21979,7 @@ MonoBehaviour:
   moneyText2: {fileID: 1722983504}
   shopPanel: {fileID: 1813789607}
   historyManager: {fileID: 0}
+  propManagerGlobal: {fileID: 0}
 --- !u!4 &2000991873
 Transform:
   m_ObjectHideFlags: 0
@@ -21933,6 +22020,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deleteCardCost: 2
+  refreshPropCost: 2
+  propCost: 2
   CardSelectionPanel: {fileID: 916298002}
   CardRemovePanel: {fileID: 31126313}
   CardRemoveButton: {fileID: 342268774}
@@ -21942,6 +22031,16 @@ MonoBehaviour:
   - {fileID: 1273449689}
   shopCardPrefab: {fileID: 5534623161727414095, guid: 1fee1728ceb108c4595c3f516851cfa9, type: 3}
   DrawnCards: []
+  shopPropPrefab: {fileID: 5534623161727414095, guid: 2429ce7bcc4c13142a9f2fe719180b77, type: 3}
+  PropSlots:
+  - {fileID: 238332122}
+  - {fileID: 1933506052}
+  - {fileID: 539642563}
+  propBuyButtons:
+  - {fileID: 133065100}
+  - {fileID: 344748584}
+  - {fileID: 66717615}
+  refreshButton: {fileID: 1743763801}
 --- !u!114 &2000991876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21966,7 +22065,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6247ef152de917f4ea57605709ae7aac, type: 2}
   - {fileID: 11400000, guid: 3986956d4040594469d2a29852eb1d99, type: 2}
   - {fileID: 11400000, guid: d083f15865677494f96ebce0e6a01ee0, type: 2}
-  AllProps: []
+  AllProps:
+  - {fileID: 11400000, guid: cfadfa24682d0f14fa66e05fc286296a, type: 2}
+  - {fileID: 11400000, guid: 3f5a2f15887e9014a99c1e500ee3414c, type: 2}
+--- !u!114 &2000991877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000991869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 856f703c26a326e46b625bc72aae127b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PropTableManager: {fileID: 1412814390}
+  PropShopManager: {fileID: 1423439031}
+  propFieldPrefab: {fileID: 259729996853682315, guid: cf3af88375540a744b99eb4e740b3bf1, type: 3}
+  propShopPrefab: {fileID: 259729996853682315, guid: 1cf2ac2adab8d0f408be81d493a01c86, type: 3}
 --- !u!4 &2006600084 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2770666803903516498, guid: bc297edc304019e448aba327ef79a2be, type: 3}

@@ -4,14 +4,17 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
     private Canvas canvas;
     private Image imageComponent;
     [SerializeField] private bool instantiateVisual = true;
-    private VisualCardsHandler visualHandler;
+    private VisualPropsHandler visualHandler;
     private Vector3 offset;
+    [SerializeField]
+    private PropVisualLevel targetVisualLevel = PropVisualLevel.Field;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeedLimit = 50;
@@ -44,6 +47,7 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     private float pointerDownTime;
     private float pointerUpTime;
     private TooltipTrigger tooltipTrigger;
+    private bool didFirstUpdateVisual = false;
 
     void Start()
     {
@@ -62,7 +66,7 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
         if (instantiateVisual)
         {
-            visualHandler = FindObjectOfType<VisualCardsHandler>();
+            visualHandler = FindObjectsOfType<VisualPropsHandler>().Where(x => x.propVisualLevel == targetVisualLevel).FirstOrDefault();
             propVisual = Instantiate(propVisualPrefab, visualHandler ? visualHandler.transform : canvas.transform).GetComponent<PropVisual>();
             propVisual.Initialize(this);
         }
@@ -82,6 +86,11 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
             Vector2 velocity = direction * Mathf.Min(moveSpeedLimit, Vector2.Distance(transform.position, targetPosition) / Time.deltaTime);
             transform.Translate(velocity * Time.deltaTime);
+        }
+
+        if(!didFirstUpdateVisual)
+        {
+            UpdateVisual();
         }
     }
 
@@ -241,6 +250,7 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (PropData != null && propVisual != null)
         {
             propVisual.UpdateVisual(PropData);
+            didFirstUpdateVisual = true;
         }
     }
 }

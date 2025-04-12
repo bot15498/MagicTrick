@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ using UnityEngine.UI;
 public class ShopManager : MonoBehaviour
 {
     public long deleteCardCost = 2;
+    public long refreshPropCost = 2;
+    public long propCost = 2;
 
     [SerializeField]
     private GameObject CardSelectionPanel;
@@ -16,34 +19,87 @@ public class ShopManager : MonoBehaviour
     private GameObject CardRemovePanel;
     [SerializeField]
     private Button CardRemoveButton;
+    [Header("card stuff")]
     [SerializeField]
     private List<GameObject> CardSlots = new List<GameObject>();
     [SerializeField]
     private GameObject shopCardPrefab;
     [SerializeField]
     private List<ShopCard> DrawnCards = new List<ShopCard>();
+    [Header("props stuff")]
+    [SerializeField]
+    private GameObject shopPropPrefab;
+    [SerializeField]
+    private List<GameObject> PropSlots = new List<GameObject>();
+    [SerializeField]
+    private List<Button> propBuyButtons = new List<Button>();
+    [SerializeField]
+    private Button refreshButton;
     private ItemManager itemManager;
     private ScoreManager scoreManager;
     private DeckManager deckManager;
+    private PropManagerGlobal propManagerGlobal;
 
     void Start()
     {
         itemManager = GetComponent<ItemManager>();
         scoreManager = GetComponent<ScoreManager>();
         deckManager = GetComponent<DeckManager>();
+        propManagerGlobal = GetComponent<PropManagerGlobal>();
         CardSelectionPanel.SetActive(false);
         CardRemovePanel.SetActive(false);
     }
 
     void Update()
     {
-        if (scoreManager.money < deleteCardCost && CardRemoveButton.enabled)
+        // Disable the delete card button if not enough money
+        if (scoreManager.money < deleteCardCost && CardRemoveButton.interactable)
         {
-            CardRemoveButton.enabled = false;
+            CardRemoveButton.interactable = false;
         }
-        else if (scoreManager.money >= deleteCardCost && !CardRemoveButton.enabled)
+        else if (scoreManager.money >= deleteCardCost && !CardRemoveButton.interactable)
         {
-            CardRemoveButton.enabled = true;
+            CardRemoveButton.interactable = true;
+        }
+
+        // Disable the refresh button if not enough money
+        if (scoreManager.money < refreshPropCost && refreshButton.interactable)
+        {
+            refreshButton.interactable = false;
+        }
+        else if (scoreManager.money >= refreshPropCost && !refreshButton.interactable)
+        {
+            refreshButton.interactable = true;
+        }
+
+        // Disable the buy prop button if not enough money
+        for (int i = 0; i < propBuyButtons.Count; i++)
+        {
+            var butt = propBuyButtons[i];
+            if (propManagerGlobal.PropShopManager.IsFull() && butt.interactable)
+            {
+                butt.interactable = false;
+            }
+            else
+            {
+                // If something is in the slot, then control prop button enable / disable
+                ShopProp prop = PropSlots[i].GetComponentInChildren<ShopProp>();
+                if (prop != null)
+                {
+                    if (scoreManager.money < propCost && butt.interactable)
+                    {
+                        butt.interactable = false;
+                    }
+                    else if (scoreManager.money >= propCost && !butt.interactable)
+                    {
+                        butt.interactable = true;
+                    }
+                }
+                else if (prop == null && butt.interactable)
+                {
+                    butt.interactable = false;
+                }
+            }
         }
     }
 
@@ -98,5 +154,50 @@ public class ShopManager : MonoBehaviour
     public void CloseCardRemovePanel()
     {
         CardRemovePanel.SetActive(false);
+    }
+
+    public void RefreshPropShop()
+    {
+        for (int i = 0; i < PropSlots.Count; i++)
+        {
+            propBuyButtons[i].interactable = true;
+
+            // Delete the prop there.
+            ShopProp child = PropSlots[i].GetComponentInChildren<ShopProp>();
+            if (child != null)
+            {
+                Destroy(child.gameObject);
+            }
+
+            // Roll a new prop
+            PlayableProp newprop = itemManager.GetRandomProp(propManagerGlobal.PropShopManager.GetPropList());
+
+            // Instantiate a new ShopProp
+            GameObject slotObj = Instantiate(shopPropPrefab, PropSlots[i].transform);
+            ShopProp prop = slotObj.GetComponentInChildren<ShopProp>(true);
+            prop.PropData = newprop;
+            prop.name = $"{i}";
+            prop.UpdateVisual();
+        }
+    }
+
+    public void BuyProp(int index)
+    {
+        ShopProp child = PropSlots[index].GetComponentInChildren<ShopProp>();
+        if (child == null)
+        {
+            return;
+        }
+
+        scoreManager.money -= propCost;
+
+        // Only add to the shop prop manager
+        propManagerGlobal.PropShopManager.AssignPropToEmptySlot(child.PropData);
+
+        // Delete the prop there.
+        Destroy(child.gameObject);
+
+        // Disable the buy button
+        propBuyButtons[index].interactable = false;
     }
 }

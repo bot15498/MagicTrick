@@ -35,4 +35,12 @@ public class ItemManager : MonoBehaviour
         tempCards = tempCards.Where(x => x.Type == targetType).ToList();
         return tempCards[rand.Next(0, tempCards.Count)];
     }
+
+    public PlayableProp GetRandomProp(List<PlayableProp> currentInventory)
+    {
+        List<PlayableProp> tempProps = new List<PlayableProp>();
+        tempProps.AddRange(AllProps);
+        tempProps = tempProps.Where(x => !currentInventory.Contains(x)).ToList();
+        return tempProps[rand.Next(0, tempProps.Count)];
+    }
 }

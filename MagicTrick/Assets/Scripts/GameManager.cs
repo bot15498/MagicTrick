@@ -94,7 +94,9 @@ public class GameManager : MonoBehaviour
     private GameObject shopPanel;
     private ScoreManager scoreManager;
     private DeckManager deckManager;
+    private ShopManager shopManager;
     public HistoryManager historyManager;
+    public PropManagerGlobal propManagerGlobal;
     private List<GameObject> slots;
     private List<GameObject> propSlots;
 
@@ -116,7 +118,8 @@ public class GameManager : MonoBehaviour
         scoreManager = GetComponent<ScoreManager>();
         deckManager = GetComponent<DeckManager>();
         historyManager = GetComponent<HistoryManager>();
-
+        propManagerGlobal = GetComponent<PropManagerGlobal>();
+        shopManager = GetComponent<ShopManager>();
         shopPanel.SetActive(false);
     }
 
@@ -199,6 +202,9 @@ public class GameManager : MonoBehaviour
                     scoreManager.UpdateMoney(currParty.Rounds[currRound].ScoreRequired);
                     // Send your hand to your discards.
                     SendHandToDiscard();
+                    deckManager.RefreshDeck();
+                    // Update the prop inventory in the shop
+                    propManagerGlobal.UpdateShopPropManager();
                     // Advance to the shop
                     currRound++;
                     if (currRound > maxRounds)
@@ -218,6 +224,7 @@ public class GameManager : MonoBehaviour
                 if (!shopPanel.activeSelf)
                 {
                     shopPanel.SetActive(true);
+                    shopManager.RefreshPropShop();
                 }
                 // Pull the curtain down
                 break;
@@ -227,9 +234,9 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        if (mulliganButton.enabled != canMulligan)
+        if (mulliganButton.interactable != canMulligan)
         {
-            mulliganButton.enabled = canMulligan;
+            mulliganButton.interactable = canMulligan;
         }
 
         // debug stuff
@@ -332,6 +339,17 @@ public class GameManager : MonoBehaviour
                 return false;
             }
         }
+        // Now send all props back to your inventory
+        foreach (var propslot in propSlots)
+        {
+            Prop currPropObj = propslot.GetComponentInChildren<Prop>();
+            if (currPropObj != null)
+            {
+                propManagerGlobal.PropTableManager.AssignPropToEmptySlot(currPropObj);
+                // exit early
+                return false;
+            }
+        }
         // If you get here, all slots are empty
         return true;
     }
@@ -379,7 +397,8 @@ public class GameManager : MonoBehaviour
         }
 
         // Go one by one and delete / draw a card
-        for (int i = 0; i < cardObjs.Count; i++)
+        int startCardCounToKill = cardObjs.Count;
+        for (int i = 0; i < startCardCounToKill; i++)
         {
             GameObject cardToKill = cardObjs.FirstOrDefault();
             if (cardToKill != null)
@@ -428,6 +447,8 @@ public class GameManager : MonoBehaviour
 
     public void LeaveShop()
     {
+        // Update the table props
+        propManagerGlobal.UpdateTablePropManager();
         state = GameState.RoundStart;
         shopPanel.SetActive(false);
     }

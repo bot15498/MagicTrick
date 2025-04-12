@@ -193,7 +193,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instantiateVisual: 1
+  targetVisualLevel: 1
   moveSpeedLimit: 75
+  targetCamera: {fileID: 0}
   propVisualPrefab: {fileID: 4877114960914594400, guid: ae90b75f86da0f44f96d6dcec906844e, type: 3}
   propVisual: {fileID: 0}
   isHovering: 0
