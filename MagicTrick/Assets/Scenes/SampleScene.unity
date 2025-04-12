@@ -21980,7 +21980,7 @@ MonoBehaviour:
   shopPanel: {fileID: 1813789607}
   historyManager: {fileID: 0}
   propManagerGlobal: {fileID: 0}
-  animationManager: {fileID: 0}
+  animationManager: {fileID: 807227220}
   slots: []
   propSlots: []
 --- !u!4 &2000991873

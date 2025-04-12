@@ -269,7 +269,7 @@ public class GameManager : MonoBehaviour
             {
                 // not waiting for anything, start animation
                 Card currCardObj = slots[currCardContainerIndex].GetComponentInChildren<Card>();
-                animationManager.playAnimation(currCardObj.CardData.AnimationName);
+                //animationManager.playAnimation(currCardObj.CardData.AnimationName);
                 // Play the card
                 scoreManager.ApplyToScore(currCardContainers[currCardContainerIndex], this);
                 // Now update the timeline
