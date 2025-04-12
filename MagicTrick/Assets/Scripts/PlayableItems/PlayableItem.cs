@@ -112,5 +112,21 @@ public abstract class PlayableItem : ScriptableObject
         EditorUtility.SetDirty(this);
         EditorUtility.SetDirty(newaction);
     }
+    [ContextMenu("Increase Stat If Card Matches Type")]
+    private void AddIncreaseStatIfCardMatchesType()
+    {
+        IncreaseStatConditionalCardAction newaction = CreateInstance<IncreaseStatConditionalCardAction>();
+        newaction.name = "Increase Stat If CardType Matches";
+        newaction.CardTypeToLookFor = CardType.Showmanship;
+        newaction.StatToChange = Stats.Captivation;
+        newaction.ChangeAmount = 0;
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
 #endif
 }

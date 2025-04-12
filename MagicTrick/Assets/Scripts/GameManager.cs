@@ -102,8 +102,8 @@ public class GameManager : MonoBehaviour
     public HistoryManager historyManager;
     public PropManagerGlobal propManagerGlobal;
     public AnimationManager animationManager;
-    private List<GameObject> slots;
-    private List<GameObject> propSlots;
+    public List<GameObject> slots;
+    public List<GameObject> propSlots;
 
     void Awake()
     {
@@ -269,7 +269,7 @@ public class GameManager : MonoBehaviour
             {
                 // not waiting for anything, start animation
                 Card currCardObj = slots[currCardContainerIndex].GetComponentInChildren<Card>();
-                //animationManager.playAnimation(currCardObj.CardData.AnimationName);
+                animationManager.playAnimation(currCardObj.CardData.AnimationName);
                 // Play the card
                 scoreManager.ApplyToScore(currCardContainers[currCardContainerIndex], this);
                 // Now update the timeline
@@ -284,27 +284,6 @@ public class GameManager : MonoBehaviour
             // Nothing left to do
             currCardContainerIndex = 0;
             return true;
-        }
-
-        // This method returns true when ready to proceed
-        // Get the action container for each card, combine them, then calculate
-        // what the new score would be. Return the new score.
-        List<ActionContainer> currentSlotContainer = CreateCombinedContainer();
-        // Combine with anything thats currently in the history
-        for (int i = 0; i < historyManager.slotTimelines.Count; i++)
-        {
-            currentSlotContainer[i] = currentSlotContainer[i] + historyManager.slotTimelines[i].History[0];
-        }
-        foreach (ActionContainer actionContainer in currentSlotContainer)
-        {
-            scoreManager.ApplyToScore(actionContainer, this);
-        }
-
-        // Now update the timeline
-        for (int i = 0; i < historyManager.slotTimelines.Count; i++)
-        {
-            historyManager.slotTimelines[i].History[0] = currentSlotContainer[i];
-            historyManager.slotTimelines[i].AdvanceTime();
         }
     }
 

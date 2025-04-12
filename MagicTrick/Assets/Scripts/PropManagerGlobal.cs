@@ -26,33 +26,6 @@ public class PropManagerGlobal : MonoBehaviour
 
     }
 
-    //public void UpdatePropSlots()
-    //{
-    //    // Update the prop managers to show the correct props in the correct slots
-    //}
-
-    //public void AddProp(PlayableProp toadd)
-    //{
-    //    // finds the next open slot, then adds the prop. 
-
-    //    // Broadcast to all prop managers
-    //}
-
-    //public void UpdatePropSlots(PropManager masterManager, Dictionary<int, Prop> newProps)
-    //{
-    //    // Received a message from a prop manager that something has changed inside of it.
-    //    // Get the current config for the prop manager
-    //    foreach (PropManager propManager in propManagers)
-    //    {
-    //        if(propManager == masterManager)
-    //        {
-    //            continue;
-    //        }
-
-    //        propManager.RefreshProplistFromDict(newProps);
-    //    }
-    //}
-
     public void UpdateShopPropManager()
     {
         // Make it so the table manager updates the shop props
