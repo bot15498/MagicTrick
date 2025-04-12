@@ -16,6 +16,8 @@ public class DeckManager : MonoBehaviour
 
     [SerializeField]
     private TMP_Text DeckText;
+    [SerializeField]
+    private TMP_Text DeckText2;
     private System.Random rand;
 
     public event Action OnDeckChanged;
@@ -35,6 +37,7 @@ public class DeckManager : MonoBehaviour
     void Update()
     {
         DeckText.text = $"{DeckCards.Count}";
+        DeckText2.text = $"{DeckCards.Count}";
     }
 
     public void InitializeDeck()

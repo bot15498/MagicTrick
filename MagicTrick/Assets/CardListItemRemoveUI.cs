@@ -13,6 +13,8 @@ public class CardListItemRemoveUI : MonoBehaviour, IPointerEnterHandler, IPointe
     private TooltipTrigger tprigger;
 
     private DeckManager deckManager;
+    private ScoreManager scoreManager;
+    private ShopManager shopManager;
 
     [HideInInspector] public UnityEvent<CardListItemRemoveUI> PointerEnterEvent;
     public UnityEvent OnDeckChanged; // <- Add this event for click actions
@@ -30,6 +32,8 @@ public class CardListItemRemoveUI : MonoBehaviour, IPointerEnterHandler, IPointe
     private void Start()
     {
         deckManager = FindObjectOfType<DeckManager>();
+        scoreManager = deckManager.GetComponent<ScoreManager>();
+        shopManager = deckManager.GetComponent<ShopManager>();
         tprigger = GetComponent<TooltipTrigger>();
     }
 
@@ -69,6 +73,6 @@ public class CardListItemRemoveUI : MonoBehaviour, IPointerEnterHandler, IPointe
         
         deckManager.RemoveCard(savedCard);
         TooltipSystem.Instance.HideTooltip();
-
+        scoreManager.money -= shopManager.deleteCardCost;
     }
 }

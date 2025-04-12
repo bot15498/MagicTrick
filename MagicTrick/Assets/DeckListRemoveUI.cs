@@ -8,10 +8,12 @@ public class DeckListRemoveUI : MonoBehaviour
     public GameObject cardListItemPrefab;
 
     private DeckManager deckManager;
+    private ScoreManager scoreManager;
 
     void Start()
     {
         deckManager = FindObjectOfType<DeckManager>();
+        scoreManager = deckManager.GetComponent<ScoreManager>();
         deckManager.OnDeckChanged += RefreshUI;
         RefreshUI();
     }

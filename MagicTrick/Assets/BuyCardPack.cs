@@ -9,8 +9,8 @@ using System.Security.Cryptography;
 
 public class BuyCardPack : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    // Start is called before the first frame update
-
+    public CardType cardPackType = CardType.Showmanship;
+    public long cost = 2;
 
     [Header("Scale Parameters")]
     [SerializeField] private bool scaleAnimations = true;
@@ -19,6 +19,9 @@ public class BuyCardPack : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private float scaleTransition = 0.15f;
     [SerializeField] private Ease scaleEase = Ease.OutBack;
     [HideInInspector] public UnityEvent<BuyCardPack> PointerEnterEvent;
+    [Header("Hober Parameters")]
+    [SerializeField] private float hoverPunchAngle = 5;
+    [SerializeField] private float hoverTransition = .15f;
 
     [Header("Tilt Settings")]
     public float autoTiltAmount = 5f;      // Max degrees of tilt
@@ -27,8 +30,12 @@ public class BuyCardPack : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private float tiltX, tiltY, tiltZ;     // Base rotation
     private Transform tiltTarget;
+    private ShopManager shopManager;
+    private ScoreManager scoreManager;
     void Start()
     {
+        shopManager = FindObjectOfType<ShopManager>();
+        scoreManager = shopManager.GetComponent<ScoreManager>();
         tiltTarget = transform;
         Vector3 startAngles = tiltTarget.eulerAngles;
         tiltX = startAngles.x;
@@ -67,11 +74,19 @@ public class BuyCardPack : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        //MINUS MONEY DISABLE CARD REMOVAL 
-        //ADD REMOVAL EFFECT HERE
-
-     
+        // Hide tooltip
         TooltipSystem.Instance.HideTooltip();
+
+        // Check if have enough money
+        if (scoreManager.money >= cost)
+        {
+            shopManager.BuyPack(cardPackType, cost);
+        }
+        else
+        {
+            // Shake card if not
+            transform.DOPunchRotation(Vector3.forward * (hoverPunchAngle / 2), hoverTransition, 20, 1).SetId(2);
+        }
 
     }
 

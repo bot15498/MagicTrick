@@ -83,49 +83,6 @@ public class HorizontalCardHolder : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Delete))
-        {
-            if (hoveredCard != null)
-            {
-                Destroy(hoveredCard.transform.parent.gameObject);
-                cards.Remove(hoveredCard);
-
-            }
-        }
-
-        /*if (Input.GetKeyDown(KeyCode.J))
-        {
-            // Move the card's parent (slot) to the new location
-            hoveredCard.transform.parent.SetParent(test.transform); // move to new holder
-            hoveredCard.transform.parent.position = test.transform.position; // optional: align position
-
-            // Remove the card from current list
-            cards.Remove(hoveredCard);
-        }*/
-
-    //    if (Input.GetKeyDown(KeyCode.F))
-    //    {
-    //        Instantiate(slotPrefab, transform);
-    //        cards = GetComponentsInChildren<Card>(true)
-    //.Where(card => card.transform.parent != null &&
-    //               card.transform.parent.parent == this.transform)
-    //.ToList();
-
-
-    //        foreach (Card card in cards)
-    //        {
-    //            card.PointerEnterEvent.AddListener(CardPointerEnter);
-    //            card.PointerExitEvent.AddListener(CardPointerExit);
-    //            card.BeginDragEvent.AddListener(BeginDrag);
-    //            card.EndDragEvent.AddListener(EndDrag);
-    //            card.name = cardCount.ToString();
-    //            cardCount++;
-    //        }
-
-    //    }
-
-
-
         if (selectedCard == null || isCrossing)
             return;
 

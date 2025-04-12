@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,11 @@ public class GameManager : MonoBehaviour
     // The followign are references to the trick slot.
     // Heiarchy goes Trick Slot -> Cardslot prefab -> Then card
     [SerializeField]
+    private HorizontalCardHolder cardHolder;
+    [SerializeField]
+    private Button mulliganButton;
+    [Header("Trick slots and prop slots")]
+    [SerializeField]
     private GameObject slot1;
     [SerializeField]
     private GameObject slot2;
@@ -52,12 +58,40 @@ public class GameManager : MonoBehaviour
     private GameObject propSlot2;
     [SerializeField]
     private GameObject propSlot3;
+    [Header("Stat text fields")]
     [SerializeField]
-    private TMP_Text scoreText;
+    private TMP_Text totalScoreText;
     [SerializeField]
-    private HorizontalCardHolder cardHolder;
+    private TMP_Text captivationText;
     [SerializeField]
-    private Button mulliganButton;
+    private TMP_Text captivationAddText;
+    [SerializeField]
+    private TMP_Text captivationSignText;
+    [SerializeField]
+    private TMP_Text sleightOfHandText;
+    [SerializeField]
+    private TMP_Text sleightOfHandAddText;
+    [SerializeField]
+    private TMP_Text sleightOfHandSignText;
+    [SerializeField]
+    private TMP_Text additionalPayoutText;
+    [SerializeField]
+    private TMP_Text additionalPayoutAddText;
+    [SerializeField]
+    private TMP_Text additionalPayoutSignText;
+    [SerializeField]
+    private TMP_Text liabilityText;
+    [SerializeField]
+    private TMP_Text liabilityAddText;
+    [SerializeField]
+    private TMP_Text liabilitySignText;
+    [SerializeField]
+    private TMP_Text moneyText;
+    [SerializeField]
+    private TMP_Text moneyText2;
+    [Header("Shop stuff")]
+    [SerializeField]
+    private GameObject shopPanel;
     private ScoreManager scoreManager;
     private DeckManager deckManager;
     public HistoryManager historyManager;
@@ -82,6 +116,8 @@ public class GameManager : MonoBehaviour
         scoreManager = GetComponent<ScoreManager>();
         deckManager = GetComponent<DeckManager>();
         historyManager = GetComponent<HistoryManager>();
+
+        shopPanel.SetActive(false);
     }
 
     void Update()
@@ -96,6 +132,7 @@ public class GameManager : MonoBehaviour
             case GameState.RoundStart:
                 // Pre round effects
                 // Reset and shuffle deck
+                scoreManager.ResetStats();
                 deckManager.RefreshDeck();
                 state = GameState.ActStart;
                 break;
@@ -115,16 +152,14 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.ActSetup:
                 // Pick cards to play. Wait for confirmation
-                // Update score to say what it might be 
-                // TODO: DELETE THIS
                 PreviewAllCards();
-                scoreText.text = $"Current score: {scoreManager.Score} + {scoreManager.PreviewScore - scoreManager.Score}";
+                UpdateScoreFields();
                 break;
             case GameState.ActPlayout:
                 // Play each card
                 PlayAllCards();
                 // Update text
-                scoreText.text = $"Current score: {scoreManager.Score}";
+                UpdateScoreFields();
                 // Go to next 
                 state = GameState.ActEnd;
                 break;
@@ -153,8 +188,18 @@ public class GameManager : MonoBehaviour
                     // Die
                     state = GameState.GameOver;
                 }
+                else if (scoreManager.additionalPayout < scoreManager.liability)
+                {
+                    // die 
+                    state = GameState.GameOver;
+                }
                 else
                 {
+                    // Calculate money
+                    scoreManager.UpdateMoney(currParty.Rounds[currRound].ScoreRequired);
+                    // Send your hand to your discards.
+                    SendHandToDiscard();
+                    // Advance to the shop
                     currRound++;
                     if (currRound > maxRounds)
                     {
@@ -168,7 +213,13 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Shopping:
-                state = GameState.RoundStart;
+                UpdateScoreFields();
+                // Show the shop
+                if (!shopPanel.activeSelf)
+                {
+                    shopPanel.SetActive(true);
+                }
+                // Pull the curtain down
                 break;
             case GameState.PartyEnd:
                 break;
@@ -285,6 +336,16 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
+    private void SendHandToDiscard()
+    {
+        foreach (var card in cardHolder.cards)
+        {
+            deckManager.SendToDiscard(card.CardData);
+            Destroy(card.transform.parent.gameObject);
+        }
+        cardHolder.cards.Clear();
+    }
+
     public void Mulligan()
     {
         if (!canMulligan)
@@ -365,8 +426,45 @@ public class GameManager : MonoBehaviour
         state = GameState.ActPlayout;
     }
 
+    public void LeaveShop()
+    {
+        state = GameState.RoundStart;
+        shopPanel.SetActive(false);
+    }
+
     public void SetSlotEnable(int slot, bool isEnabled)
     {
         Debug.Log($"Modify slot {slot}, setting enabled to: {isEnabled}");
+    }
+
+    public void UpdateScoreFields()
+    {
+        totalScoreText.text = $"{scoreManager.Score}";
+        moneyText.text = $"{scoreManager.money}";
+        moneyText2.text = $"{scoreManager.money}";
+
+        // Captivation
+        long capToAdd = scoreManager.previewCaptivation - scoreManager.captivation;
+        captivationText.text = $"{scoreManager.captivation}";
+        captivationAddText.text = $"{Math.Abs(capToAdd)}";
+        captivationSignText.text = capToAdd < 0 ? "-" : "+";
+
+        // Sleight of hand
+        double sohToadd = scoreManager.previewSleightOfHand - scoreManager.sleightOfHand;
+        sleightOfHandText.text = scoreManager.sleightOfHand.ToString("0.##");
+        sleightOfHandAddText.text = Math.Abs(sohToadd).ToString("0.##");
+        sleightOfHandSignText.text = sohToadd < 0 ? "-" : "+";
+
+        // liability
+        double liabilityToAdd = scoreManager.previewLiability - scoreManager.liability;
+        liabilityText.text = $"{scoreManager.liability}";
+        liabilityAddText.text = $"{Math.Abs(liabilityToAdd)}";
+        liabilitySignText.text = liabilityToAdd < 0 ? "-" : "+";
+
+        // payout
+        double payoutToAdd = scoreManager.additionalPayout - scoreManager.previewAdditionalPayout;
+        additionalPayoutText.text = $"{scoreManager.additionalPayout}";
+        additionalPayoutAddText.text = $"{Math.Abs(payoutToAdd)}";
+        additionalPayoutSignText.text = payoutToAdd < 0 ? "-" : "+";
     }
 }

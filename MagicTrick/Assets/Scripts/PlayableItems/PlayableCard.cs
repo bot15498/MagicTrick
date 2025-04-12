@@ -29,6 +29,7 @@ public class PlayableCard : PlayableItem
     public string Description;
     public Sprite Image;
     public CardType Type;
+    public string AnimationName;
 
     public ActionContainer ApplyCard(ActionContainer container, int slot, GameManager gameManager)
     {

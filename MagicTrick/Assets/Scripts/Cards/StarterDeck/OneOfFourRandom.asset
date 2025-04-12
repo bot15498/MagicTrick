@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
   m_Name: Increase Stats
   m_EditorClassIdentifier: 
-  StatToChange: 0
-  ChangeAmount: 0
+  StatToChange: 1
+  ChangeAmount: 2
 --- !u!114 &-4713447209614526150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   m_Name: Increase Stats
   m_EditorClassIdentifier: 
   StatToChange: 0
-  ChangeAmount: 0
+  ChangeAmount: 25
 --- !u!114 &-2740243357450111576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,8 +57,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
   m_Name: Increase Stats
   m_EditorClassIdentifier: 
-  StatToChange: 0
-  ChangeAmount: 0
+  StatToChange: 2
+  ChangeAmount: 10
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,5 +91,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
   m_Name: Increase Stats
   m_EditorClassIdentifier: 
-  StatToChange: 0
-  ChangeAmount: 0
+  StatToChange: 3
+  ChangeAmount: 10
