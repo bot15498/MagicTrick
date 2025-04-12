@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89eab95026a0cfe4b984b4b122d36da8, type: 3}
+  m_Name: Cap5
+  m_EditorClassIdentifier: 
+  Actions:
+  - {fileID: 5940631082435147579}
+  DoesRandomAction: 0
+  PropName: 
+  Description: 
+  Image: {fileID: 0}
+  PreviousSlotActions: []
+  NextSlotActions: []
+  FixedSlotActions: []
+--- !u!114 &5940631082435147579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
+  m_Name: Increase Stats
+  m_EditorClassIdentifier: 
+  StatToChange: 0
+  ChangeAmount: 0
