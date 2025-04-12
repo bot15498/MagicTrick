@@ -5,13 +5,13 @@ using UnityEngine;
 public class AnimationManager : MonoBehaviour
 
 {
-
+    private GameManager gameManager;
 
     public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -23,6 +23,7 @@ public class AnimationManager : MonoBehaviour
 
     public void playAnimation(string animationName)
     {
+        gameManager.SetIsDoingAnimation(true);
         anim.Play(animationName);
         StartCoroutine(WaitForAnimation(animationName));
     }
@@ -42,5 +43,6 @@ public class AnimationManager : MonoBehaviour
     void TrickClipDone()
     {
         //Add stuff to scream at game manager
+        gameManager.SetIsDoingAnimation(false);
     }
 }

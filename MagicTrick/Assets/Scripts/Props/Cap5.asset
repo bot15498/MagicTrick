@@ -15,9 +15,9 @@ MonoBehaviour:
   Actions:
   - {fileID: 5940631082435147579}
   DoesRandomAction: 0
-  PropName: 
-  Description: 
-  Image: {fileID: 0}
+  PropName: Magic Wand
+  Description: +5 Captivation
+  Image: {fileID: 21300000, guid: 2dcd003017e211c4fb1a26fd727dcbfc, type: 3}
   PreviousSlotActions: []
   NextSlotActions: []
   FixedSlotActions: []
@@ -34,4 +34,4 @@ MonoBehaviour:
   m_Name: Increase Stats
   m_EditorClassIdentifier: 
   StatToChange: 0
-  ChangeAmount: 0
+  ChangeAmount: 5

@@ -21889,7 +21889,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &2000991870
 MonoBehaviour:
@@ -22066,8 +22066,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3986956d4040594469d2a29852eb1d99, type: 2}
   - {fileID: 11400000, guid: d083f15865677494f96ebce0e6a01ee0, type: 2}
   AllProps:
-  - {fileID: 11400000, guid: cfadfa24682d0f14fa66e05fc286296a, type: 2}
-  - {fileID: 11400000, guid: 3f5a2f15887e9014a99c1e500ee3414c, type: 2}
+  - {fileID: 11400000, guid: 99d113e8b8c031246b8c27bd08aed2ad, type: 2}
+  - {fileID: 11400000, guid: dd340736d19c31445a76d905d30747e3, type: 2}
 --- !u!114 &2000991877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22100,6 +22100,7 @@ GameObject:
   - component: {fileID: 2025435248}
   - component: {fileID: 2025435250}
   - component: {fileID: 2025435249}
+  - component: {fileID: 2025435251}
   m_Layer: 5
   m_Name: Trash
   m_TagString: Untagged
@@ -22164,6 +22165,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025435247}
   m_CullTransparentMesh: 1
+--- !u!114 &2025435251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025435247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740ffdb183b7a1343a1b8aff65072d49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2031056173
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,6 +45,10 @@ public class GameManager : MonoBehaviour
     private HorizontalCardHolder cardHolder;
     [SerializeField]
     private Button mulliganButton;
+    // Stuff for playing cards
+    private List<ActionContainer> currCardContainers = new List<ActionContainer>();
+    private int currCardContainerIndex = 0;
+    private bool isDoingAnimation = false;
     [Header("Trick slots and prop slots")]
     [SerializeField]
     private GameObject slot1;
@@ -97,6 +101,7 @@ public class GameManager : MonoBehaviour
     private ShopManager shopManager;
     public HistoryManager historyManager;
     public PropManagerGlobal propManagerGlobal;
+    public AnimationManager animationManager;
     private List<GameObject> slots;
     private List<GameObject> propSlots;
 
@@ -160,11 +165,14 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.ActPlayout:
                 // Play each card
-                PlayAllCards();
+                if(PlayAllCards())
+                {
+                    UpdateScoreFields();
+                    // Go to next 
+                    state = GameState.ActEnd;
+                }
                 // Update text
                 UpdateScoreFields();
-                // Go to next 
-                state = GameState.ActEnd;
                 break;
             case GameState.ActEnd:
                 // Send to discards
@@ -252,8 +260,33 @@ public class GameManager : MonoBehaviour
         currParty = party;
     }
 
-    private void PlayAllCards()
+    private bool PlayAllCards()
     {
+        // This returns true when all animations played and scores apply
+        if(currCardContainerIndex < currCardContainers.Count)
+        {
+            if(!isDoingAnimation)
+            {
+                // not waiting for anything, start animation
+                Card currCardObj = slots[currCardContainerIndex].GetComponentInChildren<Card>();
+                //animationManager.playAnimation(currCardObj.CardData.AnimationName);
+                // Play the card
+                scoreManager.ApplyToScore(currCardContainers[currCardContainerIndex], this);
+                // Now update the timeline
+                historyManager.slotTimelines[currCardContainerIndex].History[0] = currCardContainers[currCardContainerIndex];
+                historyManager.slotTimelines[currCardContainerIndex].AdvanceTime();
+                currCardContainerIndex++;
+            }
+            return false;
+        }
+        else
+        {
+            // Nothing left to do
+            currCardContainerIndex = 0;
+            return true;
+        }
+
+        // This method returns true when ready to proceed
         // Get the action container for each card, combine them, then calculate
         // what the new score would be. Return the new score.
         List<ActionContainer> currentSlotContainer = CreateCombinedContainer();
@@ -262,18 +295,29 @@ public class GameManager : MonoBehaviour
         {
             currentSlotContainer[i] = currentSlotContainer[i] + historyManager.slotTimelines[i].History[0];
         }
-        ActionContainer combined = new ActionContainer();
         foreach (ActionContainer actionContainer in currentSlotContainer)
         {
-            combined += actionContainer;
+            scoreManager.ApplyToScore(actionContainer, this);
         }
-        scoreManager.ApplyToScore(combined, this);
 
         // Now update the timeline
         for (int i = 0; i < historyManager.slotTimelines.Count; i++)
         {
             historyManager.slotTimelines[i].History[0] = currentSlotContainer[i];
             historyManager.slotTimelines[i].AdvanceTime();
+        }
+    }
+
+    private void SetupCardActionsToPlay()
+    {
+        // Get the action container for each card, combine them, then calculate
+        // what the new score would be. Return the new score.
+        currCardContainers.Clear();
+        currCardContainers = CreateCombinedContainer();
+        // Combine with anything thats currently in the history
+        for (int i = 0; i < historyManager.slotTimelines.Count; i++)
+        {
+            currCardContainers[i] = currCardContainers[i] + historyManager.slotTimelines[i].History[0];
         }
     }
 
@@ -442,6 +486,8 @@ public class GameManager : MonoBehaviour
 
     public void GoToPlayCards()
     {
+        // Set up the cards you are going to play
+        SetupCardActionsToPlay();
         state = GameState.ActPlayout;
     }
 
@@ -487,5 +533,10 @@ public class GameManager : MonoBehaviour
         additionalPayoutText.text = $"{scoreManager.additionalPayout}";
         additionalPayoutAddText.text = $"{Math.Abs(payoutToAdd)}";
         additionalPayoutSignText.text = payoutToAdd < 0 ? "-" : "+";
+    }
+
+    public void SetIsDoingAnimation(bool val)
+    {
+        isDoingAnimation = val;
     }
 }
