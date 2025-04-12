@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-142965391111775967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc303d2669c95a44f9041b53ed63c207, type: 3}
+  m_Name: Increase Stat If Stat Threshold is met
+  m_EditorClassIdentifier: 
+  StatToCheck: 0
+  CompareType: 4
+  Threshold: 0
+  StatToChange: 0
+  ChangeAmount: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89eab95026a0cfe4b984b4b122d36da8, type: 3}
+  m_Name: Payout10IfLiability5
+  m_EditorClassIdentifier: 
+  Actions:
+  - {fileID: -142965391111775967}
+  DoesRandomAction: 0
+  PropName: 
+  Description: 
+  Image: {fileID: 0}
+  PreviousSlotActions: []
+  NextSlotActions: []
+  FixedSlotActions: []

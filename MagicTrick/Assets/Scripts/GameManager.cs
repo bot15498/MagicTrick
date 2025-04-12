@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
     [Header("Shop stuff")]
     [SerializeField]
     private GameObject shopPanel;
-    private ScoreManager scoreManager;
+    public ScoreManager scoreManager;
     private DeckManager deckManager;
     private ShopManager shopManager;
     public HistoryManager historyManager;

@@ -128,5 +128,22 @@ public abstract class PlayableItem : ScriptableObject
         EditorUtility.SetDirty(this);
         EditorUtility.SetDirty(newaction);
     }
+    [ContextMenu("Increase Stat If Stat Matches Threshold")]
+    private void AddIncreaseStatIfThreshold()
+    {
+        IncreaseStatConditionalOtherStatAction newaction = CreateInstance<IncreaseStatConditionalOtherStatAction>();
+        newaction.name = "Increase Stat If Stat Threshold is met";
+        newaction.StatToCheck = Stats.Captivation;
+        newaction.CompareType = CompareType.Equal;
+        newaction.StatToChange = Stats.Captivation;
+        newaction.ChangeAmount = 0;
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
 #endif
 }
