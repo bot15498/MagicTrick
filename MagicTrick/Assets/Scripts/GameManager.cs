@@ -65,14 +65,14 @@ public class GameManager : MonoBehaviour
     private TMP_Text captivationText;
     [SerializeField]
     private TMP_Text captivationAddText;
-    [SerializeField]
-    private TMP_Text captivationSignText;
+    //[SerializeField]
+    //private TMP_Text captivationSignText;
     [SerializeField]
     private TMP_Text sleightOfHandText;
     [SerializeField]
     private TMP_Text sleightOfHandAddText;
-    [SerializeField]
-    private TMP_Text sleightOfHandSignText;
+    //[SerializeField]
+    //private TMP_Text sleightOfHandSignText;
     [SerializeField]
     private TMP_Text additionalPayoutText;
     [SerializeField]
@@ -446,14 +446,14 @@ public class GameManager : MonoBehaviour
         // Captivation
         long capToAdd = scoreManager.previewCaptivation - scoreManager.captivation;
         captivationText.text = $"{scoreManager.captivation}";
-        captivationAddText.text = $"{Math.Abs(capToAdd)}";
-        captivationSignText.text = capToAdd < 0 ? "-" : "+";
+        captivationAddText.text = capToAdd < 0 ? "-" : "+" + $"{Math.Abs(capToAdd)}";
+        //captivationSignText.text = capToAdd < 0 ? "-" : "+";
 
         // Sleight of hand
         double sohToadd = scoreManager.previewSleightOfHand - scoreManager.sleightOfHand;
         sleightOfHandText.text = scoreManager.sleightOfHand.ToString("0.##");
-        sleightOfHandAddText.text = Math.Abs(sohToadd).ToString("0.##");
-        sleightOfHandSignText.text = sohToadd < 0 ? "-" : "+";
+        sleightOfHandAddText.text = sohToadd < 0 ? "-" : "+" + Math.Abs(sohToadd).ToString("0.##");
+        //sleightOfHandSignText.text = sohToadd < 0 ? "-" : "+";
 
         // liability
         double liabilityToAdd = scoreManager.previewLiability - scoreManager.liability;
