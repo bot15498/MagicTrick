@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.ActPlayout:
                 // Play each card
-                if(PlayAllCards())
+                if (PlayAllCards())
                 {
                     UpdateScoreFields();
                     // Go to next 
@@ -213,6 +213,12 @@ public class GameManager : MonoBehaviour
                     deckManager.RefreshDeck();
                     // Update the prop inventory in the shop
                     propManagerGlobal.UpdateShopPropManager();
+                    // disable the propslots and inventory onthe table
+                    propManagerGlobal.PropTableManager.gameObject.SetActive(false);
+                    foreach (var propslot in propSlots)
+                    {
+                        propslot.SetActive(false);
+                    }
                     // Advance to the shop
                     currRound++;
                     if (currRound > maxRounds)
@@ -263,9 +269,9 @@ public class GameManager : MonoBehaviour
     private bool PlayAllCards()
     {
         // This returns true when all animations played and scores apply
-        if(currCardContainerIndex < currCardContainers.Count)
+        if (currCardContainerIndex < currCardContainers.Count)
         {
-            if(!isDoingAnimation)
+            if (!isDoingAnimation)
             {
                 // not waiting for anything, start animation
                 Card currCardObj = slots[currCardContainerIndex].GetComponentInChildren<Card>();
@@ -474,6 +480,11 @@ public class GameManager : MonoBehaviour
     {
         // Update the table props
         propManagerGlobal.UpdateTablePropManager();
+        propManagerGlobal.PropTableManager.gameObject.SetActive(true);
+        foreach (var propslot in propSlots)
+        {
+            propslot.SetActive(true);
+        }
         state = GameState.RoundStart;
         shopPanel.SetActive(false);
     }
