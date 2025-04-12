@@ -20226,7 +20226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1813789608
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21980,6 +21980,9 @@ MonoBehaviour:
   shopPanel: {fileID: 1813789607}
   historyManager: {fileID: 0}
   propManagerGlobal: {fileID: 0}
+  animationManager: {fileID: 0}
+  slots: []
+  propSlots: []
 --- !u!4 &2000991873
 Transform:
   m_ObjectHideFlags: 0
@@ -22068,6 +22071,8 @@ MonoBehaviour:
   AllProps:
   - {fileID: 11400000, guid: 99d113e8b8c031246b8c27bd08aed2ad, type: 2}
   - {fileID: 11400000, guid: dd340736d19c31445a76d905d30747e3, type: 2}
+  - {fileID: 11400000, guid: 679531df7b8e9b84db22041c5e9cdc3f, type: 2}
+  - {fileID: 11400000, guid: f2b6d091f114572438cd39e55fbcb055, type: 2}
 --- !u!114 &2000991877
 MonoBehaviour:
   m_ObjectHideFlags: 0

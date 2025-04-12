@@ -15,9 +15,9 @@ MonoBehaviour:
   Actions:
   - {fileID: 7434386230118037869}
   DoesRandomAction: 0
-  PropName: 
-  Description: 
-  Image: {fileID: 0}
+  PropName: Book of Puns
+  Description: + 15 Captivation if trick is Showmanship
+  Image: {fileID: 21300000, guid: 2dcd003017e211c4fb1a26fd727dcbfc, type: 3}
   PreviousSlotActions: []
   NextSlotActions: []
   FixedSlotActions: []
@@ -35,4 +35,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardTypeToLookFor: 0
   StatToChange: 0
-  ChangeAmount: 0
+  ChangeAmount: 15
