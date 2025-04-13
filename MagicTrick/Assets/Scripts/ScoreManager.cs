@@ -51,7 +51,7 @@ public class ScoreManager : MonoBehaviour
 
     }
 
-    public void UpdateMoney(int requiredScore)
+    public void UpdateMoney(long requiredScore)
     {
         money += CalculatePayout(requiredScore) - liability;
     }
@@ -83,7 +83,7 @@ public class ScoreManager : MonoBehaviour
         container.ApplyNonStatPostActions(gameManager);
     }
 
-    public long CalculatePayout(int requiredScore)
+    public long CalculatePayout(long requiredScore)
     {
         return additionalPayout + Mathf.FloorToInt((Score - requiredScore) / (requiredScore * payoutBonusFromScoreWeight));
     }

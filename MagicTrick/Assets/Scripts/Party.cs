@@ -9,6 +9,9 @@ using UnityEngine;
 public class Party : ScriptableObject
 {
     public string PartyName;
+    [TextArea(5,10)]
+    public string PartyDescription;
+    public Sprite PartyInvitationImage;
     public List<Round> Rounds = new List<Round>();
 
 #if UNITY_EDITOR
