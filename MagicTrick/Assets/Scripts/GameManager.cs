@@ -171,6 +171,7 @@ public class GameManager : MonoBehaviour
                 state = GameState.ActStart;
                 break;
             case GameState.ActStart:
+                partyManager.UpdateChildInfo(currRound - 1);
                 // Draw cards
                 canMulligan = true;
                 ResetCardSelection(canMulligan);
