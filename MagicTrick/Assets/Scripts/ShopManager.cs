@@ -9,9 +9,9 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    private long deleteCardCost = 2;
-    private long refreshPropCost = 2;
-    private long propCost = 5;
+    public long deleteCardCost = 2;
+    public long refreshPropCost = 2;
+    public long propCost = 5;
 
     [SerializeField]
     private GameObject CardSelectionPanel;
