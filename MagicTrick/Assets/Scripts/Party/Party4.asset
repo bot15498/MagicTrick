@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6557082496055862306
+--- !u!114 &-6436966499924179546
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,45 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoundName: Billy Billy
-  ScoreRequired: 200
-  Actions: []
-  RoundEffect: Subtracts 1 Sleight of Hand every Act
-  RoundImage: {fileID: 21300000, guid: 949a09f28ada17d49bbaed642104b6a1, type: 3}
---- !u!114 &-3003688645764081138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RoundName: Big Billy
-  ScoreRequired: 50
+  RoundName: 
+  ScoreRequired: 20000
   Actions: []
   RoundEffect: 
-  RoundImage: {fileID: 21300000, guid: 949a09f28ada17d49bbaed642104b6a1, type: 3}
---- !u!114 &-674464008326491576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RoundName: Beautiful Billy
-  ScoreRequired: 100
-  Actions: []
-  RoundEffect: 
-  RoundImage: {fileID: 21300000, guid: 72c7aecf07541d944865d00e72c61dd0, type: 3}
+  RoundImage: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,12 +27,46 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a7ceb4bb03838247b1c02d32a0cd972, type: 3}
-  m_Name: Billy
+  m_Name: Party4
   m_EditorClassIdentifier: 
-  PartyName: Billy's Big Birthday Bash
-  PartyDescription: come to billy
+  PartyName: 
+  PartyDescription: 
   PartyInvitationImage: {fileID: 0}
   Rounds:
-  - {fileID: -3003688645764081138}
-  - {fileID: -674464008326491576}
-  - {fileID: -6557082496055862306}
+  - {fileID: -6436966499924179546}
+  - {fileID: 7269092787248974413}
+  - {fileID: 5849265614398411352}
+--- !u!114 &5849265614398411352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RoundName: 
+  ScoreRequired: 60000
+  Actions: []
+  RoundEffect: 
+  RoundImage: {fileID: 0}
+--- !u!114 &7269092787248974413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RoundName: 
+  ScoreRequired: 40000
+  Actions: []
+  RoundEffect: 
+  RoundImage: {fileID: 0}
