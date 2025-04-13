@@ -26,7 +26,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Actions:
   - {fileID: -6091134592796729342}
+  DoesRandomAction: 0
   CardName: Nuke
   Description: nuke california
   Image: {fileID: 21300000, guid: beb4bbfd8131b6b4cba95a05ce89aab0, type: 3}
-  Type: 0
+  Type: 02000000
+  AnimationName: Magician_DisappearingAct

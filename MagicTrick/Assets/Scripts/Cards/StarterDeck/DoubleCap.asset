@@ -15,7 +15,7 @@ MonoBehaviour:
   Actions:
   - {fileID: 8904831308342224886}
   DoesRandomAction: 0
-  CardName: DoubleCap
+  CardName: Going All In
   Description: Double Current Captivation Amount
   Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
   Type: 00000000

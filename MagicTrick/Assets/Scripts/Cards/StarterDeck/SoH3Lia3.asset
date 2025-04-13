@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 729229654417844002}
   - {fileID: 3867667728383799941}
   DoesRandomAction: 0
-  CardName: SoH3Lia3
+  CardName: Bag of Tricks
   Description: +3 Sleight of Hand, +3 Liability
   Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
   Type: 0100000002000000

@@ -22525,7 +22525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1813789608
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22560,8 +22560,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.11, y: 0}
-  m_SizeDelta: {x: 2000, y: 2000}
+  m_AnchoredPosition: {x: -17.11, y: 1166}
+  m_SizeDelta: {x: 2000, y: 1200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1813789609
 MonoBehaviour:
@@ -24378,6 +24378,8 @@ MonoBehaviour:
   moneyText: {fileID: 897851463}
   moneyText2: {fileID: 1722983504}
   shopPanel: {fileID: 1813789607}
+  sideCurtain: {fileID: 0}
+  shopTransitionDuration: 0.5
   scoreManager: {fileID: 0}
   deckManager: {fileID: 0}
   historyManager: {fileID: 0}
@@ -24430,6 +24432,8 @@ MonoBehaviour:
   CardSelectionPanel: {fileID: 916298002}
   CardRemovePanel: {fileID: 31126313}
   CardRemoveButton: {fileID: 342268774}
+  shopPanel: {fileID: 0}
+  uiCurtain: {fileID: 0}
   CardSlots:
   - {fileID: 678969759}
   - {fileID: 1128721356}

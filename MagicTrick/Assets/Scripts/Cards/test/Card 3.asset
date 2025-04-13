@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Actions:
   - {fileID: 5882360132779425188}
+  DoesRandomAction: 0
   CardName: tummy sunday
   Description: my tummy hurt
   Image: {fileID: 21300000, guid: 4dcd9b489306411459fa9cd6216ea2c7, type: 3}
-  Type: 0
+  Type: 01000000
+  AnimationName: Magician_Incentive
 --- !u!114 &5882360132779425188
 MonoBehaviour:
   m_ObjectHideFlags: 0

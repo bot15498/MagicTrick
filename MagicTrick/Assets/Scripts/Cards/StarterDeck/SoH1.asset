@@ -33,4 +33,4 @@ MonoBehaviour:
   Description: +1 Sleight of Hand
   Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
   Type: 01000000
-  AnimationName: 
+  AnimationName: Magician_RollingUpSleeves

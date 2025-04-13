@@ -2,8 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum GameState
@@ -47,8 +50,14 @@ public class GameManager : MonoBehaviour
     private Button mulliganButton;
     // Stuff for playing cards
     private List<ActionContainer> currCardContainers = new List<ActionContainer>();
+    [SerializeField]
     private int currCardContainerIndex = 0;
+    [SerializeField]
     private bool isDoingAnimation = false;
+    [SerializeField]
+    private float elapsedTime = 0f;
+    [SerializeField]
+    private float maxAnimationElapsedTime = 7f;
     [Header("Trick slots and prop slots")]
     [SerializeField]
     private GameObject slot1;
@@ -96,6 +105,16 @@ public class GameManager : MonoBehaviour
     [Header("Shop stuff")]
     [SerializeField]
     private GameObject shopPanel;
+    [SerializeField]
+    private GameObject sideCurtain;
+    [SerializeField]
+    private float shopTransitionDuration;
+    private bool didShopUpdate = false;
+    [SerializeField]
+    private GameObject gameOverPanel;
+    [SerializeField]
+    private float gameOverTransitionDuration = 0.5f;
+    private bool calledYouLose = false;
     public ScoreManager scoreManager;
     public DeckManager deckManager;
     private ShopManager shopManager;
@@ -148,6 +167,7 @@ public class GameManager : MonoBehaviour
                 scoreManager.ResetStats();
                 deckManager.RefreshDeck();
                 partyManager.UpdateChildInfo(currRound - 1);
+                historyManager.ClearSlotTimelines();
                 state = GameState.ActStart;
                 break;
             case GameState.ActStart:
@@ -217,14 +237,6 @@ public class GameManager : MonoBehaviour
                     // Send your hand to your discards.
                     SendHandToDiscard();
                     deckManager.RefreshDeck();
-                    // Update the prop inventory in the shop
-                    propManagerGlobal.UpdateShopPropManager();
-                    // disable the propslots and inventory onthe table
-                    propManagerGlobal.PropTableManager.gameObject.SetActive(false);
-                    foreach (var propslot in propSlots)
-                    {
-                        propslot.SetActive(false);
-                    }
                     // Advance to the shop
                     currRound++;
                     if (currRound > maxRounds)
@@ -243,14 +255,45 @@ public class GameManager : MonoBehaviour
                 // Show the shop
                 if (!shopPanel.activeSelf)
                 {
+                    // REactive shop
+                    propManagerGlobal.PropShopManager.SetPropContainerActive(true);
+                    propManagerGlobal.PropShopManager.ClearProps();
+                    // Tween it in. When it gets halfway down, then update shop 
+                    var tween = shopPanel.transform.DOLocalMoveY(0f, shopTransitionDuration);
+                    tween.OnUpdate(() =>
+                    {
+                        if (!didShopUpdate && tween.position > shopTransitionDuration/2)
+                        {
+                            // Update the prop inventory in the shop
+                            //propManagerGlobal.UpdateShopPropManager();
+                            // disable the propslots and inventory onthe table
+                            propManagerGlobal.PropTableManager.gameObject.SetActive(false);
+                            foreach (var propslot in propSlots)
+                            {
+                                propslot.SetActive(false);
+                            }
+                            //shopManager.RefreshPropShop(doForFree: true);
+                            didShopUpdate = true;
+                        }
+                        else if (didShopUpdate && tween.position > shopTransitionDuration / 2)
+                        {
+                            propManagerGlobal.PropShopManager.ForceUpdatePropVisual();
+                        }
+                    });
+                    tween.OnComplete(() =>
+                    {
+                        //// Update the prop inventory in the shop
+                        propManagerGlobal.UpdateShopPropManager();
+                        shopManager.RefreshPropShop(doForFree: true);
+                        didShopUpdate = false;
+                    });
                     shopPanel.SetActive(true);
-                    shopManager.RefreshPropShop(doForFree: true);
                 }
                 // Pull the curtain down
                 break;
             case GameState.PartyEnd:
                 // Should this be a party summary?
-                if(partyManager.NextParty())
+                if (partyManager.NextParty())
                 {
                     // go next
                     state = GameState.PartyStart;
@@ -263,6 +306,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.GameOver:
                 Debug.Log("YOU LOSE");
+                YouLose();
                 break;
             case GameState.YouWin:
                 Debug.Log("YOU WIN");
@@ -284,14 +328,26 @@ public class GameManager : MonoBehaviour
 
     private bool PlayAllCards()
     {
+        elapsedTime += Time.deltaTime;
         // This returns true when all animations played and scores apply
-        if (currCardContainerIndex < currCardContainers.Count)
+        if (currCardContainerIndex < currCardContainers.Count || isDoingAnimation)
         {
             if (!isDoingAnimation)
             {
+                elapsedTime = 0f;
+                isDoingAnimation = true;
                 // not waiting for anything, start animation
                 Card currCardObj = slots[currCardContainerIndex].GetComponentInChildren<Card>();
-                //animationManager.playAnimation(currCardObj.CardData.AnimationName);
+                if(currCardObj != null)
+                {
+                    animationManager.playAnimation(currCardObj.CardData.AnimationName);
+                    Debug.Log(currCardObj.CardData.AnimationName);
+                }
+                else
+                {
+                    // Nothing to do.
+                    isDoingAnimation = false;
+                }
                 // Play the card
                 scoreManager.ApplyToScore(currCardContainers[currCardContainerIndex], this);
                 // Now update the timeline
@@ -299,12 +355,19 @@ public class GameManager : MonoBehaviour
                 historyManager.slotTimelines[currCardContainerIndex].AdvanceTime();
                 currCardContainerIndex++;
             }
+            else if(elapsedTime >= maxAnimationElapsedTime)
+            {
+                // took too long
+                elapsedTime = 0f;
+                isDoingAnimation = false;
+            }
             return false;
         }
         else
         {
             // Nothing left to do
             currCardContainerIndex = 0;
+            animationManager.playAnimation("Magician_Idle");
             return true;
         }
     }
@@ -320,6 +383,9 @@ public class GameManager : MonoBehaviour
         {
             currCardContainers[i] = currCardContainers[i] + historyManager.slotTimelines[i].History[0];
         }
+        // Clear animation stuff
+        elapsedTime = 0f;
+        isDoingAnimation = false;
     }
 
     private void PreviewAllCards()
@@ -496,15 +562,31 @@ public class GameManager : MonoBehaviour
 
     public void LeaveShop()
     {
-        // Update the table props
-        propManagerGlobal.UpdateTablePropManager();
-        propManagerGlobal.PropTableManager.gameObject.SetActive(true);
-        foreach (var propslot in propSlots)
+        // Start tweening out
+        didShopUpdate = false;
+        var tween = shopPanel.transform.DOLocalMoveY(1166f, shopTransitionDuration);
+        tween.OnUpdate(() =>
         {
-            propslot.SetActive(true);
-        }
-        state = GameState.RoundStart;
-        shopPanel.SetActive(false);
+            if(!didShopUpdate && tween.position >= shopTransitionDuration / 2)
+            {
+                // Update the table props
+                propManagerGlobal.UpdateTablePropManager();
+                propManagerGlobal.PropTableManager.gameObject.SetActive(true);
+                foreach (var propslot in propSlots)
+                {
+                    propslot.SetActive(true);
+                }
+                // Hide all the shop prop slots
+                propManagerGlobal.PropShopManager.SetPropContainerActive(false);
+                state = GameState.RoundStart;
+                didShopUpdate = true;
+            }
+        });
+        tween.OnComplete(() =>
+        {
+            didShopUpdate = false;
+            shopPanel.SetActive(false);
+        });
     }
 
     public void SetSlotEnable(int slot, bool isEnabled)
@@ -532,13 +614,13 @@ public class GameManager : MonoBehaviour
 
         // liability
         double liabilityToAdd = scoreManager.previewLiability - scoreManager.liability;
-        liabilityText.text = $"{scoreManager.liability:n0}";
+        liabilityText.text = $"${scoreManager.liability:n0}";
         liabilityAddText.text = $"{Math.Abs(liabilityToAdd):n0}";
         liabilitySignText.text = liabilityToAdd < 0 ? "-" : "+";
 
         // payout
         double payoutToAdd = scoreManager.previewAdditionalPayout - scoreManager.additionalPayout;
-        additionalPayoutText.text = $"{scoreManager.additionalPayout:n0}";
+        additionalPayoutText.text = $"${scoreManager.additionalPayout:n0}";
         additionalPayoutAddText.text = $"{Math.Abs(payoutToAdd):n0}";
         additionalPayoutSignText.text = payoutToAdd < 0 ? "-" : "+";
     }
@@ -553,4 +635,24 @@ public class GameManager : MonoBehaviour
         partyManager.HideInviteScreen();
         state = GameState.RoundStart;
     }
+
+    public void YouLose()
+    {
+        if(!calledYouLose)
+        {
+            gameOverPanel.SetActive(true);
+            gameOverPanel.transform.DOMoveY(0f, gameOverTransitionDuration);
+            calledYouLose = true;
+        }
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    //private IEnumerator UpdateNumericalText(TMP_Text textui, long valToChangeTo, bool includeSign)
+    //{
+    //    long startVal = long.Parse
+    //}
 }

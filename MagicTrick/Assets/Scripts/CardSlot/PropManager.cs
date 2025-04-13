@@ -144,4 +144,48 @@ public class PropManager : MonoBehaviour
         }
         return toreturn;
     }
+
+    public void SetPropContainerActive(bool isActive)
+    {
+        foreach (var propslot in propSlots)
+        {
+            propslot.gameObject.SetActive(isActive);
+            if (!isActive)
+            {
+                foreach (var slot in propSlots)
+                {
+                    if (slot.CurrentProp != null)
+                    {
+                        GameObject propobj = slot.CurrentProp.gameObject;
+                        Destroy(propobj);
+                    }
+                }
+            }
+        }
+    }
+
+    public void ForceUpdatePropVisual()
+    {
+        foreach (var propslot in propSlots)
+        {
+            if(propslot.CurrentProp != null)
+            {
+                propslot.CurrentProp.propVisual.transform.position = propslot.CurrentProp.transform.position;
+            }
+        }
+    }
+
+    public void ClearProps()
+    {
+        // Clear out the current props
+        for (int i = 0; i < propSlots.Count; i++)
+        {
+            if (propSlots[i].CurrentProp != null)
+            {
+                GameObject propobj = propSlots[i].CurrentProp.gameObject;
+                Destroy(propobj);
+            }
+            propSlots[i].ClearSlot();
+        }
+    }
 }

@@ -21,6 +21,14 @@ public class HistoryManager : MonoBehaviour
     {
 
     }
+
+    public void ClearSlotTimelines()
+    {
+        foreach (SlotTimeline timeline in slotTimelines)
+        {
+            timeline.ClearTimeline();
+        }
+    }
 }
 
 public class SlotTimeline
@@ -61,4 +69,9 @@ public class SlotTimeline
         }
     }
 
+    public void ClearTimeline()
+    {
+        History.Clear();
+        History[0] = new ActionContainer();
+    }
 }

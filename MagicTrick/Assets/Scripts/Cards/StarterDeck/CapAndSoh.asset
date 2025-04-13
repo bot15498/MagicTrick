@@ -30,7 +30,7 @@ MonoBehaviour:
   - {fileID: 6081190005430331806}
   - {fileID: -3766052734733114444}
   DoesRandomAction: 0
-  CardName: CapAndSoh
+  CardName: Showboat
   Description: +5 Captivation, +0.5 Sleight of Hand
   Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
   Type: 0000000001000000

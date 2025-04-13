@@ -19,6 +19,9 @@ public class ShopManager : MonoBehaviour
     private GameObject CardRemovePanel;
     [SerializeField]
     private Button CardRemoveButton;
+    [Header("UI stuff")]
+    public GameObject shopPanel;
+    public GameObject uiCurtain;
     [Header("card stuff")]
     [SerializeField]
     private List<GameObject> CardSlots = new List<GameObject>();
@@ -159,7 +162,7 @@ public class ShopManager : MonoBehaviour
 
     public void RefreshPropShop(bool doForFree = false)
     {
-        if(!doForFree)
+        if (!doForFree)
         {
             scoreManager.money -= refreshPropCost;
         }

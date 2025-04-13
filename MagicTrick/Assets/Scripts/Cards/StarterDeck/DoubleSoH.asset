@@ -15,7 +15,7 @@ MonoBehaviour:
   Actions:
   - {fileID: 3381631004508806608}
   DoesRandomAction: 0
-  CardName: Double SoH
+  CardName: Going All In
   Description: Double Sleight of Hand
   Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
   Type: 01000000
