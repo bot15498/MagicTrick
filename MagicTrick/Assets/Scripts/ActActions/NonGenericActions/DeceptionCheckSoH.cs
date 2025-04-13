@@ -12,7 +12,7 @@ public class DeceptionCheckSoH : ActAction
             Card currcard = cardslot.GetComponentInChildren<Card>();
             if(currcard != null)
             {
-                if(currcard.CardData.Type == CardType.Deception)
+                if(currcard.CardData.Type.Contains(CardType.Deception))
                 {
                     numDeceptionCards++;
                 }

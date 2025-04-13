@@ -145,6 +145,48 @@ public abstract class PlayableItem : ScriptableObject
         EditorUtility.SetDirty(this);
         EditorUtility.SetDirty(newaction);
     }
+    [ContextMenu("Add Action To Future Act")]
+    private void AddFutureActAction()
+    {
+        AddToFutureActAction newaction = CreateInstance<AddToFutureActAction>();
+        newaction.name = "Increase Stat If Stat Threshold is met";
+        newaction.RelativeFutureStep = 1;
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("Add Action if All Slots Filled")]
+    private void AddAllSlotsFilledAction()
+    {
+        AllSlotsFilledAction newaction = CreateInstance<AllSlotsFilledAction>();
+        newaction.name = "Do Action if All Slots filled";
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("Increase Stat Based On Cards in Deck")]
+    private void AddIncreaseStatBasedOnRemainingCards()
+    {
+        IncreaseStatBasedOnDeckAction newaction = CreateInstance<IncreaseStatBasedOnDeckAction>();
+        newaction.name = "Do Action if All Slots filled";
+        newaction.StatToChange = Stats.Captivation;
+        newaction.SleightOfHandScaleFactor = 0.05;
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
     [ContextMenu("SPECIFIC: Halve Liability -> Captivation")]
     private void AddHalveLiabilityToCaptivation()
     {
@@ -163,6 +205,19 @@ public abstract class PlayableItem : ScriptableObject
     {
         DeceptionCheckSoH newaction = CreateInstance<DeceptionCheckSoH>();
         newaction.name = "Add 4 SoH If 2+ Deception Cards";
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("SPECIFIC: Copy Last Act's Trick")]
+    private void AddCopyLastTrick()
+    {
+        CopyPreviousAction newaction = CreateInstance<CopyPreviousAction>();
+        newaction.name = "Add Copy Last Trick In This Slot";
 
         Actions.Add(newaction);
 

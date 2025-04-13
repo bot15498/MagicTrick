@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject shopPanel;
     public ScoreManager scoreManager;
-    private DeckManager deckManager;
+    public DeckManager deckManager;
     private ShopManager shopManager;
     public HistoryManager historyManager;
     public PropManagerGlobal propManagerGlobal;
@@ -265,7 +265,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("YOU LOSE");
                 break;
             case GameState.YouWin:
-                Debug.Log("YOU LOSE");
+                Debug.Log("YOU WIN");
                 break;
         }
 
@@ -537,7 +537,7 @@ public class GameManager : MonoBehaviour
         liabilitySignText.text = liabilityToAdd < 0 ? "-" : "+";
 
         // payout
-        double payoutToAdd = scoreManager.additionalPayout - scoreManager.previewAdditionalPayout;
+        double payoutToAdd = scoreManager.previewAdditionalPayout - scoreManager.additionalPayout;
         additionalPayoutText.text = $"{scoreManager.additionalPayout:n0}";
         additionalPayoutAddText.text = $"{Math.Abs(payoutToAdd):n0}";
         additionalPayoutSignText.text = payoutToAdd < 0 ? "-" : "+";

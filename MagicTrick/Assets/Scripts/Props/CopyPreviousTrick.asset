@@ -9,18 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2efa998ea87a49943b089a64c81492ff, type: 3}
-  m_Name: Pay5
+  m_Script: {fileID: 11500000, guid: 89eab95026a0cfe4b984b4b122d36da8, type: 3}
+  m_Name: CopyPreviousTrick
   m_EditorClassIdentifier: 
   Actions:
-  - {fileID: 8987642764800288434}
+  - {fileID: 6273838695004797148}
   DoesRandomAction: 0
-  CardName: Incentive
-  Description: +5 Payout
-  Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
-  Type: 03000000
-  AnimationName: 
---- !u!114 &8987642764800288434
+  PropName: Dual Aces
+  Description: Play the trick from the previous turn
+  Image: {fileID: 21300000, guid: 2dcd003017e211c4fb1a26fd727dcbfc, type: 3}
+  PreviousSlotActions: []
+  NextSlotActions: []
+  FixedSlotActions: []
+--- !u!114 &6273838695004797148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29,8 +30,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
-  m_Name: Increase Stats
+  m_Script: {fileID: 11500000, guid: c2543a87492f2d44da745f5a9352d1e7, type: 3}
+  m_Name: Add Copy Last Trick In This Slot
   m_EditorClassIdentifier: 
-  StatToChange: 2
-  ChangeAmount: 5

@@ -29,7 +29,8 @@ MonoBehaviour:
   Actions:
   - {fileID: -4525109663874705881}
   DoesRandomAction: 0
-  CardName: Cap10
-  Description: Increase Captivation by 10
+  CardName: Making an Entrance
+  Description: +10 Captivation
   Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
-  Type: 0
+  Type: 00000000
+  AnimationName: 

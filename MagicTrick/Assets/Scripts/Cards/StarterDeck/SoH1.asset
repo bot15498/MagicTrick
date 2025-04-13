@@ -29,7 +29,8 @@ MonoBehaviour:
   Actions:
   - {fileID: -5135065333407811889}
   DoesRandomAction: 0
-  CardName: SoH 1
-  Description: Increase Sleight of Hand by 1
+  CardName: Rolling up Sleeves
+  Description: +1 Sleight of Hand
   Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
-  Type: 1
+  Type: 01000000
+  AnimationName: 

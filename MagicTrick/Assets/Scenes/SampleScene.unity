@@ -22456,6 +22456,7 @@ MonoBehaviour:
   moneyText2: {fileID: 1722983504}
   shopPanel: {fileID: 1813789607}
   scoreManager: {fileID: 0}
+  deckManager: {fileID: 0}
   historyManager: {fileID: 0}
   propManagerGlobal: {fileID: 0}
   animationManager: {fileID: 807227220}
@@ -22535,25 +22536,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AllCards:
+  - {fileID: 11400000, guid: de54d8db24be4064f81c4bde5224e9f6, type: 2}
   - {fileID: 11400000, guid: ab2a13935bffc3147875c244d1535057, type: 2}
   - {fileID: 11400000, guid: de934f20f834c84438a89c4ffea82d2b, type: 2}
   - {fileID: 11400000, guid: 65c8cd2815c086b42ac89a3a754eb613, type: 2}
   - {fileID: 11400000, guid: a96103b6e56118d4381346cab61b654c, type: 2}
   - {fileID: 11400000, guid: 6a3c8e15a2c302f4dbdfd2a97dfa054c, type: 2}
+  - {fileID: 11400000, guid: 90c1e7ee6a9e5134795f9ce5486e989f, type: 2}
   - {fileID: 11400000, guid: e90f8b8422c7f674ea29ecba8ce7727f, type: 2}
   - {fileID: 11400000, guid: 43a838927d2700d489171ab95a8fa87a, type: 2}
   - {fileID: 11400000, guid: 73ee7e6926bb2284da08e1b2e0b16d46, type: 2}
   - {fileID: 11400000, guid: 6247ef152de917f4ea57605709ae7aac, type: 2}
   - {fileID: 11400000, guid: 3986956d4040594469d2a29852eb1d99, type: 2}
   - {fileID: 11400000, guid: d083f15865677494f96ebce0e6a01ee0, type: 2}
+  - {fileID: 11400000, guid: b56240abc0804fa4cb16f2776ffbb9c0, type: 2}
+  - {fileID: 11400000, guid: c19f09e06a1447642aeb3f41fb9bf1f5, type: 2}
   AllProps:
+  - {fileID: 11400000, guid: 1a983d05cc533174d8ac437eecdc4e98, type: 2}
   - {fileID: 11400000, guid: 99d113e8b8c031246b8c27bd08aed2ad, type: 2}
+  - {fileID: 11400000, guid: f2b6d091f114572438cd39e55fbcb055, type: 2}
+  - {fileID: 11400000, guid: fb7db6b3be2f77a4bab8bab2b01b8b0e, type: 2}
+  - {fileID: 11400000, guid: bdfd685655b14fc4291d25935019657b, type: 2}
+  - {fileID: 11400000, guid: 7b4c3c29eb182f9479b533738dcdbc91, type: 2}
+  - {fileID: 11400000, guid: eba4625e30e52894da681e04cc55edd4, type: 2}
   - {fileID: 11400000, guid: dd340736d19c31445a76d905d30747e3, type: 2}
   - {fileID: 11400000, guid: 679531df7b8e9b84db22041c5e9cdc3f, type: 2}
-  - {fileID: 11400000, guid: f2b6d091f114572438cd39e55fbcb055, type: 2}
-  - {fileID: 11400000, guid: eba4625e30e52894da681e04cc55edd4, type: 2}
-  - {fileID: 11400000, guid: 7b4c3c29eb182f9479b533738dcdbc91, type: 2}
-  - {fileID: 11400000, guid: bdfd685655b14fc4291d25935019657b, type: 2}
 --- !u!114 &2000991877
 MonoBehaviour:
   m_ObjectHideFlags: 0

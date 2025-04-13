@@ -20,7 +20,7 @@ public class IncreaseStatConditionalCardAction : ActAction
                     Card currCardObj = manager.slots[slot].GetComponentInChildren<Card>();
                     if(currCardObj != null)
                     {
-                        return currCardObj.CardData.Type == CardTypeToLookFor ? x + (long)ChangeAmount : x;
+                        return currCardObj.CardData.Type.Contains(CardTypeToLookFor) ? x + (long)ChangeAmount : x;
                     }
                     else
                     {
@@ -34,7 +34,7 @@ public class IncreaseStatConditionalCardAction : ActAction
                     Card currCardObj = manager.slots[slot].GetComponentInChildren<Card>();
                     if (currCardObj != null)
                     {
-                        return currCardObj.CardData.Type == CardTypeToLookFor ? x + ChangeAmount : x;
+                        return currCardObj.CardData.Type.Contains(CardTypeToLookFor) ? x + ChangeAmount : x;
                     }
                     else
                     {
@@ -48,7 +48,7 @@ public class IncreaseStatConditionalCardAction : ActAction
                     Card currCardObj = manager.slots[slot].GetComponentInChildren<Card>();
                     if (currCardObj != null)
                     {
-                        return currCardObj.CardData.Type == CardTypeToLookFor ? x + (long)ChangeAmount : x;
+                        return currCardObj.CardData.Type.Contains(CardTypeToLookFor) ? x + (long)ChangeAmount : x;
                     }
                     else
                     {
@@ -62,7 +62,7 @@ public class IncreaseStatConditionalCardAction : ActAction
                     Card currCardObj = manager.slots[slot].GetComponentInChildren<Card>();
                     if (currCardObj != null)
                     {
-                        return currCardObj.CardData.Type == CardTypeToLookFor ? x + (long)ChangeAmount : x;
+                        return currCardObj.CardData.Type.Contains(CardTypeToLookFor) ? x + (long)ChangeAmount : x;
                     }
                     else
                     {
