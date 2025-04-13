@@ -36,10 +36,10 @@ MonoBehaviour:
   Description: 'If in 1st slot, +10 Captivation<br>
 
     If in 2nd slot, +1 Sleight
-    of Hand
+    of Hand<br>
 
     If in 3rd slot, +10 Payout'
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 4dd230f634f280f4cb720e26d1537316, type: 3}
   Type: 
   AnimationName: 
 --- !u!114 &1605935545850525168

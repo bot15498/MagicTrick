@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2efa998ea87a49943b089a64c81492ff, type: 3}
-  m_Name: Pay5
+  m_Name: GrandmaDisappear
   m_EditorClassIdentifier: 
   Actions:
-  - {fileID: 8987642764800288434}
+  - {fileID: 6928661774292661579}
   DoesRandomAction: 0
-  CardName: Incentive
-  Description: +5 Payout
-  Image: {fileID: 21300000, guid: c430e52639e4b79478f029e7cb83cc39, type: 3}
-  Type: 03000000
-  AnimationName: Magician_Incentive
---- !u!114 &8987642764800288434
+  CardName: Summon Grandma
+  Description: +50 Liability
+  Image: {fileID: 0}
+  Type: 
+  AnimationName: 
+--- !u!114 &6928661774292661579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -32,5 +32,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
   m_Name: Increase Stats
   m_EditorClassIdentifier: 
-  StatToChange: 2
-  ChangeAmount: 5
+  StatToChange: 3
+  ChangeAmount: 50

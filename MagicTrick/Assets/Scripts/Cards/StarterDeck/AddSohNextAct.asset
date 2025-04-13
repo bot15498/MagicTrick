@@ -31,7 +31,7 @@ MonoBehaviour:
   DoesRandomAction: 0
   CardName: Misdirection
   Description: +2 Sleight of Hand on the next act
-  Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
+  Image: {fileID: 21300000, guid: e286e83e2b4335542aad7311810b4c54, type: 3}
   Type: 01000000
   AnimationName: 
 --- !u!114 &8875846595897751822

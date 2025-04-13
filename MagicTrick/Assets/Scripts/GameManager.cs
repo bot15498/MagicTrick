@@ -617,7 +617,8 @@ public class GameManager : MonoBehaviour
 
         // Captivation
         long capToAdd = scoreManager.previewCaptivation - scoreManager.captivation;
-        captivationText.text = $"{scoreManager.captivation:n0}";
+        //captivationText.text = $"{scoreManager.captivation:n0}";
+        captivationText.GetComponent<IncrementNumberText>().TargetValue = scoreManager.captivation;
         captivationAddText.text = capToAdd < 0 ? "-" : "+" + $"{Math.Abs(capToAdd):n0}";
         //captivationSignText.text = capToAdd < 0 ? "-" : "+";
 

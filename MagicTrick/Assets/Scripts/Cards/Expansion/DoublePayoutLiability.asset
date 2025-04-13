@@ -46,6 +46,6 @@ MonoBehaviour:
   DoesRandomAction: 0
   CardName: Bank of Baphomet
   Description: x2 Payout and x2 Liability
-  Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
+  Image: {fileID: 21300000, guid: af31adb4b8680df43a6fc73cbe3d414d, type: 3}
   Type: 0200000003000000
   AnimationName: 

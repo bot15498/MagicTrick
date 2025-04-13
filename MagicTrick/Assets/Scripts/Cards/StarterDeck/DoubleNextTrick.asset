@@ -45,6 +45,6 @@ MonoBehaviour:
   DoesRandomAction: 0
   CardName: Encore
   Description: Double the next Act's Trick in this slot.
-  Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
+  Image: {fileID: 21300000, guid: da3d41943ced44944ada3b1fdd14c59f, type: 3}
   Type: 00000000
   AnimationName: 

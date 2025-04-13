@@ -18,7 +18,7 @@ MonoBehaviour:
   DoesRandomAction: 0
   CardName: Bag of Tricks
   Description: +3 Sleight of Hand, +3 Liability
-  Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
+  Image: {fileID: 21300000, guid: 6d08781524294a2488d599518644b122, type: 3}
   Type: 0100000002000000
   AnimationName: 
 --- !u!114 &729229654417844002

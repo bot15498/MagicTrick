@@ -31,6 +31,6 @@ MonoBehaviour:
   DoesRandomAction: 0
   CardName: Making an Entrance
   Description: +10 Captivation
-  Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
+  Image: {fileID: 21300000, guid: f806e75bda3371447944f2212b763295, type: 3}
   Type: 00000000
   AnimationName: Magician_MakingAnEntrance

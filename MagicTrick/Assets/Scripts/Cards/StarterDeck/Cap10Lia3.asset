@@ -18,7 +18,7 @@ MonoBehaviour:
   DoesRandomAction: 0
   CardName: Disappearing Act
   Description: +10 Captivation, +3 Liability
-  Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
+  Image: {fileID: 21300000, guid: 0979d01b646561a4da6c8539de2603d6, type: 3}
   Type: 0000000002000000
   AnimationName: Magician_DisappearingAct
 --- !u!114 &1022588221287161163
