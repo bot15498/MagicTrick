@@ -63,6 +63,9 @@ ShaderVariantCollection:
       variants:
       - keywords: 
         passType: 0
+  - first: {fileID: 4800000, guid: 6ad1e8d49c3a0400cbbe4426084594c1, type: 3}
+    second:
+      variants: []
   - first: {fileID: 4800000, guid: 65df88701913c224d95fc554db28381a, type: 3}
     second:
       variants:

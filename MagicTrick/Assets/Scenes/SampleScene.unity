@@ -2164,6 +2164,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 176428521}
   m_CullTransparentMesh: 1
+--- !u!1 &176967754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 176967756}
+  - component: {fileID: 176967755}
+  m_Layer: 0
+  m_Name: CameraPivot (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &176967755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176967754}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0717b4fb631d34d44a07d1b42a6b73ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mouseSensitivity: 4
+  _rotationSpeed: 5
+--- !u!4 &176967756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176967754}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.09904577, y: 0.8923991, z: -0.23911765, w: 0.36964378}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 226281207}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 135, z: 0}
 --- !u!1 &179862677
 GameObject:
   m_ObjectHideFlags: 0
@@ -3133,6 +3180,89 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224362873}
   m_CullTransparentMesh: 1
+--- !u!1 &226281206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 226281207}
+  - component: {fileID: 226281208}
+  m_Layer: 0
+  m_Name: MainCamera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &226281207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226281206}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.4, y: 6.1, z: -109.890114}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 176967756}
+  m_LocalEulerAnglesHint: {x: 3.025, y: -1.27, z: -2.851}
+--- !u!20 &226281208
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226281206}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.3137255, g: 0.39215687, b: 0.49019608, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.01
+  far clip plane: 219.78023
+  field of view: 60
+  orthographic: 1
+  orthographic size: 10.989011
+  m_Depth: 2
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &238332122
 GameObject:
   m_ObjectHideFlags: 0
@@ -21606,12 +21736,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grassLayer:
-    serializedVersion: 2
     m_Bits: 64
   _grassMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
   _material: {fileID: 2100000, guid: 6ddce44f4f36c4cf08fffc923d8c1955, type: 2}
   _density: 2
   _seed: 42
+  _meshGenerator: {fileID: 0}
   chunkCount: 3
 --- !u!114 &1699851550
 MonoBehaviour:
@@ -21626,12 +21756,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grassLayer:
-    serializedVersion: 2
     m_Bits: 8
   _grassMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
   _material: {fileID: 2100000, guid: 49e81b630d20c6b4c85503e861b8aa5b, type: 2}
   _density: 0.1
   _seed: 42
+  _meshGenerator: {fileID: 0}
   chunkCount: 3
 --- !u!64 &1699851551
 MeshCollider:
@@ -24970,6 +25100,7 @@ MonoBehaviour:
   animationManager: {fileID: 807227220}
   slots: []
   propSlots: []
+  reloadDelay: 0.1
 --- !u!4 &2000991873
 Transform:
   m_ObjectHideFlags: 0
@@ -26603,6 +26734,7 @@ SceneRoots:
   - {fileID: 807227219}
   - {fileID: 557551027}
   - {fileID: 1974216609}
+  - {fileID: 176967756}
   - {fileID: 955904045}
   - {fileID: 556952597}
   - {fileID: 2000991873}
