@@ -2,6 +2,7 @@
 using UnityEditor;
 #endif
 using UnityEngine;
+using System.Collections;
 using static System.Runtime.InteropServices.Marshal;
 
 [RequireComponent(typeof(MeshSurfaceSampler))]
@@ -20,6 +21,7 @@ public class LeafInstancer : MonoBehaviour
     ComputeBuffer leafBuffer;
 
     const int commandCount = 1;
+    bool isGenerated = false;
 
     struct LeafData
     {
@@ -30,6 +32,9 @@ public class LeafInstancer : MonoBehaviour
     void OnEnable()
     {
         Setup();
+        isGenerated = false;
+        StartCoroutine(WaitUntilReadyAndGenerate());
+
     }
 
     void OnDisable()
@@ -38,23 +43,34 @@ public class LeafInstancer : MonoBehaviour
         commandBuffer = null;
         leafBuffer?.Release();
         leafBuffer = null;
+        isGenerated = false;
     }
 
     void Setup()
     {
         _meshSurfaceSampler = GetComponent<MeshSurfaceSampler>();
         if (_meshSurfaceSampler == null)
-            Debug.LogError("MeshGenerator is null");
-
-        var meshRenderer = GetComponent<MeshRenderer>();
-        if (meshRenderer == null)
-            Debug.LogError("MeshRenderer is null");
+            Debug.LogError("MeshSurfaceSampler is null");
 
         if (_material == null)
             Debug.LogError("Material is null");
 
         if (_leafMesh == null)
-            Debug.LogError("Grass mesh is null");
+            Debug.LogError("Leaf mesh is null");
+    }
+
+    IEnumerator WaitUntilReadyAndGenerate()
+    {
+        // Continuously check until points exist and are valid
+        while (_meshSurfaceSampler == null ||
+               !_meshSurfaceSampler.ArePointsGenerated() ||
+               _meshSurfaceSampler.points == null ||
+               _meshSurfaceSampler.points.Length == 0)
+        {
+            yield return null;
+        }
+
+        Generate();
     }
 
     public void GeneratePoints()
@@ -80,16 +96,30 @@ public class LeafInstancer : MonoBehaviour
             boundingBox.SetMinMax(minPoint, maxPoint);
         }
 
-        var extrude = _material.GetFloat("_Extrude");
-        boundingBox.Expand(boundingBox.size * extrude);
+        if (_material != null && _material.HasProperty("_Extrude"))
+        {
+            var extrude = _material.GetFloat("_Extrude");
+            boundingBox.Expand(boundingBox.size * extrude);
+        }
 
         return boundingBox;
     }
 
     public void Generate()
     {
+        if (_meshSurfaceSampler == null)
+            Setup();
+
+        if (!_meshSurfaceSampler.ArePointsGenerated())
+            _meshSurfaceSampler.GeneratePoints();
+
+        if (_meshSurfaceSampler.points == null || _meshSurfaceSampler.points.Length == 0)
+        {
+            Debug.LogWarning("LeafInstancer: No points found. Skipping buffer generation.");
+            return;
+        }
+
         var count = _meshSurfaceSampler.points.Length;
-        // var count = 1;
 
         leafData = new LeafData[count];
         leafBuffer?.Release();
@@ -107,7 +137,6 @@ public class LeafInstancer : MonoBehaviour
             };
         }
 
-        // Set the buffers
         var indirectDrawIndexedArgs = new GraphicsBuffer.IndirectDrawIndexedArgs
         {
             indexCountPerInstance = _leafMesh.GetIndexCount(0),
@@ -116,13 +145,13 @@ public class LeafInstancer : MonoBehaviour
             baseVertexIndex = _leafMesh.GetBaseVertex(0),
             startInstance = 0,
         };
+
         for (int i = 0; i < commandCount; i++)
             commandData[i] = indirectDrawIndexedArgs;
 
         commandBuffer.SetData(commandData);
         leafBuffer.SetData(leafData);
 
-        // Set the render params
         var block = new MaterialPropertyBlock();
         block.SetBuffer("_LeafData", leafBuffer);
 
@@ -135,12 +164,15 @@ public class LeafInstancer : MonoBehaviour
         };
 
         UpdateRotation();
+        isGenerated = true;
     }
 
-    // Update the rotation of the grass
     void UpdateRotation()
     {
-        var target = Camera.main.transform.position;
+        var cam = Camera.main;
+        if (cam == null || _renderParams.matProps == null) return;
+
+        var target = cam.transform.position;
         var rotation = Quaternion.LookRotation(transform.position - target, Vector3.up);
         var quaternion = new Vector4(rotation.x, rotation.y, rotation.z, rotation.w);
         _renderParams.matProps.SetVector("_Rotation", quaternion);
@@ -148,33 +180,25 @@ public class LeafInstancer : MonoBehaviour
 
     void Update()
     {
-        // Validation checks
-        if (_meshSurfaceSampler == null)
-            Setup();
-
-        if (!_meshSurfaceSampler.ArePointsGenerated())
-            _meshSurfaceSampler.GeneratePoints();
-
-        // if (transform.lossyScale != Vector3.one)
-        // Debug.LogWarning("GrassInstancer does not support scaling");
-
-        if (leafData == null || leafData.Length == 0)
-            Generate();
+        if (!isGenerated || leafBuffer == null || leafData == null)
+            return;
 
         UpdateRotation();
 
+        var cam = Camera.main;
+        if (cam == null || _renderParams.matProps == null)
+            return;
 
-        // Frustum culling check for the chunk
-        var frustumPlanes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+        var frustumPlanes = GeometryUtility.CalculateFrustumPlanes(cam);
         if (!GeometryUtility.TestPlanesAABB(frustumPlanes, GetBoundingBox()))
             return;
 
-        // Render the grass
         Graphics.RenderMeshIndirect(_renderParams, _leafMesh, commandBuffer, commandCount);
     }
+    
 }
 
-// Custom editor which adds a button to generate the terrain
+#if UNITY_EDITOR
 [CustomEditor(typeof(LeafInstancer))]
 public class LeafInstancerEditor : Editor
 {
@@ -190,3 +214,4 @@ public class LeafInstancerEditor : Editor
         }
     }
 }
+#endif

@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 public class MenuController : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject tutorial;
 
 
     void Start()
     {
-        
+        tutorial.SetActive(false);
     }
 
     // Update is called once per frame
@@ -21,9 +22,13 @@ public class MenuController : MonoBehaviour
 
     public void openTutorial()
     {
-
+        tutorial.SetActive(true);
     }
 
+    public void closeTutorial()
+    {
+        tutorial.SetActive(false);
+    }
 
 
     public void loadscene(int scenetoload)
