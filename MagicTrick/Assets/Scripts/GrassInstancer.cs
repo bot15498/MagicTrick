@@ -268,6 +268,7 @@ public class GrassInstancer : MonoBehaviour
     }
 }
 
+#if UNITY_EDITOR
 // Custom editor which adds a button to generate the terrain
 [CustomEditor(typeof(GrassInstancer))]
 public class GrassInstancerEditor : Editor
@@ -282,3 +283,4 @@ public class GrassInstancerEditor : Editor
             script.Generate();
     }
 }
+#endif

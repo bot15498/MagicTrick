@@ -174,6 +174,7 @@ public class LeafInstancer : MonoBehaviour
     }
 }
 
+#if UNITY_EDITOR
 // Custom editor which adds a button to generate the terrain
 [CustomEditor(typeof(LeafInstancer))]
 public class LeafInstancerEditor : Editor
@@ -190,3 +191,4 @@ public class LeafInstancerEditor : Editor
         }
     }
 }
+#endif

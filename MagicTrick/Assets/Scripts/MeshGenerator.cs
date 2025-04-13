@@ -180,6 +180,7 @@ public class MeshData
 	}
 }
 
+#if UNITY_EDITOR
 // Custom editor which adds a button to generate the terrain
 [CustomEditor(typeof(MeshGenerator))]
 public class MeshGeneratorEditor : Editor
@@ -193,3 +194,4 @@ public class MeshGeneratorEditor : Editor
 			script.GenerateTerrainMesh();
 	}
 }
+#endif
