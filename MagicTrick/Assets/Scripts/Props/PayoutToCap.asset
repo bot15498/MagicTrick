@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89eab95026a0cfe4b984b4b122d36da8, type: 3}
+  m_Name: PayoutToCap
+  m_EditorClassIdentifier: 
+  Actions:
+  - {fileID: 1934352289646926447}
+  DoesRandomAction: 0
+  PropName: 
+  Description: 
+  Image: {fileID: 0}
+  PreviousSlotActions: []
+  NextSlotActions: []
+  FixedSlotActions: []
+--- !u!114 &1934352289646926447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f96e8241e978458428a43f4af1149, type: 3}
+  m_Name: Convert stat to other stat
+  m_EditorClassIdentifier: 
+  StatToConvertFrom: 0
+  StatToConvertTo: 0

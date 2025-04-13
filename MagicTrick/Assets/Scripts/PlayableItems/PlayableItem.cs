@@ -176,9 +176,24 @@ public abstract class PlayableItem : ScriptableObject
     private void AddIncreaseStatBasedOnRemainingCards()
     {
         IncreaseStatBasedOnDeckAction newaction = CreateInstance<IncreaseStatBasedOnDeckAction>();
-        newaction.name = "Do Action if All Slots filled";
+        newaction.name = "Increase Stat Based on Cards left in deck";
         newaction.StatToChange = Stats.Captivation;
         newaction.SleightOfHandScaleFactor = 0.05;
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("Convert Stat to Other Stat")]
+    private void AddConvertStatToOtherStatAction()
+    {
+        ConvertStatToStatAction newaction = CreateInstance<ConvertStatToStatAction>();
+        newaction.name = "Convert stat to other stat";
+        newaction.StatToConvertFrom = Stats.Captivation;
+        newaction.StatToConvertTo = Stats.Captivation;
 
         Actions.Add(newaction);
 
