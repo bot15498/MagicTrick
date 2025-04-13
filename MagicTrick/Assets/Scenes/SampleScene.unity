@@ -15552,6 +15552,7 @@ GameObject:
   - component: {fileID: 1009772705}
   - component: {fileID: 1009772707}
   - component: {fileID: 1009772706}
+  - component: {fileID: 1009772708}
   m_Layer: 5
   m_Name: Total Liability
   m_TagString: Untagged
@@ -15675,6 +15676,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009772704}
   m_CullTransparentMesh: 1
+--- !u!114 &1009772708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009772704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab070d23ac1efa4a8ef5dfaf946a047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUpdating: 0
+  CurrentValue: 0
+  TargetValue: 0
+  prefix: 
 --- !u!4 &1012917168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6803169544883306252, guid: bc297edc304019e448aba327ef79a2be, type: 3}
