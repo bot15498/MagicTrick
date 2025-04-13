@@ -64,7 +64,8 @@ MonoBehaviour:
   m_Name: Billy
   m_EditorClassIdentifier: 
   PartyName: Billy's Big Birthday Bash
-  PartyDescription: come to billy
+  PartyDescription: Billy's Mother Billy needs you to entertain her son Billy and
+    his Friends at his Birthday Party.
   PartyInvitationImage: {fileID: 0}
   Rounds:
   - {fileID: -3003688645764081138}

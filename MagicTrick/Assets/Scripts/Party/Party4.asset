@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoundName: Sad Joe
+  RoundName: Huey
   ScoreRequired: 20000
   Actions: []
   RoundEffect: 
-  RoundImage: {fileID: 0}
+  RoundImage: {fileID: 21300000, guid: 96406a5cda8f49642a104f7bd6a5d7a4, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29,8 +29,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7ceb4bb03838247b1c02d32a0cd972, type: 3}
   m_Name: Party4
   m_EditorClassIdentifier: 
-  PartyName: Joe's bedroom
-  PartyDescription: 
+  PartyName: Money Plan Fan Club
+  PartyDescription: We need an entertainer to perform in the background while we
+    watch money plan for the 12th time.
   PartyInvitationImage: {fileID: 0}
   Rounds:
   - {fileID: -6436966499924179546}
@@ -48,11 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoundName: Angry Joe
+  RoundName: Huey Cool
   ScoreRequired: 60000
   Actions: []
   RoundEffect: 
-  RoundImage: {fileID: 0}
+  RoundImage: {fileID: 21300000, guid: 1a5ed6fa4bb8a794e95db8133dc85f42, type: 3}
 --- !u!114 &7269092787248974413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,8 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoundName: Depressed Joe
+  RoundName: Punished Huey
   ScoreRequired: 40000
   Actions: []
   RoundEffect: 
-  RoundImage: {fileID: 0}
+  RoundImage: {fileID: 21300000, guid: 3bfbdf66a632b2d4d805bc2f1cb093aa, type: 3}
