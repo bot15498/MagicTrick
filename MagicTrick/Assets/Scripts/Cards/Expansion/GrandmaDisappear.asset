@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7359809149620692154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
+  m_Name: Increase Stats
+  m_EditorClassIdentifier: 
+  StatToChange: 1
+  ChangeAmount: 10
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14,12 +28,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Actions:
   - {fileID: 6928661774292661579}
+  - {fileID: 2910030821135441980}
+  - {fileID: -7359809149620692154}
   DoesRandomAction: 0
   CardName: Summon Grandma
-  Description: +50 Liability
+  Description: +100 Liability<br>+5000 Captivation<br>+10 Sleight of Hand
   Image: {fileID: 0}
-  Type: 
+  Type: 000000000100000002000000
   AnimationName: 
+--- !u!114 &2910030821135441980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
+  m_Name: Increase Stats
+  m_EditorClassIdentifier: 
+  StatToChange: 0
+  ChangeAmount: 5000
 --- !u!114 &6928661774292661579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33,4 +63,4 @@ MonoBehaviour:
   m_Name: Increase Stats
   m_EditorClassIdentifier: 
   StatToChange: 3
-  ChangeAmount: 50
+  ChangeAmount: 100

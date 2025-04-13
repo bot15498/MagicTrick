@@ -8,7 +8,7 @@ public class IncrementNumberText : MonoBehaviour
     public bool isUpdating = false;
     public long CurrentValue = 0;
     public long TargetValue = 0;
-    private long stepVal = 3;
+    private long stepVal = 1;
     public string prefix;
     private TMP_Text targetText;
     void Start()
@@ -18,6 +18,8 @@ public class IncrementNumberText : MonoBehaviour
 
     void Update()
     {
+        stepVal = (long)(Mathf.Sqrt(TargetValue - CurrentValue) /10);
+        stepVal = stepVal < 1 ? 1 : stepVal;
         if (CurrentValue != TargetValue)
         {
             isUpdating = true;
