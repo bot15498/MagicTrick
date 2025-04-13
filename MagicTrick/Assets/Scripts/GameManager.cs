@@ -115,6 +115,9 @@ public class GameManager : MonoBehaviour
     private GameObject gameOverPanel;
     [SerializeField]
     private float gameOverTransitionDuration = 0.5f;
+    [SerializeField]
+    private GameObject YouWinPanel;
+    private bool calledYouWin = false;
     private bool calledYouLose = false;
     [SerializeField]
     private AudioClip PlayTrickAudioClip;
@@ -314,6 +317,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.YouWin:
                 Debug.Log("YOU WIN");
+                YouWin();
                 break;
         }
 
@@ -663,6 +667,16 @@ public class GameManager : MonoBehaviour
             gameOverPanel.SetActive(true);
             gameOverPanel.transform.DOMoveY(0f, gameOverTransitionDuration);
             calledYouLose = true;
+        }
+    }
+
+    public void YouWin()
+    {
+        if (!calledYouWin)
+        {
+            YouWinPanel.SetActive(true);
+            YouWinPanel.transform.DOLocalMoveY(0f, gameOverTransitionDuration);
+            calledYouWin = true;
         }
     }
 
