@@ -112,7 +112,7 @@ public class PostProcesser : MonoBehaviour
 
     void UpdateZoom()
     {
-        if (Camera.main == null)
+        /*if (Camera.main == null)
             return;
 
         Camera.main.orthographicSize = 1 / zoom;
@@ -120,7 +120,7 @@ public class PostProcesser : MonoBehaviour
         var pos = Camera.main.transform.localPosition;
         pos.z = -farPlane / 2;
         Camera.main.transform.SetLocalPositionAndRotation(pos, Quaternion.identity);
-        Camera.main.farClipPlane = farPlane;
+        Camera.main.farClipPlane = farPlane;*/
     }
 
     void OnValidate()
