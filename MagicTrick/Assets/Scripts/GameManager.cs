@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     private Button mulliganButton;
     // Stuff for playing cards
     private List<ActionContainer> currCardContainers = new List<ActionContainer>();
+    private List<PlayableCard> currCardData = new List<PlayableCard>();
     [SerializeField]
     private int currCardContainerIndex = 0;
     [SerializeField]
@@ -192,7 +193,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.ActPlayout:
                 // Play each card
-                if (PlayAllCards())
+                if (DiscardBoard() && PlayAllCards())
                 {
                     UpdateScoreFields();
                     // Go to next 
@@ -263,7 +264,7 @@ public class GameManager : MonoBehaviour
                     var tween = shopPanel.transform.DOLocalMoveY(0f, shopTransitionDuration);
                     tween.OnUpdate(() =>
                     {
-                        if (!didShopUpdate && tween.position > shopTransitionDuration/2)
+                        if (!didShopUpdate && tween.position > shopTransitionDuration / 2)
                         {
                             // Update the prop inventory in the shop
                             //propManagerGlobal.UpdateShopPropManager();
@@ -338,11 +339,10 @@ public class GameManager : MonoBehaviour
                 elapsedTime = 0f;
                 isDoingAnimation = true;
                 // not waiting for anything, start animation
-                Card currCardObj = slots[currCardContainerIndex].GetComponentInChildren<Card>();
-                if(currCardObj != null)
+                PlayableCard currCardObj = currCardData[currCardContainerIndex];
+                if (currCardObj != null)
                 {
-                    animationManager.playAnimation(currCardObj.CardData.AnimationName);
-                    Debug.Log(currCardObj.CardData.AnimationName);
+                    animationManager.playAnimation(currCardObj.AnimationName);
                 }
                 else
                 {
@@ -356,7 +356,7 @@ public class GameManager : MonoBehaviour
                 historyManager.slotTimelines[currCardContainerIndex].AdvanceTime();
                 currCardContainerIndex++;
             }
-            else if(elapsedTime >= maxAnimationElapsedTime)
+            else if (elapsedTime >= maxAnimationElapsedTime)
             {
                 // took too long
                 elapsedTime = 0f;
@@ -378,11 +378,25 @@ public class GameManager : MonoBehaviour
         // Get the action container for each card, combine them, then calculate
         // what the new score would be. Return the new score.
         currCardContainers.Clear();
+        currCardData.Clear();
         currCardContainers = CreateCombinedContainer();
         // Combine with anything thats currently in the history
         for (int i = 0; i < historyManager.slotTimelines.Count; i++)
         {
             currCardContainers[i] = currCardContainers[i] + historyManager.slotTimelines[i].History[0];
+        }
+        // Get the card data if it exists
+        foreach(var cardslot in slots)
+        {
+            Card currCardObj = cardslot.GetComponentInChildren<Card>();
+            if(currCardObj != null)
+            {
+                currCardData.Add(currCardObj.CardData);
+            }
+            else
+            {
+                currCardData.Add(null);
+            }
         }
         // Clear animation stuff
         elapsedTime = 0f;
@@ -568,7 +582,7 @@ public class GameManager : MonoBehaviour
         var tween = shopPanel.transform.DOLocalMoveY(1166f, shopTransitionDuration);
         tween.OnUpdate(() =>
         {
-            if(!didShopUpdate && tween.position >= shopTransitionDuration / 2)
+            if (!didShopUpdate && tween.position >= shopTransitionDuration / 2)
             {
                 // Update the table props
                 propManagerGlobal.UpdateTablePropManager();
@@ -639,7 +653,7 @@ public class GameManager : MonoBehaviour
 
     public void YouLose()
     {
-        if(!calledYouLose)
+        if (!calledYouLose)
         {
             gameOverPanel.SetActive(true);
             gameOverPanel.transform.DOMoveY(0f, gameOverTransitionDuration);
@@ -652,8 +666,34 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    //private IEnumerator UpdateNumericalText(TMP_Text textui, long valToChangeTo, bool includeSign)
-    //{
-    //    long startVal = long.Parse
-    //}
+    private IEnumerator UpdateNumericalText(TMP_Text textui, long valToChangeTo, string pref)
+    {
+        int numstep = 3;
+        string currVal = textui.text;
+        long parsedCurrVal = long.Parse(currVal.Substring(pref.Length));
+        if(valToChangeTo != parsedCurrVal)
+        {
+            while(parsedCurrVal != valToChangeTo)
+            {
+                if (valToChangeTo > parsedCurrVal)
+                {
+                    // need to increase
+                    parsedCurrVal += numstep;
+                    parsedCurrVal = parsedCurrVal > valToChangeTo ? valToChangeTo : parsedCurrVal;
+                    textui.text = $"{pref}{parsedCurrVal:n0}";
+                }
+                else
+                {
+                    // Need to decrease
+                    parsedCurrVal -= numstep;
+                    parsedCurrVal = parsedCurrVal < valToChangeTo ? valToChangeTo : parsedCurrVal;
+                    textui.text = $"{pref}{parsedCurrVal:n0}";
+                }
+                yield return null;
+            }
+        }
+
+        // Set it equal one last time
+        textui.text = $"{valToChangeTo:n0}";
+    }
 }
