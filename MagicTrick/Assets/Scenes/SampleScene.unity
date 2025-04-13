@@ -19847,7 +19847,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2000991875}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
         m_MethodName: RefreshPropShop
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -22552,6 +22552,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 679531df7b8e9b84db22041c5e9cdc3f, type: 2}
   - {fileID: 11400000, guid: f2b6d091f114572438cd39e55fbcb055, type: 2}
   - {fileID: 11400000, guid: eba4625e30e52894da681e04cc55edd4, type: 2}
+  - {fileID: 11400000, guid: 7b4c3c29eb182f9479b533738dcdbc91, type: 2}
+  - {fileID: 11400000, guid: bdfd685655b14fc4291d25935019657b, type: 2}
 --- !u!114 &2000991877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22581,7 +22583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PartyList:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 8dd52c3a729b9e7419dceff490a511cb, type: 2}
   currPartyIndex: 0
   invitationPanel: {fileID: 2077490772}
   partyNameText: {fileID: 241597906}
@@ -23130,7 +23132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2077490773
 RectTransform:
   m_ObjectHideFlags: 0

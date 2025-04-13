@@ -145,5 +145,31 @@ public abstract class PlayableItem : ScriptableObject
         EditorUtility.SetDirty(this);
         EditorUtility.SetDirty(newaction);
     }
+    [ContextMenu("SPECIFIC: Halve Liability -> Captivation")]
+    private void AddHalveLiabilityToCaptivation()
+    {
+        CapToLiabilityAction newaction = CreateInstance<CapToLiabilityAction>();
+        newaction.name = "Halve Liability To Captivation Action";
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("SPECIFIC: Add 4 SoH if Deception")]
+    private void AddSoHIfEnoughDeception()
+    {
+        DeceptionCheckSoH newaction = CreateInstance<DeceptionCheckSoH>();
+        newaction.name = "Add 4 SoH If 2+ Deception Cards";
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
 #endif
 }

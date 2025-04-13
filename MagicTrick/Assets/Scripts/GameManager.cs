@@ -244,7 +244,7 @@ public class GameManager : MonoBehaviour
                 if (!shopPanel.activeSelf)
                 {
                     shopPanel.SetActive(true);
-                    shopManager.RefreshPropShop();
+                    shopManager.RefreshPropShop(doForFree: true);
                 }
                 // Pull the curtain down
                 break;

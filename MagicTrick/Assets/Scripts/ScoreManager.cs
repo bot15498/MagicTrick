@@ -59,14 +59,14 @@ public class ScoreManager : MonoBehaviour
     public void ApplyToPreviewScore(ActionContainer container, GameManager gameManager)
     {
         // Also do the extra actions
-        //container.ApplyNonStatActions(gameManager);
+        container.PreviewNonStatActions(gameManager);
 
         previewCaptivation = container.ApplyCaptivationActions(captivation);
         previewSleightOfHand = Math.Max(container.ApplySleightOfHandActions(sleightOfHand), 0.0);
         previewAdditionalPayout = container.ApplyPayoutActions(additionalPayout);
         previewLiability = container.ApplyLiabilityActions(liability);
 
-        //container.ApplyNonStatPostActions(gameManager);
+        container.PreviewNonStatPostActions(gameManager);
     }
 
     public void ApplyToScore(ActionContainer container, GameManager gameManager)

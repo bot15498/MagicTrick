@@ -14,6 +14,9 @@ public class ActionContainer
     public Func<GameManager, int> NonStatActions { get; set; } = x => 0;
     // Non stat actions only get run when playing a card, but happen at the end
     public Func<GameManager, int> NonStatPostActions { get; set; } = x => 0;
+    public Func<GameManager, int> PreviewNonStatActions { get; set; } = x => 0;
+    // Non stat actions only get run when playing a card, but happen at the end
+    public Func<GameManager, int> PreviewNonStatPostActions { get; set; } = x => 0;
 
     public long ApplyCaptivationActions(long startingVal)
     {
