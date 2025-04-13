@@ -638,13 +638,17 @@ public class GameManager : MonoBehaviour
 
         // liability
         double liabilityToAdd = scoreManager.previewLiability - scoreManager.liability;
-        liabilityText.text = $"${scoreManager.liability:n0}";
+        //liabilityText.text = $"${scoreManager.liability:n0}";
+        liabilityText.GetComponent<IncrementNumberText>().prefix = "$";
+        liabilityText.GetComponent<IncrementNumberText>().TargetValue = scoreManager.liability;
         liabilityAddText.text = $"{Math.Abs(liabilityToAdd):n0}";
         liabilitySignText.text = liabilityToAdd < 0 ? "-" : "+";
 
         // payout
         double payoutToAdd = scoreManager.previewAdditionalPayout - scoreManager.additionalPayout;
-        additionalPayoutText.text = $"${scoreManager.additionalPayout:n0}";
+        //additionalPayoutText.text = $"${scoreManager.additionalPayout:n0}";
+        additionalPayoutText.GetComponent<IncrementNumberText>().prefix = "$";
+        additionalPayoutText.GetComponent<IncrementNumberText>().TargetValue = scoreManager.additionalPayout;
         additionalPayoutAddText.text = $"{Math.Abs(payoutToAdd):n0}";
         additionalPayoutSignText.text = payoutToAdd < 0 ? "-" : "+";
     }

@@ -11745,6 +11745,7 @@ GameObject:
   - component: {fileID: 742044590}
   - component: {fileID: 742044592}
   - component: {fileID: 742044591}
+  - component: {fileID: 742044593}
   m_Layer: 5
   m_Name: PayoutText (1)
   m_TagString: Untagged
@@ -11868,6 +11869,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742044589}
   m_CullTransparentMesh: 1
+--- !u!114 &742044593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742044589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab070d23ac1efa4a8ef5dfaf946a047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUpdating: 0
+  CurrentValue: 0
+  TargetValue: 0
+  prefix: 
 --- !u!4 &744453265 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8021001004253913084, guid: 9eb7db268d4203e4280f9fd8726be077, type: 3}
