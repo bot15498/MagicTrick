@@ -675,7 +675,7 @@ public class GameManager : MonoBehaviour
         if (!calledYouWin)
         {
             YouWinPanel.SetActive(true);
-            YouWinPanel.transform.DOMoveY(0f, gameOverTransitionDuration);
+            YouWinPanel.transform.DOLocalMoveY(0f, gameOverTransitionDuration);
             calledYouWin = true;
         }
     }

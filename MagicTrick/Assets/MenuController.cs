@@ -12,7 +12,10 @@ public class MenuController : MonoBehaviour
 
     void Start()
     {
-        tutorial.SetActive(false);
+        if(tutorial != null)
+        {
+            tutorial.SetActive(false);
+        }
     }
 
     // Update is called once per frame

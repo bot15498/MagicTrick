@@ -14520,12 +14520,12 @@ MonoBehaviour:
     dedicated as a children's party magician for our recent events. We appreciate
     your contributions and the energy you brought to our parties.\n\nHowever, after
     careful consideration, we have decided to discontinue your services effective
-    [insert termination date]. This decision was not made lightly, but we believe
-    it is the best course of action for our future events and entertainment goals.\n\nPlease
-    ensure that any outstanding materials, invoices, or obligations are settled by
-    [insert relevant date]. If there are any further questions or details to discuss,
-    feel free to reach out via phone or email.\n\nWe wish you the best in your future
-    performances and endeavors.\n\nSincerely,\n[Your Name]\n[Your Position]"
+    immediately. This decision was not made lightly, but we believe it is the best
+    course of action for our future events and entertainment goals.\n\nPlease ensure
+    that any outstanding materials, invoices, or obligations are settled by July
+    27, 1976. If there are any further questions or details to discuss, feel free
+    to reach out via phone or email.\n\nWe wish you the best in your future performances
+    and endeavors.\n\nSincerely,\nJoe Hagary\nChief"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1289f98db15f76c40b84ea0516f2efeb, type: 2}
   m_sharedMaterial: {fileID: -700432986418380601, guid: 1289f98db15f76c40b84ea0516f2efeb, type: 2}
@@ -16812,7 +16812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1099386549
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27641,7 +27641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f66fc80e913ac43b0afc88d47baeea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentDeck: {fileID: 795570397668151484, guid: 586b4ed62146400409ccfe2807343fd3, type: 3}
+  CurrentDeck: {fileID: 795570397668151484, guid: aa86d28afb583a247a115621c3166faf, type: 3}
   DeckCards: []
   Discards: []
   DeckText: {fileID: 931970505}
@@ -27723,7 +27723,7 @@ MonoBehaviour:
   shopTransitionDuration: 0.5
   gameOverPanel: {fileID: 387106357}
   gameOverTransitionDuration: 0.5
-  YouWinPanel: {fileID: 0}
+  YouWinPanel: {fileID: 1099386548}
   PlayTrickAudioClip: {fileID: 0}
   scoreManager: {fileID: 0}
   deckManager: {fileID: 0}
