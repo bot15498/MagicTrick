@@ -25,16 +25,16 @@ public class AudioManager : MonoBehaviour
 
     public void PlayOneShot(AudioClip clip, float volume)
     {
-        audioSource.PlayOneShot(clip, volume);
+        audioSource.PlayOneShot(clip, 0.05f);
     }
 
     public void PlayButtonPress()
     {
-        audioSource.PlayOneShot(buttonPress, 1f);
+        audioSource.PlayOneShot(buttonPress, 0.05f);
     }
 
     public void PlayShowtimeButtonPress()
     {
-        audioSource.PlayOneShot(showtimeButtonPress, 1f);
+        audioSource.PlayOneShot(showtimeButtonPress, 0.05f);
     }
 }
