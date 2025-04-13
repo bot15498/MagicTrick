@@ -15,7 +15,7 @@ MonoBehaviour:
   Actions:
   - {fileID: 6243284134591452223}
   DoesRandomAction: 0
-  PropName: ????????
+  PropName: Fake Limb
   Description: +4 Sleight of Hand if you have at least 2 Deception Cards in play.
   Image: {fileID: 21300000, guid: 2dcd003017e211c4fb1a26fd727dcbfc, type: 3}
   PreviousSlotActions: []

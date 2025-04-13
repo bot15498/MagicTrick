@@ -77,7 +77,7 @@ MonoBehaviour:
   CardName: What's Up My Sleeve?
   Description: 25% to do + 25 captivation OR +2 Slight of Hand OR +10 payout OR +10
     liability
-  Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
+  Image: {fileID: 21300000, guid: 9e3032ab612643a4d80ba8482348825e, type: 3}
   Type: 00000000010000000200000003000000
   AnimationName: Magician_RollingUpSleeves
 --- !u!114 &5686267907331183248

@@ -17,7 +17,7 @@ MonoBehaviour:
   DoesRandomAction: 0
   CardName: Going All In
   Description: Double Current Captivation Amount
-  Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
+  Image: {fileID: 21300000, guid: 596a19bc3e9d2c14fbe3f1154fb356d2, type: 3}
   Type: 00000000
   AnimationName: Magician_Incentive
 --- !u!114 &8904831308342224886
