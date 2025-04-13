@@ -20672,6 +20672,7 @@ GameObject:
   - component: {fileID: 1610638895}
   - component: {fileID: 1610638897}
   - component: {fileID: 1610638896}
+  - component: {fileID: 1610638898}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -20795,6 +20796,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610638894}
   m_CullTransparentMesh: 1
+--- !u!114 &1610638898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610638894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab070d23ac1efa4a8ef5dfaf946a047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUpdating: 0
+  CurrentValue: 0
+  TargetValue: 0
+  prefix: 
 --- !u!4 &1613081950 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6000407479487422213, guid: 9eb7db268d4203e4280f9fd8726be077, type: 3}
@@ -21735,14 +21752,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0b6253ae2084750ad5801aa8fd8c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _grassLayer:
-    m_Bits: 64
-  _grassMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
-  _material: {fileID: 2100000, guid: 6ddce44f4f36c4cf08fffc923d8c1955, type: 2}
-  _density: 2
-  _seed: 42
-  _meshGenerator: {fileID: 0}
-  chunkCount: 3
 --- !u!114 &1699851550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21755,14 +21764,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0b6253ae2084750ad5801aa8fd8c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _grassLayer:
-    m_Bits: 8
-  _grassMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
-  _material: {fileID: 2100000, guid: 49e81b630d20c6b4c85503e861b8aa5b, type: 2}
-  _density: 0.1
-  _seed: 42
-  _meshGenerator: {fileID: 0}
-  chunkCount: 3
 --- !u!64 &1699851551
 MeshCollider:
   m_ObjectHideFlags: 0
