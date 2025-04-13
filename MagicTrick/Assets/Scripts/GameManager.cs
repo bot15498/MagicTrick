@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
     private PartyManager partyManager;
     public List<GameObject> slots;
     public List<GameObject> propSlots;
-
+    [SerializeField] float reloadDelay = 0.1f;
     void Awake()
     {
         slots = new List<GameObject>
