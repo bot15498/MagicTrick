@@ -97,7 +97,7 @@ MonoBehaviour:
   targetCamera: {fileID: 0}
   OnSelect: {fileID: 8300000, guid: 5860977dd0f1a3c4f88902fd970b6a5d, type: 3}
   OnUnselect: {fileID: 8300000, guid: 81b447474d0f60346bf2408b05176662, type: 3}
-  OnCardDragStart: {fileID: 8300000, guid: 1aee15bc1e0b682499fa47bb99b0493b, type: 3}
+  OnCardDragStart: {fileID: 8300000, guid: bd36b158b9e14a84eba1897c5a7d66f8, type: 3}
   OnCardPlace: {fileID: 8300000, guid: 9e8299d2192e9064b8ab3dcf981d074d, type: 3}
 --- !u!114 &7486306067316991545
 MonoBehaviour:
