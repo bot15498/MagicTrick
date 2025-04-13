@@ -45,7 +45,7 @@ public class PartyManager : MonoBehaviour
 
     public void UpdateChildInfo(int roundIndex = 0)
     {
-        childNameText.text = $"{PartyList[currPartyIndex].Rounds[roundIndex].RoundName} - Act {gameManager.currRound}";
+        childNameText.text = $"{PartyList[currPartyIndex].Rounds[roundIndex].RoundName} - Act {gameManager.currAct}";
         childDecText.text = PartyList[currPartyIndex].Rounds[roundIndex].RoundEffect;
         childRequiredScoreText.text = $"{PartyList[currPartyIndex].Rounds[roundIndex].ScoreRequired:n0}";
         childSprite.sprite = PartyList[currPartyIndex].Rounds[roundIndex].RoundImage;
