@@ -44,6 +44,11 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public IPropZone previousSlotGroup;
     public IPropZone currentDropZone;
 
+    [Header("Audio")]
+    private AudioManager audioManager;
+    [SerializeField] private AudioClip OnPropDragStart;
+    [SerializeField] private AudioClip OnPropPlace;
+
     private float pointerDownTime;
     private float pointerUpTime;
     private TooltipTrigger tooltipTrigger;
@@ -51,6 +56,7 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     void Start()
     {
+        audioManager = AudioManager.Instance;
         if (targetCamera == null)
         {
             GameObject camObj = GameObject.FindGameObjectWithTag("GameCamera");
@@ -113,6 +119,7 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         wasDragged = true;
 
         previousSlotGroup = GetComponentInParent<IPropZone>();
+        audioManager.PlayOneShot(OnPropDragStart, 1f);
     }
 
     public void OnDrag(PointerEventData eventData) { }
@@ -155,6 +162,7 @@ public class Prop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
         if (droppedInZone && targetZone != null)
         {
+            audioManager.PlayOneShot(OnPropPlace, 1f);
             if (targetZone.CurrentProp != null && targetZone.CurrentProp != this)
             {
                 Prop other = targetZone.CurrentProp;

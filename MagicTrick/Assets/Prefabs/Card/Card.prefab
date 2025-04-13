@@ -94,6 +94,11 @@ MonoBehaviour:
       m_Calls: []
   previousSlotGroup: {fileID: 0}
   currentDropZone: {fileID: 0}
+  targetCamera: {fileID: 0}
+  OnSelect: {fileID: 8300000, guid: 3fc7d86dbf317464083a0359c9eb5c5e, type: 3}
+  OnUnselect: {fileID: 8300000, guid: b2307378b34cf4c4bb99e3a3aec0f72b, type: 3}
+  OnCardDragStart: {fileID: 8300000, guid: b8c4e7e05d5862142a9214c14680a0c6, type: 3}
+  OnCardPlace: {fileID: 8300000, guid: a67c87ebe5dd43e4ebef4794b7827541, type: 3}
 --- !u!114 &7486306067316991545
 MonoBehaviour:
   m_ObjectHideFlags: 0

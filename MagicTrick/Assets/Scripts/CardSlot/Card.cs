@@ -48,12 +48,20 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     [SerializeField] private Camera targetCamera;
 
+    [Header("Audio")]
+    private AudioManager audioManager;
+    [SerializeField] private AudioClip OnSelect;
+    [SerializeField] private AudioClip OnUnselect;
+    [SerializeField] private AudioClip OnCardDragStart;
+    [SerializeField] private AudioClip OnCardPlace;
+
     private TooltipTrigger tooltipTrigger;
 
     public void Awake() { }
 
     void Start()
     {
+        audioManager = AudioManager.Instance;
         canvas = GetComponentInParent<Canvas>();
         imageComponent = GetComponent<Image>();
 
@@ -106,6 +114,8 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         imageComponent.raycastTarget = false;
         wasDragged = true;
         previousSlotGroup = transform.parent.GetComponentInParent<CardDropZone>();
+
+        audioManager.PlayOneShot(OnCardDragStart, 1f);
     }
 
     public void OnDrag(PointerEventData eventData) { }
@@ -143,10 +153,15 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 droppedInZone = true;
 
                 if (currentDropZone != null && currentDropZone != dropZone)
+                {
                     currentDropZone.ClearSlot(this);
+                }
 
                 if (dropZone.CurrentCard != null && dropZone.CurrentCard != this)
+                {
                     dropZone.CurrentCard.ReturnToHand();
+                }
+                audioManager.PlayOneShot(OnCardPlace, 1f);
 
                 dropZone.AssignCard(this);
                 currentDropZone = dropZone;
@@ -205,6 +220,14 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             return;
 
         selected = !selected;
+        if(selected)
+        {
+            audioManager.PlayOneShot(OnSelect, 1f);
+        }
+        else
+        {
+            audioManager.PlayOneShot(OnUnselect, 1f);
+        }
         SetSelected(selected);
     }
 
