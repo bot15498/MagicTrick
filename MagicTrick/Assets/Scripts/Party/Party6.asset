@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7ceb4bb03838247b1c02d32a0cd972, type: 3}
   m_Name: Party6
   m_EditorClassIdentifier: 
-  PartyName: Joe's Room
+  PartyName: Watching "Cloud Watching Club" Club
   PartyDescription: 
   PartyInvitationImage: {fileID: 0}
   Rounds:

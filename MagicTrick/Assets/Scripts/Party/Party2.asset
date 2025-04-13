@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoundName: Katie
+  RoundName: Sophie
   ScoreRequired: 500
   Actions: []
   RoundEffect: 
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoundName: Maple
+  RoundName: Stephany
   ScoreRequired: 2000
   Actions: []
   RoundEffect: 
