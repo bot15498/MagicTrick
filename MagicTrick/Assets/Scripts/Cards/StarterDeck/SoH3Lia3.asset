@@ -16,11 +16,11 @@ MonoBehaviour:
   - {fileID: 729229654417844002}
   - {fileID: 3867667728383799941}
   DoesRandomAction: 0
-  CardName: Bag of Tricks
+  CardName: Box of Tricks
   Description: +3 Sleight of Hand, +3 Liability
   Image: {fileID: 21300000, guid: 6d08781524294a2488d599518644b122, type: 3}
   Type: 0100000002000000
-  AnimationName: 
+  AnimationName: Magician_Incentive
 --- !u!114 &729229654417844002
 MonoBehaviour:
   m_ObjectHideFlags: 0

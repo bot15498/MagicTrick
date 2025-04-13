@@ -34,7 +34,7 @@ MonoBehaviour:
   Description: +5 Captivation, +0.5 Sleight of Hand
   Image: {fileID: 21300000, guid: 9a76972db9098d946ac5177d2dc9e4d9, type: 3}
   Type: 0000000001000000
-  AnimationName: 
+  AnimationName: Magician_NeckBreak
 --- !u!114 &6081190005430331806
 MonoBehaviour:
   m_ObjectHideFlags: 0

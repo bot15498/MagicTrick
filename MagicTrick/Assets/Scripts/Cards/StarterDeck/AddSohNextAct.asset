@@ -33,7 +33,7 @@ MonoBehaviour:
   Description: +2 Sleight of Hand on the next act
   Image: {fileID: 21300000, guid: e286e83e2b4335542aad7311810b4c54, type: 3}
   Type: 01000000
-  AnimationName: 
+  AnimationName: Magician_RollingUpSleeves
 --- !u!114 &8875846595897751822
 MonoBehaviour:
   m_ObjectHideFlags: 0

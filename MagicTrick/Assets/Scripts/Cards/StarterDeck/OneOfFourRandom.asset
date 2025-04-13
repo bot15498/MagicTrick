@@ -79,7 +79,7 @@ MonoBehaviour:
     liability
   Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
   Type: 00000000010000000200000003000000
-  AnimationName: 
+  AnimationName: Magician_RollingUpSleeves
 --- !u!114 &5686267907331183248
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -36,7 +36,7 @@ MonoBehaviour:
   Description: +5 on Act 1, +10 on Act 2, +20 Act 3
   Image: {fileID: 21300000, guid: 8d7ad76c7cf87f3479bc0bfc27d3fd31, type: 3}
   Type: 00000000
-  AnimationName: 
+  AnimationName: Magician_Rabbit
 --- !u!114 &2639242257652056657
 MonoBehaviour:
   m_ObjectHideFlags: 0

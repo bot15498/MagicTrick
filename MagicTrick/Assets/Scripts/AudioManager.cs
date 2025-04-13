@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField]
     private AudioClip buttonPress;
+    [SerializeField]
+    private AudioClip showtimeButtonPress;
     public static AudioManager Instance;
 
     void Awake()
@@ -29,5 +31,10 @@ public class AudioManager : MonoBehaviour
     public void PlayButtonPress()
     {
         audioSource.PlayOneShot(buttonPress, 1f);
+    }
+
+    public void PlayShowtimeButtonPress()
+    {
+        audioSource.PlayOneShot(showtimeButtonPress, 1f);
     }
 }

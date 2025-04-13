@@ -35,7 +35,7 @@ MonoBehaviour:
   Description: +100 Liability<br>+5000 Captivation<br>+10 Sleight of Hand
   Image: {fileID: 0}
   Type: 000000000100000002000000
-  AnimationName: 
+  AnimationName: Magician_DisappearingAct
 --- !u!114 &2910030821135441980
 MonoBehaviour:
   m_ObjectHideFlags: 0

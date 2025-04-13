@@ -94,7 +94,7 @@ MonoBehaviour:
   Description: 1/6th Chance to get +30 Liability, Othewise +30 Captivation
   Image: {fileID: 21300000, guid: e58dd936e4f59084285fa4e79f646032, type: 3}
   Type: 
-  AnimationName: 
+  AnimationName: Magician_RussianRoulette
 --- !u!114 &1494559275630493795
 MonoBehaviour:
   m_ObjectHideFlags: 0

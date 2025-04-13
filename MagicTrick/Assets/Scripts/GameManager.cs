@@ -116,6 +116,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float gameOverTransitionDuration = 0.5f;
     private bool calledYouLose = false;
+    [SerializeField]
+    private AudioClip PlayTrickAudioClip;
     public ScoreManager scoreManager;
     public DeckManager deckManager;
     private ShopManager shopManager;
@@ -351,6 +353,8 @@ public class GameManager : MonoBehaviour
                 }
                 // Play the card
                 scoreManager.ApplyToScore(currCardContainers[currCardContainerIndex], this);
+                // Play the sound
+                AudioManager.Instance.PlayOneShot(PlayTrickAudioClip, 1f);
                 // Now update the timeline
                 historyManager.slotTimelines[currCardContainerIndex].History[0] = currCardContainers[currCardContainerIndex];
                 historyManager.slotTimelines[currCardContainerIndex].AdvanceTime();

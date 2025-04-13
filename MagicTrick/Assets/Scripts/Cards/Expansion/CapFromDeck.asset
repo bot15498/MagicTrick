@@ -19,7 +19,7 @@ MonoBehaviour:
   Description: +X Captivation, where X is the number of cards left in deck
   Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
   Type: 00000000
-  AnimationName: 
+  AnimationName: Magician_GravitySwap
 --- !u!114 &6492387698716581789
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -41,7 +41,7 @@ MonoBehaviour:
     If in 3rd slot, +10 Payout'
   Image: {fileID: 21300000, guid: 4dd230f634f280f4cb720e26d1537316, type: 3}
   Type: 
-  AnimationName: 
+  AnimationName: Magician_RollingUpSleeves
 --- !u!114 &1605935545850525168
 MonoBehaviour:
   m_ObjectHideFlags: 0
