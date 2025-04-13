@@ -17,7 +17,7 @@ MonoBehaviour:
   DoesRandomAction: 0
   PropName: Disposable Income
   Description: Converts all Payout to Captivation
-  Image: {fileID: 21300000, guid: 2dcd003017e211c4fb1a26fd727dcbfc, type: 3}
+  Image: {fileID: 21300000, guid: 02d22fd52879a5840b7c03c60de5e794, type: 3}
   PreviousSlotActions: []
   NextSlotActions: []
   FixedSlotActions: []

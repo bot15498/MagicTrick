@@ -17,7 +17,7 @@ MonoBehaviour:
   DoesRandomAction: 0
   PropName: Devlish Charm
   Description: If this is the only prop in play, Halve Liability and convert to Captivation
-  Image: {fileID: 21300000, guid: 2dcd003017e211c4fb1a26fd727dcbfc, type: 3}
+  Image: {fileID: 21300000, guid: 0aaeca429049d1b4183631a4b02ce949, type: 3}
   PreviousSlotActions: []
   NextSlotActions: []
   FixedSlotActions: []

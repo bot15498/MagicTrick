@@ -17,7 +17,7 @@ MonoBehaviour:
   DoesRandomAction: 0
   PropName: Dual Aces
   Description: Play the trick from the previous turn
-  Image: {fileID: 21300000, guid: 2dcd003017e211c4fb1a26fd727dcbfc, type: 3}
+  Image: {fileID: 21300000, guid: 5dad581b61fd39b448c3f99f45e6db90, type: 3}
   PreviousSlotActions: []
   NextSlotActions: []
   FixedSlotActions: []

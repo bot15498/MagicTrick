@@ -46,7 +46,7 @@ MonoBehaviour:
   PropName: Special Confetti
   Description: If all trick and prop slots are filled, +25 Captivation, +1 Sleight 
     of Hand, +10 Payout
-  Image: {fileID: 21300000, guid: 2dcd003017e211c4fb1a26fd727dcbfc, type: 3}
+  Image: {fileID: 21300000, guid: a29dc13355f4604448822469c3aa572c, type: 3}
   PreviousSlotActions: []
   NextSlotActions: []
   FixedSlotActions: []
