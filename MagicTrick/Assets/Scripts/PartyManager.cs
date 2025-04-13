@@ -22,10 +22,12 @@ public class PartyManager : MonoBehaviour
     private TMP_Text childRequiredScoreText;
     [SerializeField]
     private Image childSprite;
+    private GameManager gameManager;
 
     void Start()
     {
         currPartyIndex = 0;
+        gameManager = GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -68,5 +70,14 @@ public class PartyManager : MonoBehaviour
     public void HideInviteScreen()
     {
         invitationPanel.SetActive(false);
+    }
+
+    public ActionContainer ApplyChildEffect(ActionContainer container, int cardSlot, int roundIndex)
+    {
+        foreach(var roundAct in PartyList[currPartyIndex].Rounds[roundIndex].Actions)
+        {
+            container = roundAct.AddAction(container, cardSlot, gameManager);
+        }
+        return container;
     }
 }

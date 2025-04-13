@@ -359,6 +359,8 @@ public class GameManager : MonoBehaviour
                     previewContainer = currPropObj.PropData.ApplyProp(previewContainer, this, currCardSlot, currPropSlot);
                 }
             }
+            // Add any child / round effects if they exist
+            previewContainer = partyManager.ApplyChildEffect(previewContainer, currCardSlot, currRound - 1);
             slotchanges.Add(previewContainer);
         }
         return slotchanges;
