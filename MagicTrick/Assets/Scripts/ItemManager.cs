@@ -32,7 +32,7 @@ public class ItemManager : MonoBehaviour
     {
         List<PlayableCard> tempCards = new List<PlayableCard>();
         tempCards.AddRange(AllCards);
-        tempCards = tempCards.Where(x => x.Type == targetType).ToList();
+        tempCards = tempCards.Where(x => x.Type.Contains(targetType)).ToList();
         return tempCards[rand.Next(0, tempCards.Count)];
     }
 

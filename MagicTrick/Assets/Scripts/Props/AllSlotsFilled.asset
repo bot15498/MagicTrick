@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8630005053474621204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
+  m_Name: Increase Stats
+  m_EditorClassIdentifier: 
+  StatToChange: 1
+  ChangeAmount: 1
+--- !u!114 &-5637718603067647416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
+  m_Name: Increase Stats
+  m_EditorClassIdentifier: 
+  StatToChange: 0
+  ChangeAmount: 25
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89eab95026a0cfe4b984b4b122d36da8, type: 3}
+  m_Name: AllSlotsFilled
+  m_EditorClassIdentifier: 
+  Actions:
+  - {fileID: 8176892363913886153}
+  DoesRandomAction: 0
+  PropName: Special Confetti
+  Description: If all trick and prop slots are filled, +25 Captivation, +1 Sleight 
+    of Hand, +10 Payout
+  Image: {fileID: 21300000, guid: 2dcd003017e211c4fb1a26fd727dcbfc, type: 3}
+  PreviousSlotActions: []
+  NextSlotActions: []
+  FixedSlotActions: []
+--- !u!114 &4488126622392149260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d6e2a1cea0bdbc4cbdef341cf5e4a08, type: 3}
+  m_Name: Increase Stats
+  m_EditorClassIdentifier: 
+  StatToChange: 2
+  ChangeAmount: 10
+--- !u!114 &8176892363913886153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39bc8132baf70e448dcff0869de5a30, type: 3}
+  m_Name: Do Action if All Slots filled
+  m_EditorClassIdentifier: 
+  AdditionalActions:
+  - {fileID: -5637718603067647416}
+  - {fileID: 4488126622392149260}
+  - {fileID: -8630005053474621204}

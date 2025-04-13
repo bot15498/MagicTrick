@@ -51,7 +51,7 @@ public class ScoreManager : MonoBehaviour
 
     }
 
-    public void UpdateMoney(int requiredScore)
+    public void UpdateMoney(long requiredScore)
     {
         money += CalculatePayout(requiredScore) - liability;
     }
@@ -59,14 +59,14 @@ public class ScoreManager : MonoBehaviour
     public void ApplyToPreviewScore(ActionContainer container, GameManager gameManager)
     {
         // Also do the extra actions
-        //container.ApplyNonStatActions(gameManager);
+        container.PreviewNonStatActions(gameManager);
 
         previewCaptivation = container.ApplyCaptivationActions(captivation);
         previewSleightOfHand = Math.Max(container.ApplySleightOfHandActions(sleightOfHand), 0.0);
         previewAdditionalPayout = container.ApplyPayoutActions(additionalPayout);
         previewLiability = container.ApplyLiabilityActions(liability);
 
-        //container.ApplyNonStatPostActions(gameManager);
+        container.PreviewNonStatPostActions(gameManager);
     }
 
     public void ApplyToScore(ActionContainer container, GameManager gameManager)
@@ -83,7 +83,7 @@ public class ScoreManager : MonoBehaviour
         container.ApplyNonStatPostActions(gameManager);
     }
 
-    public long CalculatePayout(int requiredScore)
+    public long CalculatePayout(long requiredScore)
     {
         return additionalPayout + Mathf.FloorToInt((Score - requiredScore) / (requiredScore * payoutBonusFromScoreWeight));
     }

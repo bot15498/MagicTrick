@@ -33,6 +33,7 @@ public class ShopManager : MonoBehaviour
     private List<GameObject> PropSlots = new List<GameObject>();
     [SerializeField]
     private List<Button> propBuyButtons = new List<Button>();
+    private List<PlayableProp> currPropsInStore = new List<PlayableProp>();
     [SerializeField]
     private Button refreshButton;
     private ItemManager itemManager;
@@ -156,8 +157,13 @@ public class ShopManager : MonoBehaviour
         CardRemovePanel.SetActive(false);
     }
 
-    public void RefreshPropShop()
+    public void RefreshPropShop(bool doForFree = false)
     {
+        if(!doForFree)
+        {
+            scoreManager.money -= refreshPropCost;
+        }
+        currPropsInStore.Clear();
         for (int i = 0; i < PropSlots.Count; i++)
         {
             propBuyButtons[i].interactable = true;
@@ -170,7 +176,10 @@ public class ShopManager : MonoBehaviour
             }
 
             // Roll a new prop
-            PlayableProp newprop = itemManager.GetRandomProp(propManagerGlobal.PropShopManager.GetPropList());
+            // Combine with current prop list to prevent repeats
+            var onscreenPropList = propManagerGlobal.PropShopManager.GetPropList();
+            onscreenPropList.AddRange(currPropsInStore);
+            PlayableProp newprop = itemManager.GetRandomProp(onscreenPropList);
 
             // Instantiate a new ShopProp
             GameObject slotObj = Instantiate(shopPropPrefab, PropSlots[i].transform);
@@ -178,6 +187,7 @@ public class ShopManager : MonoBehaviour
             prop.PropData = newprop;
             prop.name = $"{i}";
             prop.UpdateVisual();
+            currPropsInStore.Add(newprop);
         }
     }
 

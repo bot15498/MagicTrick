@@ -19,7 +19,8 @@ MonoBehaviour:
   CardName: SoH3Lia3
   Description: +3 Sleight of Hand, +3 Liability
   Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
-  Type: 2
+  Type: 0100000002000000
+  AnimationName: 
 --- !u!114 &729229654417844002
 MonoBehaviour:
   m_ObjectHideFlags: 0

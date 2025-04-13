@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89eab95026a0cfe4b984b4b122d36da8, type: 3}
+  m_Name: HalveLiabilityToCap
+  m_EditorClassIdentifier: 
+  Actions:
+  - {fileID: 54779567309835621}
+  DoesRandomAction: 0
+  PropName: Devlish Charm
+  Description: If this is the only prop in play, Halve Liability and convert to Captivation
+  Image: {fileID: 21300000, guid: 2dcd003017e211c4fb1a26fd727dcbfc, type: 3}
+  PreviousSlotActions: []
+  NextSlotActions: []
+  FixedSlotActions: []
+--- !u!114 &54779567309835621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51cc62e7850a2b4c8fac31e4c0f031e, type: 3}
+  m_Name: Halve Liability To Captivation Action
+  m_EditorClassIdentifier: 

@@ -83,7 +83,7 @@ public abstract class PlayableItem : ScriptableObject
         EditorUtility.SetDirty(this);
         EditorUtility.SetDirty(newaction);
     }
-    [ContextMenu("Increase Stat On Turn")]
+    [ContextMenu("Increase Stat On Specific Turn")]
     private void AddIncreaseStatOnTurnAction()
     {
         IncreaseStatOnTurnAction newaction = CreateInstance<IncreaseStatOnTurnAction>();
@@ -91,6 +91,22 @@ public abstract class PlayableItem : ScriptableObject
         newaction.StatToChange = Stats.Captivation;
         newaction.ChangeAmount = 0;
         newaction.TargetAct = 1;
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("Increase Stat If In Specific Slot")]
+    private void AddIncreaseStatOnSlotAction()
+    {
+        IncreaseStatOnSlotAction newaction = CreateInstance<IncreaseStatOnSlotAction>();
+        newaction.name = "Increase Stat if in specific slot";
+        newaction.StatToChange = Stats.Captivation;
+        newaction.ChangeAmount = 0;
+        newaction.TargetSlot = 0;
 
         Actions.Add(newaction);
 
@@ -137,6 +153,102 @@ public abstract class PlayableItem : ScriptableObject
         newaction.CompareType = CompareType.Equal;
         newaction.StatToChange = Stats.Captivation;
         newaction.ChangeAmount = 0;
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("Add Action To Future Act")]
+    private void AddFutureActAction()
+    {
+        AddToFutureActAction newaction = CreateInstance<AddToFutureActAction>();
+        newaction.name = "Increase Stat If Stat Threshold is met";
+        newaction.RelativeFutureStep = 1;
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("Add Action if All Slots Filled")]
+    private void AddAllSlotsFilledAction()
+    {
+        AllSlotsFilledAction newaction = CreateInstance<AllSlotsFilledAction>();
+        newaction.name = "Do Action if All Slots filled";
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("Increase Stat Based On Cards in Deck")]
+    private void AddIncreaseStatBasedOnRemainingCards()
+    {
+        IncreaseStatBasedOnDeckAction newaction = CreateInstance<IncreaseStatBasedOnDeckAction>();
+        newaction.name = "Increase Stat Based on Cards left in deck";
+        newaction.StatToChange = Stats.Captivation;
+        newaction.SleightOfHandScaleFactor = 0.05;
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("Convert Stat to Other Stat")]
+    private void AddConvertStatToOtherStatAction()
+    {
+        ConvertStatToStatAction newaction = CreateInstance<ConvertStatToStatAction>();
+        newaction.name = "Convert stat to other stat";
+        newaction.StatToConvertFrom = Stats.Captivation;
+        newaction.StatToConvertTo = Stats.Captivation;
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("SPECIFIC: Halve Liability -> Captivation")]
+    private void AddHalveLiabilityToCaptivation()
+    {
+        CapToLiabilityAction newaction = CreateInstance<CapToLiabilityAction>();
+        newaction.name = "Halve Liability To Captivation Action";
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("SPECIFIC: Add 4 SoH if Deception")]
+    private void AddSoHIfEnoughDeception()
+    {
+        DeceptionCheckSoH newaction = CreateInstance<DeceptionCheckSoH>();
+        newaction.name = "Add 4 SoH If 2+ Deception Cards";
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("SPECIFIC: Copy Last Act's Trick")]
+    private void AddCopyLastTrick()
+    {
+        CopyPreviousAction newaction = CreateInstance<CopyPreviousAction>();
+        newaction.name = "Add Copy Last Trick In This Slot";
 
         Actions.Add(newaction);
 

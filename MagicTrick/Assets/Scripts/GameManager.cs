@@ -19,6 +19,7 @@ public enum GameState
     Shopping,
     PartyEnd,
     GameOver,
+    YouWin,
 }
 
 public enum Slot
@@ -36,7 +37,6 @@ public class GameManager : MonoBehaviour
     public int maxAct = 3;
     public int maxHandSize = 8;
     public GameState state;
-    public Party currParty;
     public bool canMulligan = true;
 
     // The followign are references to the trick slot.
@@ -97,11 +97,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject shopPanel;
     public ScoreManager scoreManager;
-    private DeckManager deckManager;
+    public DeckManager deckManager;
     private ShopManager shopManager;
     public HistoryManager historyManager;
     public PropManagerGlobal propManagerGlobal;
     public AnimationManager animationManager;
+    private PartyManager partyManager;
     public List<GameObject> slots;
     public List<GameObject> propSlots;
 
@@ -125,6 +126,7 @@ public class GameManager : MonoBehaviour
         historyManager = GetComponent<HistoryManager>();
         propManagerGlobal = GetComponent<PropManagerGlobal>();
         shopManager = GetComponent<ShopManager>();
+        partyManager = GetComponent<PartyManager>();
         shopPanel.SetActive(false);
     }
 
@@ -135,13 +137,17 @@ public class GameManager : MonoBehaviour
             case GameState.Idle:
                 break;
             case GameState.PartyStart:
-                state = GameState.RoundStart;
+                // Show the party text
+                UpdateScoreFields();
+                partyManager.ShowInviteScreen();
+                partyManager.UpdateChildInfo();
                 break;
             case GameState.RoundStart:
                 // Pre round effects
                 // Reset and shuffle deck
                 scoreManager.ResetStats();
                 deckManager.RefreshDeck();
+                partyManager.UpdateChildInfo(currRound - 1);
                 state = GameState.ActStart;
                 break;
             case GameState.ActStart:
@@ -194,7 +200,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.RoundEnd:
                 // Check if you die or not
-                if (scoreManager.Score < currParty.Rounds[currRound].ScoreRequired)
+                if (!partyManager.CheckIfRoundPass(currRound - 1, scoreManager.Score))
                 {
                     // Die
                     state = GameState.GameOver;
@@ -207,7 +213,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     // Calculate money
-                    scoreManager.UpdateMoney(currParty.Rounds[currRound].ScoreRequired);
+                    scoreManager.UpdateMoney(partyManager.GetRoundScoreRequired(currRound - 1));
                     // Send your hand to your discards.
                     SendHandToDiscard();
                     deckManager.RefreshDeck();
@@ -238,13 +244,28 @@ public class GameManager : MonoBehaviour
                 if (!shopPanel.activeSelf)
                 {
                     shopPanel.SetActive(true);
-                    shopManager.RefreshPropShop();
+                    shopManager.RefreshPropShop(doForFree: true);
                 }
                 // Pull the curtain down
                 break;
             case GameState.PartyEnd:
+                // Should this be a party summary?
+                if(partyManager.NextParty())
+                {
+                    // go next
+                    state = GameState.PartyStart;
+                }
+                else
+                {
+                    // Out of parties
+                    state = GameState.YouWin;
+                }
                 break;
             case GameState.GameOver:
+                Debug.Log("YOU LOSE");
+                break;
+            case GameState.YouWin:
+                Debug.Log("YOU WIN");
                 break;
         }
 
@@ -259,11 +280,6 @@ public class GameManager : MonoBehaviour
             PlayableCard draw = deckManager.DrawCard();
             cardHolder.AddCardToHand(draw);
         }
-    }
-
-    public void LoadParty(Party party)
-    {
-        currParty = party;
     }
 
     private bool PlayAllCards()
@@ -343,6 +359,8 @@ public class GameManager : MonoBehaviour
                     previewContainer = currPropObj.PropData.ApplyProp(previewContainer, this, currCardSlot, currPropSlot);
                 }
             }
+            // Add any child / round effects if they exist
+            previewContainer = partyManager.ApplyChildEffect(previewContainer, currCardSlot, currRound - 1);
             slotchanges.Add(previewContainer);
         }
         return slotchanges;
@@ -496,37 +514,43 @@ public class GameManager : MonoBehaviour
 
     public void UpdateScoreFields()
     {
-        totalScoreText.text = $"{scoreManager.Score}";
-        moneyText.text = $"{scoreManager.money}";
-        moneyText2.text = $"{scoreManager.money}";
+        totalScoreText.text = $"{scoreManager.Score:n0}";
+        moneyText.text = $"{scoreManager.money:n0}";
+        moneyText2.text = $"{scoreManager.money:n0}";
 
         // Captivation
         long capToAdd = scoreManager.previewCaptivation - scoreManager.captivation;
-        captivationText.text = $"{scoreManager.captivation}";
-        captivationAddText.text = capToAdd < 0 ? "-" : "+" + $"{Math.Abs(capToAdd)}";
+        captivationText.text = $"{scoreManager.captivation:n0}";
+        captivationAddText.text = capToAdd < 0 ? "-" : "+" + $"{Math.Abs(capToAdd):n0}";
         //captivationSignText.text = capToAdd < 0 ? "-" : "+";
 
         // Sleight of hand
         double sohToadd = scoreManager.previewSleightOfHand - scoreManager.sleightOfHand;
-        sleightOfHandText.text = scoreManager.sleightOfHand.ToString("0.##");
-        sleightOfHandAddText.text = sohToadd < 0 ? "-" : "+" + Math.Abs(sohToadd).ToString("0.##");
+        sleightOfHandText.text = scoreManager.sleightOfHand.ToString("#,##0.##");
+        sleightOfHandAddText.text = sohToadd < 0 ? "-" : "+" + Math.Abs(sohToadd).ToString("#,##0.##");
         //sleightOfHandSignText.text = sohToadd < 0 ? "-" : "+";
 
         // liability
         double liabilityToAdd = scoreManager.previewLiability - scoreManager.liability;
-        liabilityText.text = $"{scoreManager.liability}";
-        liabilityAddText.text = $"{Math.Abs(liabilityToAdd)}";
+        liabilityText.text = $"{scoreManager.liability:n0}";
+        liabilityAddText.text = $"{Math.Abs(liabilityToAdd):n0}";
         liabilitySignText.text = liabilityToAdd < 0 ? "-" : "+";
 
         // payout
-        double payoutToAdd = scoreManager.additionalPayout - scoreManager.previewAdditionalPayout;
-        additionalPayoutText.text = $"{scoreManager.additionalPayout}";
-        additionalPayoutAddText.text = $"{Math.Abs(payoutToAdd)}";
+        double payoutToAdd = scoreManager.previewAdditionalPayout - scoreManager.additionalPayout;
+        additionalPayoutText.text = $"{scoreManager.additionalPayout:n0}";
+        additionalPayoutAddText.text = $"{Math.Abs(payoutToAdd):n0}";
         additionalPayoutSignText.text = payoutToAdd < 0 ? "-" : "+";
     }
 
     public void SetIsDoingAnimation(bool val)
     {
         isDoingAnimation = val;
+    }
+
+    public void StartParty()
+    {
+        partyManager.HideInviteScreen();
+        state = GameState.RoundStart;
     }
 }

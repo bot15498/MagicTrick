@@ -16,7 +16,7 @@ public class MeshSurfaceSampler : MonoBehaviour
     {
         _mesh = GetComponent<MeshFilter>().mesh;
         GeneratePoints();
-        Debug.Log("mesh");
+        //Debug.Log("mesh");
     }
 
     public void GeneratePoints()

@@ -33,7 +33,8 @@ MonoBehaviour:
   CardName: CapAndSoh
   Description: +5 Captivation, +0.5 Sleight of Hand
   Image: {fileID: 21300000, guid: 3b42e6018f61ba7438376899c7d6d74f, type: 3}
-  Type: 0
+  Type: 0000000001000000
+  AnimationName: 
 --- !u!114 &6081190005430331806
 MonoBehaviour:
   m_ObjectHideFlags: 0

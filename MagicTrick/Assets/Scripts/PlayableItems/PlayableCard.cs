@@ -26,9 +26,10 @@ public enum Stats
 public class PlayableCard : PlayableItem
 {
     public string CardName;
+    [TextArea]
     public string Description;
     public Sprite Image;
-    public CardType Type;
+    public List<CardType> Type = new List<CardType>();
     public string AnimationName;
 
     public ActionContainer ApplyCard(ActionContainer container, int slot, GameManager gameManager)

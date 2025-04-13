@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc303d2669c95a44f9041b53ed63c207, type: 3}
   m_Name: Increase Stat If Stat Threshold is met
   m_EditorClassIdentifier: 
-  StatToCheck: 0
-  CompareType: 4
-  Threshold: 0
-  StatToChange: 0
-  ChangeAmount: 0
+  StatToCheck: 3
+  CompareType: 0
+  Threshold: 5
+  StatToChange: 2
+  ChangeAmount: 10
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32,9 +32,9 @@ MonoBehaviour:
   Actions:
   - {fileID: -142965391111775967}
   DoesRandomAction: 0
-  PropName: 
-  Description: 
-  Image: {fileID: 0}
+  PropName: Background Check
+  Description: If Liability is under 5, +10 payout
+  Image: {fileID: 21300000, guid: 2dcd003017e211c4fb1a26fd727dcbfc, type: 3}
   PreviousSlotActions: []
   NextSlotActions: []
   FixedSlotActions: []
