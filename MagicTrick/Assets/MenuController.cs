@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuController : MonoBehaviour
 {
     // Start is called before the first frame update
+     public Animator anim;
     public GameObject tutorial;
 
 
@@ -33,9 +34,20 @@ public class MenuController : MonoBehaviour
 
     public void loadscene(int scenetoload)
     {
-        SceneManager.LoadScene(scenetoload);
+
+       
+
+        anim.Play("FadeOut");
+        StartCoroutine(delay(scenetoload));
+
     }
 
+    IEnumerator delay(int scenetoload)
+    {
+        yield return new WaitForSeconds(2);
+        print("Coroutine ended: " + Time.time + " seconds");
+        SceneManager.LoadScene(scenetoload);
+    }
 
     public void QuitGame()
     {
