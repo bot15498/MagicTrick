@@ -1231,7 +1231,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Remove Card
+  m_text: "Remove Card \n$2"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1289f98db15f76c40b84ea0516f2efeb, type: 2}
   m_sharedMaterial: {fileID: -700432986418380601, guid: 1289f98db15f76c40b84ea0516f2efeb, type: 2}
@@ -9028,8 +9028,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.100388, y: 22}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 35.390152, y: 12.999992}
+  m_SizeDelta: {x: 248.89, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &553483269
 MonoBehaviour:
@@ -22493,8 +22493,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11, y: -25}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 38, y: -34}
+  m_SizeDelta: {x: 248.89, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1610638896
 MonoBehaviour:
@@ -22543,8 +22543,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

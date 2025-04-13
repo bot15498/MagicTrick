@@ -223,7 +223,7 @@ MonoBehaviour:
   SelectEvent:
     m_PersistentCalls:
       m_Calls: []
-  OnPropDragStart: {fileID: 8300000, guid: b8c4e7e05d5862142a9214c14680a0c6, type: 3}
+  OnPropDragStart: {fileID: 8300000, guid: 82f9a79eec8d1b24e819f103eaecd7d6, type: 3}
   OnPropPlace: {fileID: 8300000, guid: a67c87ebe5dd43e4ebef4794b7827541, type: 3}
 --- !u!114 &7152895137023990413
 MonoBehaviour:
