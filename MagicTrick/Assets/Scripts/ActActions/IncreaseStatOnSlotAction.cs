@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IncreaseStatOnTurnAction : ActAction
+public class IncreaseStatOnSlotAction : ActAction
 {
     public Stats StatToChange = Stats.Captivation;
     public double ChangeAmount = 0;
-    public int TargetAct = 1;
+    public int TargetSlot = 0;
 
     public override ActionContainer AddAction(ActionContainer container, int slot, GameManager manager)
     {
-        // return a function thad adds to input
-        double amountToChange = manager.currAct == TargetAct ? ChangeAmount : 0;
+        // Check to see if slot matches
+        double amountToChange = TargetSlot == slot ? ChangeAmount : 0;
         switch (StatToChange)
         {
             case Stats.Captivation:

@@ -26,6 +26,7 @@ public enum Stats
 public class PlayableCard : PlayableItem
 {
     public string CardName;
+    [TextArea]
     public string Description;
     public Sprite Image;
     public List<CardType> Type = new List<CardType>();

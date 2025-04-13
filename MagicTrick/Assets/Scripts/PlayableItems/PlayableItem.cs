@@ -83,7 +83,7 @@ public abstract class PlayableItem : ScriptableObject
         EditorUtility.SetDirty(this);
         EditorUtility.SetDirty(newaction);
     }
-    [ContextMenu("Increase Stat On Turn")]
+    [ContextMenu("Increase Stat On Specific Turn")]
     private void AddIncreaseStatOnTurnAction()
     {
         IncreaseStatOnTurnAction newaction = CreateInstance<IncreaseStatOnTurnAction>();
@@ -91,6 +91,22 @@ public abstract class PlayableItem : ScriptableObject
         newaction.StatToChange = Stats.Captivation;
         newaction.ChangeAmount = 0;
         newaction.TargetAct = 1;
+
+        Actions.Add(newaction);
+
+        AssetDatabase.AddObjectToAsset(newaction, this);
+        AssetDatabase.SaveAssets();
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(newaction);
+    }
+    [ContextMenu("Increase Stat If In Specific Slot")]
+    private void AddIncreaseStatOnSlotAction()
+    {
+        IncreaseStatOnSlotAction newaction = CreateInstance<IncreaseStatOnSlotAction>();
+        newaction.name = "Increase Stat if in specific slot";
+        newaction.StatToChange = Stats.Captivation;
+        newaction.ChangeAmount = 0;
+        newaction.TargetSlot = 0;
 
         Actions.Add(newaction);
 
