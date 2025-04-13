@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoundName: 
+  RoundName: Katie
   ScoreRequired: 500
   Actions: []
   RoundEffect: 
@@ -29,7 +29,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7ceb4bb03838247b1c02d32a0cd972, type: 3}
   m_Name: Party2
   m_EditorClassIdentifier: 
-  PartyName: 
+  PartyName: Sally's Sweet Sixteen
   PartyDescription: 
   PartyInvitationImage: {fileID: 0}
   Rounds:
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoundName: 
+  RoundName: Sally
   ScoreRequired: 5000
   Actions: []
   RoundEffect: 
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoundName: 
+  RoundName: Maple
   ScoreRequired: 2000
   Actions: []
   RoundEffect: 
