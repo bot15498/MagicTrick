@@ -193,7 +193,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instantiateVisual: 1
+  targetVisualLevel: 0
   moveSpeedLimit: 50
+  targetCamera: {fileID: 0}
   propVisualPrefab: {fileID: 4877114960914594400, guid: 91c79cc2b5e696144b23ea0f7b1b03ea, type: 3}
   propVisual: {fileID: 0}
   isHovering: 0
@@ -221,6 +223,8 @@ MonoBehaviour:
   SelectEvent:
     m_PersistentCalls:
       m_Calls: []
+  OnPropDragStart: {fileID: 8300000, guid: b8c4e7e05d5862142a9214c14680a0c6, type: 3}
+  OnPropPlace: {fileID: 8300000, guid: a67c87ebe5dd43e4ebef4794b7827541, type: 3}
 --- !u!114 &976628832856118392
 MonoBehaviour:
   m_ObjectHideFlags: 0
