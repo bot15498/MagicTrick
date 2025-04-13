@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoundName: 
+  RoundName: Skyler 76
   ScoreRequired: 500000
   Actions: []
   RoundEffect: 
-  RoundImage: {fileID: 0}
+  RoundImage: {fileID: 21300000, guid: c2a8fa2a97c75e843aa87495570c8002, type: 3}
 --- !u!114 &-2039233423635822272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29,11 +29,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoundName: 
+  RoundName: Handsome Skyler
   ScoreRequired: 200000
   Actions: []
   RoundEffect: 
-  RoundImage: {fileID: 0}
+  RoundImage: {fileID: 21300000, guid: 3b4b76a19e032134b9140c1f21d48a86, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Name: Party5
   m_EditorClassIdentifier: 
   PartyName: Cloud Watching Club
-  PartyDescription: 
+  PartyDescription: 'The elite cloud watching club needs a opening act for their
+    annual cloud watching emposium. '
   PartyInvitationImage: {fileID: 0}
   Rounds:
   - {fileID: 702605131618998408}
@@ -65,8 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cae3f9637dff24fbc9d9334a13db6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoundName: Tummy Sunday
+  RoundName: Cloud Watcher Skyler
   ScoreRequired: 100000
   Actions: []
   RoundEffect: 
-  RoundImage: {fileID: 0}
+  RoundImage: {fileID: 21300000, guid: 827c62ad3a5b1d14dad04febc6468d3f, type: 3}

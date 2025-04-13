@@ -16,7 +16,7 @@ MonoBehaviour:
   ScoreRequired: 20000
   Actions: []
   RoundEffect: 
-  RoundImage: {fileID: 0}
+  RoundImage: {fileID: 21300000, guid: 96406a5cda8f49642a104f7bd6a5d7a4, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   ScoreRequired: 60000
   Actions: []
   RoundEffect: 
-  RoundImage: {fileID: 0}
+  RoundImage: {fileID: 21300000, guid: 1a5ed6fa4bb8a794e95db8133dc85f42, type: 3}
 --- !u!114 &7269092787248974413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,4 +70,4 @@ MonoBehaviour:
   ScoreRequired: 40000
   Actions: []
   RoundEffect: 
-  RoundImage: {fileID: 0}
+  RoundImage: {fileID: 21300000, guid: 3bfbdf66a632b2d4d805bc2f1cb093aa, type: 3}

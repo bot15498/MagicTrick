@@ -16,7 +16,7 @@ MonoBehaviour:
   ScoreRequired: 10000
   Actions: []
   RoundEffect: 
-  RoundImage: {fileID: 0}
+  RoundImage: {fileID: 21300000, guid: 0c564eb346df54e43820a41af0974d25, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
   m_Name: Party3
   m_EditorClassIdentifier: 
   PartyName: Joe's Bedroom
-  PartyDescription: 
+  PartyDescription: Joe is looking for someone to keep him company.
   PartyInvitationImage: {fileID: 0}
   Rounds:
   - {fileID: 3892863879110521452}
@@ -52,7 +52,7 @@ MonoBehaviour:
   ScoreRequired: 5000
   Actions: []
   RoundEffect: 
-  RoundImage: {fileID: 0}
+  RoundImage: {fileID: 21300000, guid: 59f9840c83a8f284a86b5cf42b77d012, type: 3}
 --- !u!114 &4647109702758164938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,4 +69,4 @@ MonoBehaviour:
   ScoreRequired: 7000
   Actions: []
   RoundEffect: 
-  RoundImage: {fileID: 0}
+  RoundImage: {fileID: 21300000, guid: b8da71cf9c061ad468b99453ea1dd820, type: 3}
